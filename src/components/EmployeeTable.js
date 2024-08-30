@@ -1,75 +1,141 @@
-import { Table, Tooltip } from 'antd'
-import React from 'react'
-import { employeesColumn } from '../models/employeeColumnModel'
+import { Table, Tooltip, Select, Switch } from "antd";
+import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
+import React from "react";
+import { employeesColumn } from "../models/employeeColumnModel";
+import option from "./../models/employeeDapartmentModel";
+
+import "../App.css"
+
 const EmployeeTable = () => {
-   
-const columns = [
-    { title: 'Sr.', dataIndex: 'id', key: 'id' },
+  const handleDepartmentChange = (value, key) => {};
+
+  const columns = [
+    { title: "Sr.", dataIndex: "id", key: "id" },
     {
-        title: 'Photo',
-        dataIndex: 'photo',
-        key: 'photo',
-        render: (photo) => <img src={photo} alt="Employee" style={{ width: 50, height: 50 }} />
+      title: "Photo",
+      dataIndex: "photo",
+      key: "photo",
+      render: (photo) => (
+        <img src={photo} alt="" style={{ width: 50, height: 50 }} />
+      ),
     },
     {
-        title: 'Name',
-        dataIndex: 'name',
-        key: 'name',
-        render: (text, record) => (
-          <Tooltip title={`${record.firstName} ${record.lastName}`}>
+      title: "Name",
+      dataIndex: "name",
+      key: "name",
+      render: (text, record) => {
+        return (
+          <Tooltip
+            color="blue"
+            placement="right"
+            title={`${record.firstName} ${record.lastName}`}
+          >
             <span>{text}</span>
           </Tooltip>
-        ),
+        );
       },
-    { title: 'Email', dataIndex: 'email', key: 'email' },
+    },
     {
-        title: 'Department',
-        dataIndex: 'department',
-        key: 'department',
-        render: (text, record) => (
-          <Select
-            defaultValue={text} // This sets the current department as the selected option
-            style={{ width: 120 }}
-            onChange={(value) => handleDepartmentChange(value, record.key)}
+      title: "Email",
+      dataIndex: "email",
+      key: "email",
+      render: (email) => <span style={{ color: "blue" }}>{email}</span>,
+    },
+    {
+        title: "Contact",
+        dataIndex: "contact",
+        key: "contact",
+        render: (contact) => <span >{contact}</span>,
+      },
+    {
+      title: "Designation",
+      dataIndex: "department",
+      key: "department",
+      render: (text, record) => (
+        <Select
+          defaultValue={text}
+          style={{ width: 120 }}
+          onChange={(value) => handleDepartmentChange(value, record.key)}
+          options={option}
+        ></Select>
+      ),
+    },
+    {
+      title: "Salary",
+      dataIndex: "salary",
+      key: "salary",
+      render: (salary) => (salary ? `PKR: ${salary.toLocaleString()}` : "N/A"),
+    },
+    {
+      title: "Date",
+      dataIndex: "date",
+      key: "date",
+      render: (text, record) => (
+        <span>
+          <p
+            style={{
+              color: record.endDate ? "red" : "green",
+              fontSize: "12px", // Adjust font size as needed
+              margin: "0",
+            }}
           >
-            <Option value="HR">HR</Option>
-            <Option value="Engineering">Engineering</Option>
-            <Option value="Marketing">Marketing</Option>
-            <Option value="Sales">Sales</Option>
-            {/* Add more department options here */}
-          </Select>
-        ),
-      },
-    { 
-        title: 'Salary', 
-        dataIndex: 'salary', 
-        key: 'salary', 
-        render: (salary) => `$${salary.toLocaleString()}`
+            {record.endDate || "PRESENT"}
+          </p>
+          <p
+            style={{
+              color: "green",
+              fontSize: "12px", // Adjust font size as needed
+              margin: "0", // Adjust spacing (top and bottom margin) as needed
+            }}
+          >
+            {record.joiningDate}
+          </p>
+        </span>
+      ),
     },
-    { title: 'Date', dataIndex: 'date', key: 'date' },
+
+    { title: "Address", dataIndex: "currentAddress", key: "currentAddress" },
+
     {
-        title: 'Actions',
-        key: 'actions',
-        render: (text, record) => (
-            <>
-                <Button onClick={() => handleEdit(record.id)} type="link" style={{ marginRight: '8px' }}>Edit</Button>
-                <Button onClick={() => handleDelete(record.id)} type="link">Delete</Button>
-            </>
-        )
+      title: "Status",
+      dataIndex: "status",
+      key: "status",
+
+      render: (text) => {
+        console.log("text: ", text);
+        return (
+          <Switch
+            checked={text}
+            style={{
+              backgroundColor: text ? "green" : "red",
+            }}
+          />
+        );
+      },
     },
-];
+
+    {
+      title: "Actions",
+      key: "actions",
+      render: () => (
+        <>
+          <EditOutlined className="icon-edit" style={{ margin: "5px" }} />
+          <DeleteOutlined className="icon-delete" style={{ margin: "5px" }} />
+        </>
+      ),
+    },
+  ];
 
   return (
     <div>
       <Table
-       columns={columns} 
-       dataSource={employeesColumn} 
-       pagination={false} 
-       rowKey="id" 
-      
+        columns={columns}
+        dataSource={employeesColumn}
+        pagination={false}
+        rowKey="id"
       />
     </div>
-  )
-}
+  );
+};
 
-export default EmployeeTable
+export default EmployeeTable;

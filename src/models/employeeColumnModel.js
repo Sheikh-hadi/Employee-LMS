@@ -2,6 +2,8 @@ const employeesColumn = [
     {
         "id":1,
         "name": "Jeffery Lalor",
+        "firstName":"Jeffery",
+        "lastName":"Lalor",
         "cnic": "35201-1234567-8",
         "designation": "Team Leader",
         "email": "jefferylalor@example.com",
@@ -11,7 +13,7 @@ const employeesColumn = [
         "joiningDate": "2013-01-01",
         "endDate": null,
         "duration": "11 years",
-        "contract": "false",
+        "contract": true,
         "guardianName": "John Lalor",
         "guardianContact": "0321-7654321",
         "relation": "Father",
@@ -19,12 +21,15 @@ const employeesColumn = [
         "bankName": "ABC Bank",
         "accountNumber": "1234567890123456",
         "accountTitle": "Jeffery Lalor",
-        "status": "Active",
+        "status": false,
         "createdBy":"user1",
+        "salary":"20000"
     },
     {
         "id":2,
         "name": "John Doe",
+        "firstName":"John",
+        "lastName":"Doe",
         "cnic": "35201-7654321-0",
         "designation": "Web Designer",
         "email": "johndoe@example.com",
@@ -32,9 +37,9 @@ const employeesColumn = [
         "dob": "1990-09-20",
         "currentAddress": "789 Maple Street, Springfield",
         "joiningDate": "2015-06-01",
-        "endDate": null,
+        "endDate": "2016-06-01",
         "duration": "8 years",
-        "contract": "true",
+        "contract": false,
         "guardianName": "David Doe",
         "guardianContact": "0333-2222222",
         "relation": "Father",
@@ -42,8 +47,9 @@ const employeesColumn = [
         "bankName": "XYZ Bank",
         "accountNumber": "0987654321098765",
         "accountTitle": "John Doe",
-        "status": "Active",
+        "status":true,
         "createdBy":"user2",
+       "salary":"50000"
 
     }
 ];
