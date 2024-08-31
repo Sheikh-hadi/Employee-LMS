@@ -4,7 +4,11 @@ import EmployeeDasboard from '../components/DasboardComponent'
 
 const Dashboard = () => {
   return (
+    <div>
 <EmployeeDasboard/>
+</div>
+
+
   )
 }
 
