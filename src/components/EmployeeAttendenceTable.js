@@ -108,7 +108,7 @@ const EmployeeAttendenceTable = () => {
       key: "paymentInWords",
       render: (text, record) => {
         let salaryInWord = toWords(record.salary) ; 
-        return <span>{salaryInWord}</span>;
+        return <span>{salaryInWord.toUpperCase()}</span>;
     }},
   ];
 
