@@ -1,7 +1,6 @@
 import React from "react";
 import { Table, Tooltip } from "antd";
-import { employeesColumn } from "../models/employeeColumnModel"; // Importing the employeesColumn data
-import { render } from "@testing-library/react";
+import { employeesColumn } from "../models/employeeColumnModel"; 
 import { toWords } from "number-to-words";
 
 const EmployeeAttendenceTable = () => {
@@ -39,12 +38,12 @@ const EmployeeAttendenceTable = () => {
     },
     {
       title: "Late",
-      dataIndex: ["attendance", "late"], // Adjusted for nested data
+      dataIndex: ["attendance", "late"],
       key: "lateComings",
     },
     {
       title: "Leaves",
-      dataIndex: ["attendance", "leave"], // Adjusted for nested data
+      dataIndex: ["attendance", "leave"],
       key: "leaves",
     },
     {
@@ -107,9 +106,10 @@ const EmployeeAttendenceTable = () => {
       dataIndex: "paymentInWords",
       key: "paymentInWords",
       render: (text, record) => {
-        let salaryInWord = toWords(record.salary) ; 
+        let salaryInWord = toWords(record.salary);
         return <span>{salaryInWord.toUpperCase()}</span>;
-    }},
+      },
+    },
   ];
 
   return <Table columns={columns} dataSource={employeesColumn} />;

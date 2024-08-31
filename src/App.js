@@ -1,19 +1,20 @@
 import React, { useState } from "react";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
-import Employee from "./Pages/Employee";
 import {
   MenuFoldOutlined,
   MenuUnfoldOutlined,
-  UploadOutlined,
+  CreditCardOutlined,
   UserOutlined,
-  VideoCameraOutlined,
+  BarChartOutlined,
+  DashboardOutlined,
 } from "@ant-design/icons";
 import { Button, Layout, Menu, theme } from "antd";
+import Employee from "./Pages/Employee";
 import Attendence from "./Pages/Attendence";
 import Payment from "./Pages/Payment";
 import Dashboard from "./Pages/Dashboard";
 
-const { Header, Sider, Content } = Layout;
+const { Sider, Content } = Layout;
 
 const App = () => {
   const [collapsed, setCollapsed] = useState(false);
@@ -25,41 +26,49 @@ const App = () => {
     <Router>
       <Layout style={{ minHeight: "100vh" }}>
         <Sider trigger={null} collapsible collapsed={collapsed}>
-          <div className="demo-logo-vertical" />
+          <div
+            style={{
+              display: "flex",
+              justifyContent: collapsed ? "center" : "flex-start",
+              padding: "10px",
+            }}
+          >
+            <Button
+              type="text"
+              icon={
+                collapsed ? (
+                  <MenuUnfoldOutlined
+                    style={{ fontSize: "24px", color: "white" }}
+                  />
+                ) : (
+                  <MenuFoldOutlined
+                    style={{ fontSize: "24px", color: "white" }}
+                  />
+                )
+              }
+              onClick={() => setCollapsed(!collapsed)}
+              style={{
+                fontSize: "24px",
+                marginLeft: collapsed ? "0" : "10px",
+              }}
+            />
+          </div>
           <Menu theme="dark" mode="inline" defaultSelectedKeys={["1"]}>
-            <Menu.Item key="1" icon={<UserOutlined />}>
+            <Menu.Item key="1" icon={<DashboardOutlined />}>
               <Link to="/">Dashboard</Link>
             </Menu.Item>
             <Menu.Item key="2" icon={<UserOutlined />}>
               <Link to="/employee">Employee</Link>
             </Menu.Item>
-            <Menu.Item key="3" icon={<VideoCameraOutlined />}>
+            <Menu.Item key="3" icon={<BarChartOutlined />}>
               <Link to="/attendence">Attendence</Link>
             </Menu.Item>
-            <Menu.Item key="4" icon={<UploadOutlined />}>
+            <Menu.Item key="4" icon={<CreditCardOutlined />}>
               <Link to="/Payment">Payment</Link>
             </Menu.Item>
           </Menu>
         </Sider>
         <Layout>
-          {/* <Header
-            style={{
-              padding: 0,
-              background: colorBgContainer,
-            }}
-          >
-            <Button
-              type="text"
-              icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
-              onClick={() => setCollapsed(!collapsed)}
-              style={{
-                fontSize: '16px',
-                width: 64,
-                height: 64,
-              }}
-            />
-            <AddNewEmployee />
-          </Header> */}
           <Content
             style={{
               margin: "5px 16px",
