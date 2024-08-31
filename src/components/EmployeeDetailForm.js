@@ -7,7 +7,6 @@ import {
   CalendarOutlined,
   IdcardOutlined,
   DollarOutlined,
-  ContactsOutlined,
 } from "@ant-design/icons";
 import genderDropdownOptions from "../models/genderDropdownModel";
 import employeeDepartmentDropdownOptions from "../models/employeeDapartmentModel";

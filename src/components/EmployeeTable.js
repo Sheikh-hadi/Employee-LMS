@@ -3,7 +3,6 @@ import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import React from "react";
 import { employeesColumn } from "../models/employeeColumnModel";
 import employeeDapartmentDropdownOptions from "./../models/employeeDapartmentModel";
-
 import "../App.css";
 
 const EmployeeTable = () => {
