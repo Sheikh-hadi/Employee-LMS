@@ -11,6 +11,7 @@ import {
 import { Button, Layout, Menu, theme } from "antd";
 import Attendence from "./Pages/Attendence";
 import Payment from "./Pages/Payment";
+import Dashboard from "./Pages/Dashboard";
 
 const { Header, Sider, Content } = Layout;
 
@@ -22,17 +23,20 @@ const App = () => {
 
   return (
     <Router>
-      <Layout style={{minHeight:"100vh"}}>
+      <Layout style={{ minHeight: "100vh" }}>
         <Sider trigger={null} collapsible collapsed={collapsed}>
           <div className="demo-logo-vertical" />
           <Menu theme="dark" mode="inline" defaultSelectedKeys={["1"]}>
             <Menu.Item key="1" icon={<UserOutlined />}>
+              <Link to="/">Dashboard</Link>
+            </Menu.Item>
+            <Menu.Item key="2" icon={<UserOutlined />}>
               <Link to="/employee">Employee</Link>
             </Menu.Item>
-            <Menu.Item key="2" icon={<VideoCameraOutlined />}>
+            <Menu.Item key="3" icon={<VideoCameraOutlined />}>
               <Link to="/attendence">Attendence</Link>
             </Menu.Item>
-            <Menu.Item key="3" icon={<UploadOutlined />}>
+            <Menu.Item key="4" icon={<UploadOutlined />}>
               <Link to="/Payment">Payment</Link>
             </Menu.Item>
           </Menu>
@@ -65,8 +69,8 @@ const App = () => {
             }}
           >
             <Routes>
+              <Route path="/" element={<Dashboard />} />
               <Route path="/employee" element={<Employee />} />
-         
               <Route path="/attendence" element={<Attendence />} />
               <Route path="/Payment" element={<Payment />} />
             </Routes>
