@@ -22,6 +22,21 @@ const employeeDepartmentDropdownOptions = [
     label: "Sales",
     icon: <TagsOutlined style={{ fontSize: '16px', paddingRight: '10px' }} />
   },
+  {
+    value: "productManager",
+    label: "Pro.Manager",
+    icon: <TagsOutlined style={{ fontSize: '16px', paddingRight: '10px' }} />
+  },
+  {
+    value: "teamLeader",
+    label: "Team Leader",
+    icon: <TagsOutlined style={{ fontSize: '16px', paddingRight: '10px' }} />
+  },
+  {
+    value: "webDesigner",
+    label: "Web Designer",
+    icon: <TagsOutlined style={{ fontSize: '16px', paddingRight: '10px' }} />
+  },
 ];
 
 export default employeeDepartmentDropdownOptions;

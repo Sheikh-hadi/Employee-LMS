@@ -1,6 +1,6 @@
 import React from "react";
 import { Table, Tooltip } from "antd";
-import { employeesColumn } from "../models/employeeColumnModel"; // Importing the employeesColumn data
+import { employeesColumn } from "../models/employeeColumnModel"; 
 import { render } from "@testing-library/react";
 
 const EmployeeAttendenceTable = () => {
@@ -28,7 +28,7 @@ const EmployeeAttendenceTable = () => {
     },
     {
       title: "Days",
-      dataIndex: ["attendance", "days"], // Adjusted for nested data
+      dataIndex: ["attendance", "days"],
       key: "days",
     },
     {
@@ -38,12 +38,12 @@ const EmployeeAttendenceTable = () => {
     },
     {
       title: "Late Comings",
-      dataIndex: ["attendance", "late"], // Adjusted for nested data
+      dataIndex: ["attendance", "late"],
       key: "lateComings",
     },
     {
       title: "Leaves",
-      dataIndex: ["attendance", "leave"], // Adjusted for nested data
+      dataIndex: ["attendance", "leave"], 
       key: "leaves",
     },
     {

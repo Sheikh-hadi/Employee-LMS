@@ -49,8 +49,8 @@ const EmployeeTable = () => {
     },
     {
       title: "Designation",
-      dataIndex: "department",
-      key: "department",
+      dataIndex: "designation",
+      key: "designation",
       render: (text, record) => (
         <Select
           defaultValue={text}
