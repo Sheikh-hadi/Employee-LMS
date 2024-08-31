@@ -2,9 +2,9 @@ import { Table, Tooltip, Select, Switch } from "antd";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import React from "react";
 import { employeesColumn } from "../models/employeeColumnModel";
-import option from "./../models/employeeDapartmentModel";
+import employeeDapartmentDropdownOptions from "./../models/employeeDapartmentModel";
 
-import "../App.css"
+import "../App.css";
 
 const EmployeeTable = () => {
   const handleDepartmentChange = (value, key) => {};
@@ -42,11 +42,11 @@ const EmployeeTable = () => {
       render: (email) => <span style={{ color: "blue" }}>{email}</span>,
     },
     {
-        title: "Contact",
-        dataIndex: "contact",
-        key: "contact",
-        render: (contact) => <span >{contact}</span>,
-      },
+      title: "Contact",
+      dataIndex: "contact",
+      key: "contact",
+      render: (contact) => <span>{contact}</span>,
+    },
     {
       title: "Designation",
       dataIndex: "department",
@@ -56,7 +56,7 @@ const EmployeeTable = () => {
           defaultValue={text}
           style={{ width: 120 }}
           onChange={(value) => handleDepartmentChange(value, record.key)}
-          options={option}
+          options={employeeDapartmentDropdownOptions}
         ></Select>
       ),
     },

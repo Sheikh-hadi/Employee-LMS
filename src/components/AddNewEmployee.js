@@ -1,198 +1,74 @@
 import React, { useState } from "react";
-import { Button, Modal, Form, Input } from "antd"; // Import Modal from Ant Design
+import { Button, Modal, Form } from "antd"; // Import Modal from Ant Design
+import { UserAddOutlined } from "@ant-design/icons";
+import EmployeeDetailForm from "./EmployeeDetailForm";
+import BankDetailForm from "./bankDetailForm";
+import GurdaianDetailForm from "./GurdaianDetailForm";
 
 const AddNewEmployee = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const showModal = () => {
-    setIsModalOpen(true);
-  };
+  const [form] = Form.useForm();
 
-  const handleOk = () => {
+  const onFinish = (values) => {
+    const length = Object.keys(values).length;
+    console.log(length);
+    console.log("Received values of form: ", values);
+    form.resetFields();
     setIsModalOpen(false);
   };
 
-  const handleCancel = () => {
-    setIsModalOpen(false);
+  const onFinishFailed = (errorInfo) => {
+    console.log("Failed:", errorInfo);
   };
-
   return (
     <div style={{ display: "flex", justifyContent: "flex-end" }}>
-      <Button type="primary" onClick={showModal}>
+      <Button
+        type="primary"
+        onClick={() => setIsModalOpen(true)}
+        icon={<UserAddOutlined />}
+        style={{ margin: "5px 10px" }}
+      >
         Add New Employee
       </Button>
       <Modal
         style={{ position: "absolute", top: 0, right: 0 }}
         title="Add New Employee"
         open={isModalOpen}
-        onOk={handleOk}
-        onCancel={handleCancel}
+        onOk={() => setIsModalOpen(false)}
+        onCancel={() => setIsModalOpen(false)}
       >
         <Form
-          name="layout-multiple-horizontal"
+          form={form}
+          name="basic"
           layout="horizontal"
           labelCol={{ span: 24 }}
           wrapperCol={{ span: 24 }}
+          onFinish={onFinish}
+          onFinishFailed={onFinishFailed}
+          scrollToFirstError={true}
+          initialValues={{
+            contract: "true",
+            gender: "other",
+            designation: "engineering",
+            guardianRelationship: "father",
+          }}
         >
-          <Form.Item
-            label="Name"
-            name="name"
-            rules={[
-              {
-                required: true,
-                message: "Please input your username!",
-              },
-            ]}
-          >
-            <Input type="text" />
-          </Form.Item>{" "}
-          <Form.Item
-            label="CNIC"
-            name="cnic"
-            rules={[
-              {
-                required: true,
-                message: "Please input  CNIC!",
-              },
-            ]}
-          >
-            <Input />
-          </Form.Item>{" "}
-          <Form.Item
-            label="Designation"
-            name="designation"
-            rules={[
-              {
-                required: true,
-                message: "Please input  Designation!",
-              },
-            ]}
-          > <Input type="text" /></Form.Item>
-          <Form.Item
-            label="Email"
-            name="email"
-            rules={[
-              {
-                required: true,
-                message: "Please input your EmailId!",
-              },
-            ]}
-          >
-             <Input type="text" />
+          <Form.Item>
+            <Button
+              size="medium"
+              style={{ float: "right" }}
+              type="primary"
+              htmlType="submit"
+            >
+              {" "}
+              Submit
+            </Button>
           </Form.Item>
-          <Form.Item
-            label="Contact"
-            name="contact"
-            rules={[
-              {
-                required: true,
-                message: "Please input your Contact!",
-              },
-            ]}
-          > <Input type="text" /></Form.Item>{" "}
-          <Form.Item
-            label="Dob"
-            name="dob"
-            rules={[
-              {
-                required: true,
-                message: "Please input your Date of birth!",
-              },
-            ]}
-          > <Input type="text" /></Form.Item>{" "}
-          <Form.Item
-            label="CurrentAddress"
-            name="currentAddress"
-            rules={[
-              {
-                required: true,
-                message: "Please input your Current Address!",
-              },
-            ]}
-          > <Input type="text" /></Form.Item>{" "}
-          <Form.Item
-            label="JoiningDate"
-            name="joiningDate"
-            rules={[
-              {
-                required: true,
-                message: "Please input  Joining Date!",
-              },
-            ]}
-          > <Input type="text" /></Form.Item>
-          <Form.Item
-            label="EndDate"
-            name="endDate"
-            rules={[
-              {
-                required: true,
-                message: "Please input your End Date!",
-              },
-            ]}
-          > <Input type="text" /></Form.Item>
-          <Form.Item
-            label="Duration"
-            name="duration"
-            rules={[
-              {
-                required: true,
-                message: "Please input your Duration!",
-              },
-            ]}
-          > <Input type="text" /></Form.Item>
-           <Form.Item
-            label="Contract"
-            name="contract"
-            rules={[
-              {
-                required: true,
-                message: "Please input your Contract!",
-              },
-            ]}
-          > <Input type="text" /></Form.Item>
-           <Form.Item
-            label="GuardianName"
-            name="guardianName"
-            rules={[
-              {
-                required: true,
-                message: "Please input your Guardian Name!",
-              },
-            ]}
-          > <Input type="text" /></Form.Item>
-           <Form.Item
-            label="Contact"
-            name="contact"
-            rules={[
-              {
-                required: true,
-                message: "Please input your Contact!",
-              },
-            ]}
-          > <Input type="text" /></Form.Item>
-           <Form.Item
-            label="Relation"
-            name="relation"
-            rules={[
-              {
-                required: true,
-                message: "Please input your Relation!",
-              },
-            ]}
-          > <Input type="text" /></Form.Item>
-           <Form.Item
-            label="BankAccount"
-            name="bankAccount"
-            rules={[
-              {
-                required: true,
-                message: "Please input your BankAccount!",
-              },
-            ]}
-          > <Input type="text" /></Form.Item>
-        
+          <EmployeeDetailForm />
+          <BankDetailForm />
+          <GurdaianDetailForm />
         </Form>
-        
       </Modal>
     </div>
   );

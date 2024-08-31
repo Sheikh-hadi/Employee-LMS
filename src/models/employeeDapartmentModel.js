@@ -1,20 +1,26 @@
-const option = [
-    {
-        value:"hr",
-        label:"HR",
-    },
-    {
-        value:"engineering",
-label:"Engineering"
-    },
-    {
-        value:"marketing",
-        label:"Marketing"
-    },
-    {
-        value:"sales",
-        label:"Sales"
-    }
-]
+import { UsergroupAddOutlined, CodeOutlined, BarChartOutlined, ShoppingOutlined } from '@ant-design/icons';
 
-export default option;
+const employeeDepartmentDropdownOptions = [
+  {
+    value: "hr",
+    label: "HR",
+    icon: <UsergroupAddOutlined />,
+  },
+  {
+    value: "engineering",
+    label: "Engineering",
+    icon: <CodeOutlined />,
+  },
+  {
+    value: "marketing",
+    label: "Marketing",
+    icon: <BarChartOutlined />,
+  },
+  {
+    value: "sales",
+    label: "Sales",
+    icon: <ShoppingOutlined />,
+  },
+];
+
+export default employeeDepartmentDropdownOptions;
