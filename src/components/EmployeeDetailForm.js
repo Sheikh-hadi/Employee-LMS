@@ -26,7 +26,7 @@ const EmployeeDetailForm = () => {
       >
         <Input
           placeholder="Enter your first name"
-          prefix={<UserOutlined />}
+          prefix={<UserOutlined style={{ fontSize: '18px', paddingRight: '10px' }}/>}
         />
       </Form.Item>
 
@@ -37,7 +37,7 @@ const EmployeeDetailForm = () => {
       >
         <Input
           placeholder="Enter your last name"
-          prefix={<UserOutlined />}
+          prefix={<UserOutlined  style={{ fontSize: '18px', paddingRight: '10px' }}/>}
         />
       </Form.Item>
 
@@ -51,7 +51,7 @@ const EmployeeDetailForm = () => {
       >
         <Input
           placeholder="Enter your email"
-          prefix={<MailOutlined />}
+          prefix={<MailOutlined  style={{ fontSize: '18px', paddingRight: '10px' }}/>}
         />
       </Form.Item>
 
@@ -66,7 +66,7 @@ const EmployeeDetailForm = () => {
         <Input
           placeholder="0000-0000000"
           maxLength={12}
-          prefix={<PhoneOutlined rotate={90} />}
+          prefix={<PhoneOutlined rotate={90}  style={{ fontSize: '18px', paddingRight: '10px' }}/>}
         />
       </Form.Item>
 
@@ -80,7 +80,7 @@ const EmployeeDetailForm = () => {
       >
         <Input
           placeholder="Enter your CNIC"
-          prefix={<IdcardOutlined />}
+          prefix={<IdcardOutlined  style={{ fontSize: '18px', paddingRight: '10px' }}/>}
         />
       </Form.Item>
 
@@ -102,12 +102,14 @@ const EmployeeDetailForm = () => {
         rules={[{ required: true, message: "Please select your gender!" }]}
       >
         <Select placeholder="Select your gender">
-          {genderDropdownOptions.map(option => (
-            <Option key={option.value} value={option.value}>
-              {option.label}
-            </Option>
+          {genderDropdownOptions.map((option) => (
+            <Select.Option key={option.value} value={option.value}>
+              {option.icon} {option.label}
+            </Select.Option>
           ))}
         </Select>
+      
+        
       </Form.Item>
 
       <Form.Item
@@ -117,7 +119,7 @@ const EmployeeDetailForm = () => {
       >
         <Input
           type="date"
-          prefix={<CalendarOutlined />}
+          prefix={<CalendarOutlined  style={{ fontSize: '18px', paddingRight: '10px' }}/>}
         />
       </Form.Item>
 
@@ -128,7 +130,7 @@ const EmployeeDetailForm = () => {
       >
         <Input
           placeholder="Enter duration"
-          prefix={<UserOutlined />}
+          prefix={<UserOutlined  style={{ fontSize: '18px', paddingRight: '10px' }}/>}
         />
       </Form.Item>
 
@@ -154,7 +156,7 @@ const EmployeeDetailForm = () => {
       >
         <Input
           placeholder="Enter your salary"
-          prefix={<DollarOutlined />}
+          prefix={<DollarOutlined  style={{ fontSize: '18px', paddingRight: '10px' }}/>}
         />
       </Form.Item>
 

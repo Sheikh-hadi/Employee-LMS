@@ -1,7 +1,8 @@
 import React from "react";
 import { Form, Input, Select } from "antd";
-import gardianRealationDropdownOption from "../models/gardianRealationDropdownModel";
-import { UserOutlined } from "@ant-design/icons";
+import guardianRelationDropdownOption from "../models/gardianRealationDropdownModel";
+import { UserOutlined, PhoneOutlined,  } from "@ant-design/icons";
+
 const GurdaianDetailForm = () => {
   return (
     <>
@@ -22,7 +23,7 @@ const GurdaianDetailForm = () => {
         <Input
           type="text"
           placeholder="Enter your guardian name"
-          prefix={<UserOutlined />}
+          prefix={<UserOutlined style={{ fontSize: '18px', paddingRight: '10px' }} />}
         />
       </Form.Item>
 
@@ -40,7 +41,11 @@ const GurdaianDetailForm = () => {
           },
         ]}
       >
-        <Input type="text" placeholder="0300-0000000" />
+        <Input
+          placeholder="0000-0000000"
+          maxLength={12}
+          prefix={<PhoneOutlined rotate={90} style={{ fontSize: '18px', paddingRight: '10px' }} />}
+        />
       </Form.Item>
 
       <Form.Item
@@ -53,10 +58,10 @@ const GurdaianDetailForm = () => {
           },
         ]}
       >
-        <Select options={gardianRealationDropdownOption}>
-          {gardianRealationDropdownOption.map((option) => (
+        <Select>
+          {guardianRelationDropdownOption.map((option) => (
             <Select.Option key={option.value} value={option.value}>
-              {option.label}
+              {option.icon} {option.label}
             </Select.Option>
           ))}
         </Select>

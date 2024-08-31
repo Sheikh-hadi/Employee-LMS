@@ -3,17 +3,17 @@ const genderDropdownOptions = [
   {
     value: "male",
     label: "Male",
-    icon: <ManOutlined style={{ color: 'green', marginRight: 8 }} />,
+    icon: <ManOutlined style={{  marginRight: 8 }} />,
   },
   {
     value: "female",
     label: "Female",
-    icon: <WomanOutlined style={{ color: 'green', marginRight: 8 }} />,
+    icon: <WomanOutlined style={{ marginRight: 8 }} />,
   },
   {
     value: "other",
     label: "Other",
-    icon: <CheckOutlined style={{ color: 'green', marginRight: 8 }} />,
+    icon: <CheckOutlined style={{  marginRight: 8 }} />,
   },
 ];
 

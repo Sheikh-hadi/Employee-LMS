@@ -20,7 +20,7 @@ const bankDetailForm = () => {
         <Input 
         type="text"
         placeholder="Enter your bank name"
-        prefix={<BankOutlined />}
+        prefix={<BankOutlined  style={{ fontSize: '18px', paddingRight: '10px' }}/>}
          />
       </Form.Item>
 
@@ -37,7 +37,7 @@ const bankDetailForm = () => {
         <Input
          type="text"
          placeholder="Enter your account title"
-         prefix={<BankOutlined />}
+         prefix={<BankOutlined  style={{ fontSize: '18px', paddingRight: '10px' }}/>}
           />
       </Form.Item>
 
@@ -54,7 +54,7 @@ const bankDetailForm = () => {
         <Input
          type="text"
          placeholder="Enter your account number"
-         prefix={<BankOutlined />}
+         prefix={<BankOutlined  style={{ fontSize: '18px', paddingRight: '10px' }}/>}
           />
       </Form.Item>
     </>

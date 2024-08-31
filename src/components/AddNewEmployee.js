@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Button, Modal, Form } from "antd"; // Import Modal from Ant Design
-import { UserAddOutlined } from "@ant-design/icons";
+import { UserAddOutlined , UserOutlined} from "@ant-design/icons";
 import EmployeeDetailForm from "./EmployeeDetailForm";
 import BankDetailForm from "./bankDetailForm";
 import GurdaianDetailForm from "./GurdaianDetailForm";
@@ -27,16 +27,17 @@ const AddNewEmployee = () => {
         type="primary"
         onClick={() => setIsModalOpen(true)}
         icon={<UserAddOutlined />}
-        style={{ margin: "5px 10px" }}
+        // style={{ margin: "5px 10px" }}
       >
         Add New Employee
       </Button>
       <Modal
         style={{ position: "absolute", top: 0, right: 0 }}
-        title="Add New Employee"
+         title="ADD NEW EMPLOYEE"
         open={isModalOpen}
         onOk={() => setIsModalOpen(false)}
         onCancel={() => setIsModalOpen(false)}
+        width={"31%"}
       >
         <Form
           form={form}
@@ -60,6 +61,7 @@ const AddNewEmployee = () => {
               style={{ float: "right" }}
               type="primary"
               htmlType="submit"
+              icon={<UserOutlined/>}
             >
               {" "}
               Submit
