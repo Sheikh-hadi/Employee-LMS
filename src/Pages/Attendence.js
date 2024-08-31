@@ -1,9 +1,10 @@
 import React from 'react'
+import EmployeeAttendenceTable from '../components/EmployeeAttendenceTable'
 
 const Attendence = () => {
   return (
     <div>
-      Attendence
+    <EmployeeAttendenceTable/>
     </div>
   )
 }
