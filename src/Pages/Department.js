@@ -1,11 +1,13 @@
 import React from 'react'
 import DepartmentComponent from '../components/DepartmentComponent'
-import AddNewEmployee from '../components/AddNewEmployee'
+import AddNewDepartment from '../components/AddNewDepartment'
+// import AddNewEmployee from '../components/AddNewEmployee'
 
 const Department = () => {
   return (
     <div>
-     <AddNewEmployee/>
+     {/* <AddNewEmployee/> */}
+     <AddNewDepartment/>
 <DepartmentComponent/>
     </div>
   )

@@ -25,7 +25,7 @@ const DepartmentComponent = () => {
           <Button type="primary" icon={<EditOutlined />} style={{ marginRight: 8, backgroundColor: 'green', borderColor: 'green' }}>
             Edit
           </Button>
-          <Button type="danger" icon={<DeleteOutlined />} style={{ backgroundColor: 'red', borderColor: 'red' }}>
+          <Button type="danger" icon={<DeleteOutlined />} style={{ backgroundColor: 'red', borderColor: 'red' ,color:'white'}}>
             Delete
           </Button>
         </>
