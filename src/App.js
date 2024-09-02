@@ -14,6 +14,7 @@ import Attendence from "./Pages/Attendence";
 import Payment from "./Pages/Payment";
 import Dashboard from "./Pages/Dashboard";
 import Department from "./Pages/Department";
+import LoginPage from "./components/LoginPage";
 
 const { Sider, Content } = Layout;
 
@@ -83,6 +84,7 @@ const App = () => {
           >
             <Routes>
               <Route path="/" element={<Dashboard />} />
+              <Route path="/" element={<LoginPage/>} />
               <Route path="/employee" element={<Employee />} />
               <Route path="/attendence" element={<Attendence />} />
               <Route path="/Payment" element={<Payment />} />
