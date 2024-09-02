@@ -1,6 +1,9 @@
 import React from "react";
 import { Table, Tooltip } from "antd";
+import { CalendarOutlined, ClockCircleOutlined, CheckCircleOutlined } from '@ant-design/icons'; // Correct imports
+
 import { employeesColumn } from "../models/employeeColumnModel";
+
 import { toWords } from "number-to-words";
 import { PrinterOutlined } from "@ant-design/icons";
 import "../App.css";
@@ -42,39 +45,35 @@ const EmployeeAttendenceTable = () => {
       render: (text, record) => {
         return (
           <Tooltip
-            color="blue"
-            placement="right"
-            title={<>
-              <p style={{ margin: 0 }}>Absent: {record.attendance.absent}</p>
-              <p style={{ margin: 0 }}>Late: {record.attendance.late}</p>
-              <p style={{ margin: 0 }}>Leave {record.attendance.leave}</p>
-            </>}
-          >
-            <p
-              style={{
-                margin: 0,
-                background: record.attendance.absent > 0 ? "red" : ""
-              }}
-            >
-              {record.attendance.absent}
-            </p>
-
-            <p style={{ margin: 0, background: record.attendance.late > 0 ? "yellow" : "" }}>{record.attendance.late}</p>
-            <p style={{ margin: 0, background: record.attendance.leave > 0 ? "green" : "" }}>{record.attendance.leave}</p>
-          </Tooltip>
+  color="blue"
+  placement="right"
+  title={
+    <>
+      <p style={{ margin: 0 }}>Absent: {record.attendance.absent}</p>
+      <p style={{ margin: 0 }}>Late: {record.attendance.late}</p>
+      <p style={{ margin: 0 }}>Leave: {record.attendance.leave}</p>
+    </>
+  }
+>
+  <div style={{ display: 'flex', alignItems: 'center' }}>
+    <div style={{ marginRight: 10, display: 'flex', alignItems: 'center' }}>
+      <CalendarOutlined style={{ color: record.attendance.absent > 0 ? 'red' : 'grey' }} />
+      <span style={{ marginLeft: 5 }}>{record.attendance.absent}</span>
+    </div>
+    <div style={{ marginRight: 10, display: 'flex', alignItems: 'center' }}>
+      <ClockCircleOutlined style={{ color: record.attendance.late > 0 ? 'magenta' : 'grey' }} />
+      <span style={{ marginLeft: 5 }}>{record.attendance.late}</span>
+    </div>
+    <div style={{ display: 'flex', alignItems: 'center' }}>
+      <CheckCircleOutlined style={{ color: record.attendance.leave > 0 ? 'green' : 'grey' }} />
+      <span style={{ marginLeft: 5 }}>{record.attendance.leave}</span>
+    </div>
+  </div>
+</Tooltip>
         );
       }
     },
-    // {
-    //   title: "Leaves",
-    //   dataIndex: ["attendance", "leave"],
-    //   key: "leaves",
-    // },
-    // {
-    //   title: "Absent",
-    //   dataIndex: ["attendance", "absent"],
-    //   key: "absent",
-    // },
+   
     {
       title: "Advance",
       dataIndex: "advance",

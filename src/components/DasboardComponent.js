@@ -16,7 +16,7 @@ const EmployeeDashboard = () => {
       </h2>
       <Row gutter={[16, 16]} style={{ marginBottom: "10px" }}>
         <Col span={8}>
-          <Card
+         <a href="/department" ><Card
             className="dashboardcard"
             hoverable
             style={{
@@ -81,79 +81,82 @@ const EmployeeDashboard = () => {
             >
               More Info ➔
             </div>
-          </Card>
-        </Col>
-        <Col span={8}>
-          <Card
-            className="dashboardcard"
-            hoverable
-            style={{
-              borderRadius: "10px",
-              boxShadow: "0 2px 8px rgba(0, 0, 0, 0.1)",
-              textAlign: "center",
-              padding: "30px",
-              cursor: "pointer",
-              backgroundColor: "#e91e63",
-              transition: "transform 0.2s, box-shadow 0.2s",
-              height: "200px",
-              position: "relative",
-            }}
-          >
-            <div style={{ marginBottom: "10px" }}>
-              {" "}
-              <TeamOutlined
-                style={{
-                  fontSize: "78px",
-                  color: "#fff",
-                  position: "absolute",
-                  right: "20px",
-                  top: "50%",
-                  opacity: 0.3,
-                  transform: "translateY(-50%)",
-                }}
-              />
-            </div>
-            <div
-              style={{
-                fontSize: "46px",
-                fontWeight: "600",
-                color: "#fff",
-                position: "absolute",
-                left: "20px",
-                top: "20px",
-              }}
-            >
-              {employees || 0}
-            </div>
-            <div
-              style={{
-                fontSize: "25px",
-                color: "#fff",
-                textAlign: "left",
-                position: "absolute",
-                left: "20px",
-                top: "90px", // Adjusted top position
-              }}
-            >
-              Employee
-            </div>
-            <div
-              style={{
-                fontSize: "20px",
-                color: "#fff",
-                textAlign: "left",
-                position: "absolute",
-                left: "20px",
-                top: "150px", // Adjusted top position
-              }}
-            >
-              More Info ➔
-            </div>
-          </Card>
+          </Card></a>
         </Col>
 
         <Col span={8}>
-          <Card
+          <a href="/employee">
+            <Card
+              className="dashboardcard"
+              hoverable
+              style={{
+                borderRadius: "10px",
+                boxShadow: "0 2px 8px rgba(0, 0, 0, 0.1)",
+                textAlign: "center",
+                padding: "30px",
+                cursor: "pointer",
+                backgroundColor: "#e91e63",
+                transition: "transform 0.2s, box-shadow 0.2s",
+                height: "200px",
+                position: "relative",
+              }}
+            >
+              <div style={{ marginBottom: "10px" }}>
+                {" "}
+                <TeamOutlined
+                  style={{
+                    fontSize: "78px",
+                    color: "#fff",
+                    position: "absolute",
+                    right: "20px",
+                    top: "50%",
+                    opacity: 0.3,
+                    transform: "translateY(-50%)",
+                  }}
+                />
+              </div>
+              <div
+                style={{
+                  fontSize: "46px",
+                  fontWeight: "600",
+                  color: "#fff",
+                  position: "absolute",
+                  left: "20px",
+                  top: "20px",
+                }}
+              >
+                {employees || 0}
+              </div>
+              <div
+                style={{
+                  fontSize: "25px",
+                  color: "#fff",
+                  textAlign: "left",
+                  position: "absolute",
+                  left: "20px",
+                  top: "90px",
+                }}
+              >
+                Employee
+              </div>
+              <div
+                style={{
+                  fontSize: "20px",
+                  color: "#fff",
+                  textAlign: "left",
+                  position: "absolute",
+                  left: "20px",
+                  top: "150px",
+                }}
+              >
+                More Info ➔
+              </div>
+            </Card>
+          </a>
+        </Col>
+
+        <Col span={8}>
+       <a href="/attendence"> <Card
             className="dashboardcard"
             hoverable
             style={{
@@ -204,7 +207,7 @@ const EmployeeDashboard = () => {
                 top: "90px", // Adjusted top position
               }}
             >
-              Leave Requests
+              Attendence
             </div>
             <div
               style={{
@@ -218,7 +221,7 @@ const EmployeeDashboard = () => {
             >
               More Info ➔
             </div>
-          </Card>
+          </Card></a>  
         </Col>
       </Row>
     </div>
