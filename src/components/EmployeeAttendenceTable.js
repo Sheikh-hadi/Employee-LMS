@@ -1,14 +1,17 @@
 import React from "react";
 import { Table, Tooltip } from "antd";
-import { employeesColumn } from "../models/employeeColumnModel"; 
+import { employeesColumn } from "../models/employeeColumnModel";
 import { toWords } from "number-to-words";
-
+import { PrinterOutlined } from "@ant-design/icons";
+import "../App.css";
 const EmployeeAttendenceTable = () => {
   const columns = [
     {
       title: "Sr.",
       dataIndex: "id",
       key: "id",
+      width: "1%",
+      render: (text) => <span style={{ fontWeight: "bold", }}>{`${text}_`} </span>,
     },
     {
       title: "Name",
@@ -28,32 +31,52 @@ const EmployeeAttendenceTable = () => {
     },
     {
       title: "Days",
-      dataIndex: ["attendance", "days"], // Adjusted for nested data
+      dataIndex: ["attendance", "days"],
       key: "days",
+
     },
+
     {
-      title: "Salary",
-      dataIndex: "salary",
-      key: "basicSalary",
-    },
-    {
-      title: "Late",
-      dataIndex: ["attendance", "late"],
+      title: "Attendance",
       key: "lateComings",
+      render: (text, record) => {
+        return (
+          <Tooltip
+            color="blue"
+            placement="right"
+            title={<>
+              <p style={{ margin: 0 }}>Absent: {record.attendance.absent}</p>
+              <p style={{ margin: 0 }}>Late: {record.attendance.late}</p>
+              <p style={{ margin: 0 }}>Leave {record.attendance.leave}</p>
+            </>}
+          >
+            <p
+              style={{
+                margin: 0,
+                background: record.attendance.absent > 0 ? "red" : ""
+              }}
+            >
+              {record.attendance.absent}
+            </p>
+
+            <p style={{ margin: 0, background: record.attendance.late > 0 ? "yellow" : "" }}>{record.attendance.late}</p>
+            <p style={{ margin: 0, background: record.attendance.leave > 0 ? "green" : "" }}>{record.attendance.leave}</p>
+          </Tooltip>
+        );
+      }
     },
-    {
-      title: "Leaves",
-      dataIndex: ["attendance", "leave"],
-      key: "leaves",
-    },
-    {
-      title: "Absent",
-      dataIndex: ["attendance", "absent"],
-      key: "absent",
-    },
+    // {
+    //   title: "Leaves",
+    //   dataIndex: ["attendance", "leave"],
+    //   key: "leaves",
+    // },
+    // {
+    //   title: "Absent",
+    //   dataIndex: ["attendance", "absent"],
+    //   key: "absent",
+    // },
     {
       title: "Advance",
-
       dataIndex: "advance",
       key: "advance",
       render: (text) => <span>0</span>,
@@ -109,6 +132,13 @@ const EmployeeAttendenceTable = () => {
         let salaryInWord = toWords(record.salary);
         return <span>{salaryInWord.toUpperCase()}</span>;
       },
+    },
+    {
+      title: "Print",
+      key: "print",
+      render: () => {
+        return <PrinterOutlined className="icon-edit" />
+      }
     },
   ];
 

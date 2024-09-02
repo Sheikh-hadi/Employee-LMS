@@ -13,6 +13,7 @@ import Employee from "./Pages/Employee";
 import Attendence from "./Pages/Attendence";
 import Payment from "./Pages/Payment";
 import Dashboard from "./Pages/Dashboard";
+import Dapartment from "./Pages/Dapartment";
 
 const { Sider, Content } = Layout;
 
@@ -64,6 +65,9 @@ const App = () => {
               <Link to="/attendence">Attendence</Link>
             </Menu.Item>
             <Menu.Item key="4" icon={<CreditCardOutlined />}>
+              <Link to="/dapartment">Dapartment</Link>
+            </Menu.Item>
+            <Menu.Item key="5" icon={<CreditCardOutlined />}>
               <Link to="/Payment">Payment</Link>
             </Menu.Item>
           </Menu>
@@ -82,6 +86,7 @@ const App = () => {
               <Route path="/employee" element={<Employee />} />
               <Route path="/attendence" element={<Attendence />} />
               <Route path="/Payment" element={<Payment />} />
+              <Route path="/dapartment" element={<Dapartment />} />
             </Routes>
           </Content>
         </Layout>
