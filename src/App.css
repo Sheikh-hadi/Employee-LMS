@@ -28,3 +28,6 @@
  color: 'red';
  transform: scale(1.03);
 }
+.ant-card-body{
+  padding: 0px;
+}

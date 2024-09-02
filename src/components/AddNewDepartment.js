@@ -1,69 +1,49 @@
-import React, { useState } from "react";
-import { Button, Modal, Form, Input } from "antd"; // Import Input for department name
+import React from "react";
+import { Button, Modal, Form, Input } from "antd";
 import { UserAddOutlined } from "@ant-design/icons";
 
 const AddNewDepartment = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  let formInstance;
 
-  const [form] = Form.useForm();
-
-  const onFinish = (values) => {
-    console.log("Received values of form: ", values);
-    form.resetFields();
-    setIsModalOpen(false);
-  };
-
-  const onFinishFailed = (errorInfo) => {
-    console.log("Failed:", errorInfo);
-  };
-
-  return (
-    <div style={{ display: "flex", justifyContent: "flex-end" }}>
-      <Button
-        type="primary"
-        onClick={() => setIsModalOpen(true)}
-        icon={<UserAddOutlined />}
-      >
-        Add New Department
-      </Button>
-      <Modal
-        style={{ position: "absolute", top: 0, right: 0 }}
-        title="ADD NEW DEPARTMENT"
-        open={isModalOpen}
-        onOk={() => setIsModalOpen(false)}
-        onCancel={() => setIsModalOpen(false)}
-        width={"31%"}
-      >
+  const showModal = () => {
+    Modal.confirm({
+      title: "ADD NEW DEPARTMENT",
+      icon: <UserAddOutlined style={{ color: "#1677ff" }}/>,
+      width: "31%",
+      content: (
         <Form
-          form={form}
-          name="basic"
+          ref={(form) => {
+            formInstance = form;
+          }}
           layout="horizontal"
           labelCol={{ span: 24 }}
           wrapperCol={{ span: 24 }}
-          onFinish={onFinish}
-          onFinishFailed={onFinishFailed}
-          scrollToFirstError={true}
+          onFinish={(values) => {
+            console.log("Received values of form: ", values);
+            formInstance.resetFields();
+          }}
         >
           <Form.Item
             label="Department Name"
             name="departmentName"
-            rules={[{ required: true, message: 'Please input the department name!' }]}
+            rules={[{ required: true, message: "Please input the department name!" }]}
           >
             <Input placeholder="Enter department name" />
           </Form.Item>
-
-          <Form.Item>
-            <Button
-              size="medium"
-              style={{ float: "right" }}
-              type="primary"
-              htmlType="submit"
-            >
-              Submit
-            </Button>
-          </Form.Item>
         </Form>
-      </Modal>
+      ),
+      onOk() {
+        formInstance.submit();
+      },
+      onCancel() {},
+    });
+  };
+
+  return (
+    <div style={{ display: "flex", justifyContent: "flex-end" }}>
+      <Button type="primary" onClick={showModal} icon={<UserAddOutlined  color="blue"/>}>
+        Add New Department
+      </Button>
     </div>
   );
 };
