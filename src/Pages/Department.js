@@ -1,8 +1,13 @@
 import React from 'react'
+import DepartmentComponent from '../components/DepartmentComponent'
+import AddNewEmployee from '../components/AddNewEmployee'
 
 const Department = () => {
   return (
-    <div>Department</div>
+    <div>
+     <AddNewEmployee/>
+<DepartmentComponent/>
+    </div>
   )
 }
 
