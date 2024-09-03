@@ -30,14 +30,14 @@ const App = () => {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
 
-  const handleLocation = location === "/login" || location ==="/Login" || location === "/Signup" || location === "/Signup"? false : true;
+  const handleLocation = location === "/login" || location ==="/Login" || location === "/signup" || location === "/Signup"? false : true;
 
   console.log("handleLocation: ", handleLocation);
   return (
     <Router>
       <Routes>
         <Route path="/login" element={<LoginPage />} />
-        <Route path="/Signup" element={<SignUpForm/>} />
+        <Route path="/signup" element={<SignUpForm/>} />
       </Routes>
       {handleLocation && (
         <Layout style={{ minHeight: "100vh" }}>

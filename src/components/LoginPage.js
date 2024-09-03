@@ -1,40 +1,48 @@
 import React from 'react';
-import { Form, Input, Button, Checkbox, Typography } from 'antd';
-import { GoogleOutlined, MailOutlined, LockOutlined } from '@ant-design/icons';
+import { Form, Input, Button, Checkbox, Typography, message, Row, Col } from 'antd';
+import { MailOutlined, LockOutlined } from '@ant-design/icons';
 
 const LoginPage = () => {
   const onFinish = (values) => {
     console.log('Success:', values);
+    // Display a success alert when login is successful
+    message.success('Login successful!');
   };
 
   const onFinishFailed = (errorInfo) => {
     console.log('Failed:', errorInfo);
+    // Display an error alert when a field is empty or validation fails
+    message.error('Please fill in all required fields!');
   };
 
   return (
-    <div
+    <Row
+      justify="center"
+      align="middle"
       style={{
-        display: 'flex',
         height: '100vh',
-        justifyContent: 'center',
-        alignItems: 'center',
         backgroundColor: '#f0f2f5',
       }}
     >
-      <div
+      <Col
+        xs={24}
+        sm={18}
+        md={16}
+        lg={14}
+        xl={12}
         style={{
           display: 'flex',
-          width: '800px',
           backgroundColor: 'white',
           boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
           borderRadius: '10px',
+          overflow: 'hidden',
         }}
       >
-        <div
+        <Col
+          xs={0}
+          md={12}
           style={{
-            flex: 1,
             backgroundColor: '#f0f2f5',
-            borderRadius: '10px 0 0 10px',
           }}
         >
           <img
@@ -44,23 +52,38 @@ const LoginPage = () => {
               width: '100%',
               height: '100%',
               objectFit: 'cover',
-              borderRadius: '10px 0 0 10px',
             }}
           />
-        </div>
+          <a href='/signup'>
+            <Button
+              type="primary"
+              style={{
+                position: 'absolute',
+                top: '50%',
+                left: '50%',
+                transform: 'translate(-50%, -50%)',
+                backgroundColor: 'darkslateblue',
+                borderColor: 'darkslateblue',
+              }}
+            >
+              Sign Up
+            </Button>
+          </a>
+        </Col>
 
-        <div
+        <Col
+          xs={24}
+          md={12}
           style={{
-            flex: 0.9,
             display: 'flex',
             alignItems: 'center',
             flexDirection: 'column',
             padding: '10px',
-            borderRadius: '0 10px 10px 0',
             backgroundColor: 'white',
           }}
         >
-          <div
+          <Typography.Title
+            level={2}
             style={{
               fontSize: '24px',
               fontWeight: 'bold',
@@ -69,7 +92,7 @@ const LoginPage = () => {
             }}
           >
             Craxinno CRM
-          </div>
+          </Typography.Title>
           <Typography.Title
             style={{
               fontSize: '54px',
@@ -98,14 +121,13 @@ const LoginPage = () => {
             >
               <Input
                 style={{ border: "1px solid darkslateblue" }}
-                placeholder="Enter your Email"
+                placeholder="Enter your email"
                 prefix={<MailOutlined style={{ color: 'darkslateblue', margin: '5px' }} />}
               />
             </Form.Item>
 
             <Form.Item
-              label={<span style={{ color: 'darkslateblue' }}>Password</span>
-              }
+              label={<span style={{ color: 'darkslateblue' }}>Password</span>}
               name="password"
               rules={[{ required: true, message: 'Please enter your password!' }]}
             >
@@ -117,47 +139,34 @@ const LoginPage = () => {
             </Form.Item>
 
             <Form.Item>
-              <div
-                style={{
-                  display: 'flex',
-                  justifyContent: 'space-between',
-                  alignItems: 'center',
-                }}
-              >
+              <Row justify="space-between">
                 <Checkbox style={{ color: "darkslateblue" }}>Remember Me</Checkbox>
                 <a href="/" style={{ color: "darkslateblue" }}>
                   Forgot Password?
                 </a>
-              </div>
+              </Row>
             </Form.Item>
 
-            <Form.Item  style={{ border: '1px solid darkslateblue', borderRadius: '7px' }}>
-              <Button style={{ color: "darkslateblue" }} htmlType="submit" block>
+            <Form.Item style={{ border: '1px solid darkslateblue', borderRadius: '7px' }}>
+              <Button
+                type="primary"
+                htmlType="submit"
+                block
+                style={{ backgroundColor: "darkslateblue", borderColor: "darkslateblue" }}
+              >
                 Login
               </Button>
             </Form.Item>
 
-            <p style={{ textAlign: "center", color: "darkslateblue" }}>Or</p>
-
-            <Form.Item style={{ border: '1px solid darkslateblue', borderRadius: '7px' }}>
-              <Button
-                style={{ color: "darkslateblue" }}
-                icon={<GoogleOutlined style={{ color: 'darkslateblue' }} />}
-                block
-              >
-                Login with Google
-              </Button>
-            </Form.Item>
-
-            <Form.Item>
+            <Form.Item style={{ marginTop: '20px' }}>
               <p>
-                Don’t have an account? <a href="/">Create here</a>
+                Don’t have an account? <a href="/signUpForm" style={{ color: "darkslateblue" }}>Create here</a>
               </p>
             </Form.Item>
           </Form>
-        </div>
-      </div>
-    </div>
+        </Col>
+      </Col>
+    </Row>
   );
 };
 
