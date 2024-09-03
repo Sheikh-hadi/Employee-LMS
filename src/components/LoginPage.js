@@ -51,7 +51,7 @@ const LoginPage = () => {
           />
           
           {/* Move the sign-up button here */}
-          <a href='signUpForm'>
+          <a href='/signUpForm'>
             <Button
               type="primary"
               style={{
