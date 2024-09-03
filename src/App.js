@@ -20,15 +20,19 @@ const { Sider, Content } = Layout;
 
 const App = () => {
   const [collapsed, setCollapsed] = useState(false);
+  const location = window.location.pathname === "/login";
   const {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
 
+
   return (
-    
+
     <Router>
-      <LoginPage/>
-      <Layout style={{ minHeight: "100vh" }}>
+      <Routes>
+        <Route path="/login" element={<LoginPage />} />
+      </Routes>
+      {!location && <Layout style={{ minHeight: "100vh" }}>
         <Sider trigger={null} collapsible collapsed={collapsed}>
           <div
             style={{
@@ -86,7 +90,6 @@ const App = () => {
           >
             <Routes>
               <Route path="/" element={<Dashboard />} />
-              <Route path="/" element={<LoginPage/>} />
               <Route path="/employee" element={<Employee />} />
               <Route path="/attendence" element={<Attendence />} />
               <Route path="/Payment" element={<Payment />} />
@@ -94,7 +97,8 @@ const App = () => {
             </Routes>
           </Content>
         </Layout>
-      </Layout>
+      </Layout>}
+
     </Router>
   );
 };

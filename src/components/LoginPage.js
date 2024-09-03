@@ -51,7 +51,7 @@ const LoginPage = () => {
 
         <div
           style={{
-            flex: 0.7,
+            flex: 0.9,
             display: 'flex',
             alignItems: 'center',
             flexDirection: 'column',
@@ -91,8 +91,9 @@ const LoginPage = () => {
             style={{ width: '70%' }}
           >
             <Form.Item
-              label={<span style={{ color: 'darkslateblue' }}>Email</span>} 
+              label={<span style={{ color: 'darkslateblue' }}>Email</span>}
               name="email"
+              hasFeedback
               rules={[{ required: true, message: 'Please enter your email!' }]}
             >
               <Input
@@ -103,7 +104,8 @@ const LoginPage = () => {
             </Form.Item>
 
             <Form.Item
-              label={<span style={{ color: 'darkslateblue' }}>Password</span>} 
+              label={<span style={{ color: 'darkslateblue' }}>Password</span>
+              }
               name="password"
               rules={[{ required: true, message: 'Please enter your password!' }]}
             >
@@ -129,7 +131,7 @@ const LoginPage = () => {
               </div>
             </Form.Item>
 
-            <Form.Item style={{ border: '1px solid darkslateblue', borderRadius: '7px' }}>
+            <Form.Item  style={{ border: '1px solid darkslateblue', borderRadius: '7px' }}>
               <Button style={{ color: "darkslateblue" }} htmlType="submit" block>
                 Login
               </Button>

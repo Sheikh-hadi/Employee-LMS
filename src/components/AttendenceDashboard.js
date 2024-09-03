@@ -1,8 +1,6 @@
 import React from 'react';
 import { Row, Col, Card, Progress } from 'antd';
 
-// Import the data from employeesColumn
-import { employeesColumn } from '../models/employeeColumnModel'; 
 import BirthdayCard from './BirthdayCard';
 
 const AttendenceDashboard = () => {
