@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Table, Tooltip, Input, Button, Modal, Form, InputNumber } from "antd";
+import { Table, Tooltip, Input, Button, Modal, Form, InputNumber, Col, Row } from "antd";
 import { CalendarOutlined, ClockCircleOutlined, CheckCircleOutlined, SearchOutlined, PrinterOutlined } from "@ant-design/icons";
 import { employeesColumn } from "../models/employeeColumnModel";
 import { toWords } from "number-to-words";
@@ -174,24 +174,31 @@ const EmployeeAttendenceTable = () => {
   ];
 
   return (
-    <div style={{ position: 'relative', padding: '40px' }}>
+    <div style={{ padding: '40px' }}>
       {/* Search Bar */}
       <Input
         placeholder="Search employee"
         prefix={<SearchOutlined style={{ color: 'blue' }} />}
         value={searchTerm}
         onChange={handleSearch}
-        style={{ marginBottom: '16px', width: '300px', position: 'absolute', top: 0, right: '940px' }}
-      />
-
+        style={{ marginBottom: '16px', width: '300px', position: 'absolute', top: 10, right: '940px' }}
+      /><Row>
+<Col>
       {/* Add Button */}
       <Button
         type="primary"
-        style={{ position: 'absolute', top: 0, right: 0 }}
+        style={{ position: 'absolute', top: 10, right: 40 }}
         onClick={handleAddClick}
       >
         Add
-      </Button>
+      </Button></Col>
+    <Col>  <Button
+        type="primary"
+        style={{ position: 'absolute', top: 10, right: 40 }}
+        // onClick={handleAddClick}
+      >
+       Send Email
+      </Button></Col></Row>
 
       {/* Employee Table */}
       <Table columns={columns} dataSource={filteredData} />
