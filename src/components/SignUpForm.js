@@ -1,10 +1,32 @@
 import React from 'react';
-import { Form, Input, Button, Checkbox, Typography, message } from 'antd';
+import { Form, Input, Button, message , Typography} from 'antd';
 import { MailOutlined, LockOutlined } from '@ant-design/icons';
 
-const LoginPage = () => {
+const SignUpForm = () => {
+  const [form] = Form.useForm();
+
   const onFinish = (values) => {
-    console.log('Success:', values);
+    // Check if all fields are filled
+    const { Name, userName, email, password, confirmPassword } = values;
+    if (!Name || !userName || !email || !password || !confirmPassword) {
+      message.error('Please fill in all fields!');
+      return;
+    }
+
+    // Check if passwords match
+    if (password !== confirmPassword) {
+      message.error('Passwords do not match!');
+      return;
+    }
+
+    // Check if password length is at least 8 characters
+    if (password.length < 8) {
+      message.error('Password must be at least 8 characters long!');
+      return;
+    }
+
+    // If all validations pass
+    message.success('Successfully signed up!');
   };
 
   const onFinishFailed = (errorInfo) => {
@@ -49,23 +71,19 @@ const LoginPage = () => {
               borderRadius: '10px 0 0 10px',
             }}
           />
-          
-          {/* Move the sign-up button here */}
-          <a href='signUpForm'>
-            <Button
-              type="primary"
-              style={{
-                position: 'absolute',
-                top: '50%',
-                left: '50%',
-                transform: 'translate(-50%, -50%)',
-                backgroundColor: 'darkslateblue',
-                borderColor: 'darkslateblue',
-              }}
-            >
-              Sign Up
-            </Button>
-          </a>
+       <a href='/login'> <Button
+            type="primary"
+            style={{
+              position: 'absolute',
+              top: '50%',
+              left: '50%',
+              transform: 'translate(-50%, -50%)',
+              backgroundColor: 'darkslateblue',
+              borderColor: 'darkslateblue',
+            }}
+          >
+            Log In
+          </Button></a>  
         </div>
 
         <div
@@ -79,16 +97,7 @@ const LoginPage = () => {
             backgroundColor: 'white',
           }}
         >
-          <div
-            style={{
-              fontSize: '24px',
-              fontWeight: 'bold',
-              marginTop: '40px',
-              color: 'darkblue',
-            }}
-          >
-            Craxinno CRM
-          </div>
+          
           <Typography.Title
             style={{
               fontSize: '54px',
@@ -98,17 +107,39 @@ const LoginPage = () => {
               marginTop: '2px',
             }}
           >
-            Welcome To <span style={{ fontSize: '54px', color: 'darkblue' }}>Craxinno CRM</span>
+            Sign Up<span style={{ fontSize: '54px', color: 'darkblue' }}></span>
           </Typography.Title>
 
           <Form
-            name="basic"
-            initialValues={{ remember: true }}
+            form={form}
+            name="signUp"
             onFinish={onFinish}
             onFinishFailed={onFinishFailed}
             layout="vertical"
             style={{ width: '70%' }}
           >
+            <Form.Item
+              label={<span style={{ color: 'darkslateblue' }}> Name</span>}
+              name="Name"
+              rules={[{ required: true, message: 'Please enter your  name!' }]}
+            >
+              <Input
+                style={{ border: "1px solid darkslateblue" }}
+                placeholder="Enter your  name"
+              />
+            </Form.Item>
+
+            <Form.Item
+              label={<span style={{ color: 'darkslateblue' }}>Username</span>}
+              name="userName"
+              rules={[{ required: true, message: 'Please enter your username!' }]}
+            >
+              <Input
+                style={{ border: "1px solid darkslateblue" }}
+                placeholder="Enter your username"
+              />
+            </Form.Item>
+
             <Form.Item
               label={<span style={{ color: 'darkslateblue' }}>Email</span>}
               name="email"
@@ -134,19 +165,16 @@ const LoginPage = () => {
               />
             </Form.Item>
 
-            <Form.Item>
-              <div
-                style={{
-                  display: 'flex',
-                  justifyContent: 'space-between',
-                  alignItems: 'center',
-                }}
-              >
-                <Checkbox style={{ color: "darkslateblue" }}>Remember Me</Checkbox>
-                <a href="/" style={{ color: "darkslateblue" }}>
-                  Forgot Password?
-                </a>
-              </div>
+            <Form.Item
+              label={<span style={{ color: 'darkslateblue' }}>Confirm Password</span>}
+              name="confirmPassword"
+              rules={[{ required: true, message: 'Please confirm your password!' }]}
+            >
+              <Input.Password
+                style={{ border: "1px solid darkslateblue" }}
+                placeholder="Confirm your password"
+                prefix={<LockOutlined style={{ color: 'darkslateblue', margin: '5px' }} />}
+              />
             </Form.Item>
 
             <Form.Item style={{ border: '1px solid darkslateblue', borderRadius: '7px' }}>
@@ -156,15 +184,8 @@ const LoginPage = () => {
                 block
                 style={{ backgroundColor: "darkslateblue", borderColor: "darkslateblue" }}
               >
-                Login
+                Sign Up
               </Button>
-            </Form.Item>
-
-            {/* Ensure this is placed above the image button */}
-            <Form.Item style={{ marginTop: '20px' }}>
-              <p>
-                Don’t have an account? <a href="/signUpForm" style={{ color: "darkslateblue" }}>Create here</a>
-              </p>
             </Form.Item>
           </Form>
         </div>
@@ -173,4 +194,4 @@ const LoginPage = () => {
   );
 };
 
-export default LoginPage;
+export default SignUpForm;

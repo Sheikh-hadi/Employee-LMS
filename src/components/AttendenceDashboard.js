@@ -7,7 +7,7 @@ const AttendenceDashboard = () => {
 
 
   return (
-    <Row gutter={16} style={{ marginTop: 20, border: '2px solid black' }}>
+    <Row gutter={16} style={{ marginTop: 20,  }}>
       <Col span={12}>
         <Card>
           <h3>Today's Attendance</h3>
