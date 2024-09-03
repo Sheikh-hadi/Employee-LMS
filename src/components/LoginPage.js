@@ -137,18 +137,6 @@ const LoginPage = () => {
               </Button>
             </Form.Item>
 
-            <p style={{ textAlign: "center", color: "darkslateblue" }}>Or</p>
-
-            <Form.Item style={{ border: '1px solid darkslateblue', borderRadius: '7px' }}>
-              <Button
-                style={{ color: "darkslateblue" }}
-                icon={<GoogleOutlined style={{ color: 'darkslateblue' }} />}
-                block
-              >
-                Login with Google
-              </Button>
-            </Form.Item>
-
             <Form.Item>
               <p>
                 Don’t have an account? <a href="/">Create here</a>

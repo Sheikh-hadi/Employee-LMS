@@ -32,7 +32,7 @@ const App = () => {
       <Routes>
         <Route path="/login" element={<LoginPage />} />
       </Routes>
-      {!location && <Layout style={{ minHeight: "100vh" }}>
+      {!location &&<Layout style={{ minHeight: "100vh" }}>
         <Sider trigger={null} collapsible collapsed={collapsed}>
           <div
             style={{
@@ -97,7 +97,8 @@ const App = () => {
             </Routes>
           </Content>
         </Layout>
-      </Layout>}
+      </Layout>} 
+      
 
     </Router>
   );
