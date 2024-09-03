@@ -1,6 +1,6 @@
-import { Table, Tooltip, Select, Switch } from "antd";
-import { DeleteOutlined } from "@ant-design/icons";
-import React from "react";
+import React, { useState } from "react";
+import { Table, Tooltip, Select, Switch, Input } from "antd";
+import { DeleteOutlined, SearchOutlined } from "@ant-design/icons";
 import { employeesColumn } from "../models/employeeColumnModel";
 import employeeDapartmentDropdownOptions from "./../models/employeeDapartmentModel";
 import { toWords } from "number-to-words";
@@ -8,8 +8,13 @@ import { toWords } from "number-to-words";
 import "../App.css";
 
 const EmployeeTable = () => {
-  const handleDepartmentChange = (value, key) => { };
+  // State to hold the filtered data and search input
+  const [filteredData, setFilteredData] = useState(employeesColumn);
+  const [searchTerm, setSearchTerm] = useState("");
 
+  const handleDepartmentChange = (value, key) => {};
+
+  // Columns definition
   const columns = [
     {
       title: "Sr.",
@@ -53,20 +58,6 @@ const EmployeeTable = () => {
         );
       },
     },
-
-    // {
-    //   title: "Email",
-    //   dataIndex: "email",
-    //   key: "email",
-    //   render: (email) => <span style={{ color: "blue" }}>{email}</span>,
-    // },
-    // {
-    //   title: "Contact",
-    //   dataIndex: "contact",
-    //   key: "contact",
-    //   width: "12%",
-    //   render: (contact) => <span style={{ border: "2px solid black" }}>{contact}</span>,
-    // },
     {
       title: "Designation",
       dataIndex: "designation",
@@ -122,7 +113,6 @@ const EmployeeTable = () => {
         </span>
       ),
     },
-
     {
       title: "Address",
       dataIndex: "currentAddress",
@@ -133,15 +123,12 @@ const EmployeeTable = () => {
         color="blue"
         placement="right" ><span style={{ textAlign: "justify" }}>{text}</span></Tooltip>,
     },
-
     {
       title: "Status",
       dataIndex: "status",
       key: "status",
       width: "10%",
-
       render: (text) => {
-        console.log("text: ", text);
         return (
           <Switch
             checked={text}
@@ -152,7 +139,6 @@ const EmployeeTable = () => {
         );
       },
     },
-
     {
       title: "Author",
       key: "actions",
@@ -168,11 +154,40 @@ const EmployeeTable = () => {
     },
   ];
 
+  // Handle the search input change
+  const handleSearch = (e) => {
+    const value = e.target.value.toLowerCase();
+    setSearchTerm(value);
+
+    const filtered = employeesColumn.filter((item) => {
+      console.log(employeesColumn)
+      return (
+        item.name.toLowerCase().includes(value) ||
+        item.email.toLowerCase().includes(value) ||
+        item.contact.toLowerCase().includes(value)||
+        item.salary.toLowerCase().includes(value)
+      );
+    });
+
+    setFilteredData(filtered);
+  };
+
   return (
-    <div>
+    <div style={{ textAlign: "left", marginTop: "-16px" }}>
+  
+
+      {/* Search Input */}
+      <Input
+        placeholder="Search by name, email, or contact"
+        prefix={<SearchOutlined style={{ color: "blue" }} />}
+        value={searchTerm}
+        onChange={handleSearch}
+        style={{ marginTop: "-20px", width: "250px", margin: "0 auto" }}
+      />
+
       <Table
         columns={columns}
-        dataSource={employeesColumn}
+        dataSource={filteredData}
         pagination={false}
         rowKey="id"
       />
