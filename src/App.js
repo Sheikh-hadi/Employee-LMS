@@ -25,7 +25,9 @@ const App = () => {
   } = theme.useToken();
 
   return (
+    
     <Router>
+      <LoginPage/>
       <Layout style={{ minHeight: "100vh" }}>
         <Sider trigger={null} collapsible collapsed={collapsed}>
           <div
