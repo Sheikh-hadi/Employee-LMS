@@ -1,42 +1,48 @@
 import React from 'react';
-import { Form, Input, Button, Checkbox, Typography, message } from 'antd';
+import { Form, Input, Button, Checkbox, Typography, message, Row, Col } from 'antd';
 import { MailOutlined, LockOutlined } from '@ant-design/icons';
 
 const LoginPage = () => {
   const onFinish = (values) => {
     console.log('Success:', values);
+    // Display a success alert when login is successful
+    message.success('Login successful!');
   };
 
   const onFinishFailed = (errorInfo) => {
     console.log('Failed:', errorInfo);
+    // Display an error alert when a field is empty or validation fails
+    message.error('Please fill in all required fields!');
   };
 
   return (
-    <div
+    <Row
+      justify="center"
+      align="middle"
       style={{
-        display: 'flex',
         height: '100vh',
-        justifyContent: 'center',
-        alignItems: 'center',
         backgroundColor: '#f0f2f5',
       }}
     >
-      <div
+      <Col
+        xs={24}
+        sm={18}
+        md={16}
+        lg={14}
+        xl={12}
         style={{
           display: 'flex',
-          width: '800px',
           backgroundColor: 'white',
           boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
           borderRadius: '10px',
-          position: 'relative',
+          overflow: 'hidden',
         }}
       >
-        <div
+        <Col
+          xs={0}
+          md={12}
           style={{
-            flex: 1,
             backgroundColor: '#f0f2f5',
-            borderRadius: '10px 0 0 10px',
-            position: 'relative',
           }}
         >
           <img
@@ -46,11 +52,8 @@ const LoginPage = () => {
               width: '100%',
               height: '100%',
               objectFit: 'cover',
-              borderRadius: '10px 0 0 10px',
             }}
           />
-          
-          {/* Move the sign-up button here */}
           <a href='/signUpForm'>
             <Button
               type="primary"
@@ -66,20 +69,21 @@ const LoginPage = () => {
               Sign Up
             </Button>
           </a>
-        </div>
+        </Col>
 
-        <div
+        <Col
+          xs={24}
+          md={12}
           style={{
-            flex: 0.9,
             display: 'flex',
             alignItems: 'center',
             flexDirection: 'column',
             padding: '10px',
-            borderRadius: '0 10px 10px 0',
             backgroundColor: 'white',
           }}
         >
-          <div
+          <Typography.Title
+            level={2}
             style={{
               fontSize: '24px',
               fontWeight: 'bold',
@@ -88,7 +92,7 @@ const LoginPage = () => {
             }}
           >
             Craxinno CRM
-          </div>
+          </Typography.Title>
           <Typography.Title
             style={{
               fontSize: '54px',
@@ -135,18 +139,12 @@ const LoginPage = () => {
             </Form.Item>
 
             <Form.Item>
-              <div
-                style={{
-                  display: 'flex',
-                  justifyContent: 'space-between',
-                  alignItems: 'center',
-                }}
-              >
+              <Row justify="space-between">
                 <Checkbox style={{ color: "darkslateblue" }}>Remember Me</Checkbox>
                 <a href="/" style={{ color: "darkslateblue" }}>
                   Forgot Password?
                 </a>
-              </div>
+              </Row>
             </Form.Item>
 
             <Form.Item style={{ border: '1px solid darkslateblue', borderRadius: '7px' }}>
@@ -160,16 +158,15 @@ const LoginPage = () => {
               </Button>
             </Form.Item>
 
-            {/* Ensure this is placed above the image button */}
             <Form.Item style={{ marginTop: '20px' }}>
               <p>
                 Don’t have an account? <a href="/signUpForm" style={{ color: "darkslateblue" }}>Create here</a>
               </p>
             </Form.Item>
           </Form>
-        </div>
-      </div>
-    </div>
+        </Col>
+      </Col>
+    </Row>
   );
 };
 
