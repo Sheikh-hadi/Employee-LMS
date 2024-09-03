@@ -1,6 +1,6 @@
 import React from 'react';
 import { Form, Input, Button, message, Typography, Row, Col } from 'antd';
-import { MailOutlined, LockOutlined } from '@ant-design/icons';
+import { MailOutlined, LockOutlined, UserOutlined } from '@ant-design/icons';
 
 const SignUpForm = () => {
   const [form] = Form.useForm();
@@ -9,16 +9,6 @@ const SignUpForm = () => {
     const { Name, userName, email, password, confirmPassword } = values;
     if (!Name || !userName || !email || !password || !confirmPassword) {
       message.error('Please fill in all fields!');
-      return;
-    }
-
-    if (password !== confirmPassword) {
-      message.error('Passwords do not match!');
-      return;
-    }
-
-    if (password.length < 8) {
-      message.error('Password must be at least 8 characters long!');
       return;
     }
 
@@ -33,7 +23,8 @@ const SignUpForm = () => {
     <Row style={{ height: '100vh', justifyContent: 'center', alignItems: 'center', backgroundColor: '#f0f2f5' }}>
       <Col xs={24} sm={18} md={16} lg={14} xl={12} style={{ backgroundColor: 'white', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)', borderRadius: '10px' }}>
         <Row style={{ height: '100%' }}>
-          <Col xs={0} sm={0} md={12} lg={12} xl={12} style={{ backgroundColor: '#f0f2f5', borderRadius: '10px 0 0 10px', position: 'relative' }}>
+          <Col xs={0} sm={0} md={12} lg={12} xl={12}
+            style={{ backgroundColor: '#f0f2f5', borderRadius: '10px 0 0 10px', position: 'relative' }}>
             <img
               src="login_page.png"
               alt="Craxinno CRM"
@@ -61,29 +52,115 @@ const SignUpForm = () => {
               Sign Up
             </Typography.Title>
 
-            <Form form={form} name="signUp" onFinish={onFinish} onFinishFailed={onFinishFailed} layout="vertical" style={{ width: '70%' }}>
-              <Form.Item label={<span style={{ color: 'darkslateblue' }}>Name</span>} name="Name" rules={[{ required: true, message: 'Please enter your name!' }]}>
-                <Input style={{ border: "1px solid darkslateblue" }} placeholder="Enter your name" />
+            <Form
+              form={form}
+              name="signUp"
+              onFinish={onFinish}
+              onFinishFailed={onFinishFailed}
+              layout="vertical"
+              style={{ width: '70%' }}
+              autoComplete='off'
+            >
+              <Form.Item
+                label={<span style={{ color: 'darkslateblue' }}>Name</span>}
+                name="name"
+                hasFeedback
+                prefix={<UserOutlined style={{ color: "#F51636", fontSize: "18px" }} />}
+                rules={[
+                  { required: true, message: 'Please enter your name!' }
+                ]}
+              >
+                <Input
+                  allowClear
+                  style={{ border: "1px solid darkslateblue" }}
+                  placeholder="Enter your name"
+
+                />
               </Form.Item>
 
-              <Form.Item label={<span style={{ color: 'darkslateblue' }}>Username</span>} name="userName" rules={[{ required: true, message: 'Please enter your username!' }]}>
-                <Input style={{ border: "1px solid darkslateblue" }} placeholder="Enter your username" />
+              <Form.Item
+                label={<span style={{ color: 'darkslateblue' }}>Username</span>}
+                hasFeedback
+                name="userName"
+                rules={[{ required: true, message: 'Please enter your username!' }]}
+                prefix={<UserOutlined style={{ color: "#F51636", fontSize: "18px" }} />}
+              >
+                <Input
+                  allowClear
+                  style={{ border: "1px solid darkslateblue" }}
+                  placeholder="Enter your username"
+                />
               </Form.Item>
 
-              <Form.Item label={<span style={{ color: 'darkslateblue' }}>Email</span>} name="email" hasFeedback rules={[{ required: true, message: 'Please enter your email!' }]}>
-                <Input style={{ border: "1px solid darkslateblue" }} placeholder="Enter your email" prefix={<MailOutlined style={{ color: 'darkslateblue', margin: '5px' }} />} />
+              <Form.Item
+                label={<span style={{ color: 'darkslateblue' }}>Email</span>}
+                name="email"
+                hasFeedback
+                rules={[
+                  { required: true, message: 'Please enter your email!' },
+                  { type: 'email', message: 'Please enter a valid email!' }
+                ]}>
+
+                <Input
+                  allowClear
+                  style={{ border: "1px solid darkslateblue" }}
+                  placeholder="Enter your email"
+                  prefix={<MailOutlined style={{ color: 'darkslateblue', margin: '5px' }} />}
+
+                />
               </Form.Item>
 
-              <Form.Item label={<span style={{ color: 'darkslateblue' }}>Password</span>} name="password" rules={[{ required: true, message: 'Please enter your password!' }]}>
-                <Input.Password style={{ border: "1px solid darkslateblue" }} placeholder="Enter your password" prefix={<LockOutlined style={{ color: 'darkslateblue', margin: '5px' }} />} />
+              <Form.Item
+                label={<span style={{ color: 'darkslateblue' }}>Password</span>}
+                name="password"
+                hasFeedback
+                rules={[
+                  { required: true, message: 'Please enter your password!' },
+                  { min: 8, message: 'Password must be at least 8 characters long!' }
+                ]}>
+                <Input.Password
+                  allowClear
+                  style={{ border: "1px solid darkslateblue" }}
+                  placeholder="Enter your password"
+                  prefix={<LockOutlined style={{ color: 'darkslateblue', margin: '5px' }} />}
+                />
               </Form.Item>
 
-              <Form.Item label={<span style={{ color: 'darkslateblue' }}>Confirm Password</span>} name="confirmPassword" rules={[{ required: true, message: 'Please confirm your password!' }]}>
-                <Input.Password style={{ border: "1px solid darkslateblue" }} placeholder="Confirm your password" prefix={<LockOutlined style={{ color: 'darkslateblue', margin: '5px' }} />} />
+              <Form.Item
+                label={<span style={{ color: 'darkslateblue' }}>Confirm Password</span>}
+                name="confirmPassword"
+                rules={[
+                  { required: true, message: 'Please confirm your password!' },
+                  ({ getFieldValue }) => ({
+                    validator(_, value) {
+                      if (!value || getFieldValue("password") === value) {
+                        return Promise.resolve();
+                      }
+                      return Promise.reject(new Error("Passwords do not match!"));
+                    },
+                  }),
+                ]}
+              >
+                <Input.Password
+                  allowClear
+                  style={{ border: "1px solid darkslateblue" }}
+                  placeholder="Confirm your password"
+                  prefix={<LockOutlined style={{ color: 'darkslateblue', margin: '5px' }} />}
+                />
               </Form.Item>
 
-              <Form.Item style={{ border: '1px solid darkslateblue', borderRadius: '7px' }}>
-                <Button type="primary" htmlType="submit" block style={{ backgroundColor: "darkslateblue", borderColor: "darkslateblue" }}>
+              <Form.Item
+                style={{
+                  border: '1px solid darkslateblue',
+                  borderRadius: '7px'
+                }}
+              >
+                <Button
+                  type="primary"
+                  htmlType="submit"
+                  block
+                  style={{ backgroundColor: "darkslateblue", borderColor: "darkslateblue" }}
+                >
                   Sign Up
                 </Button>
               </Form.Item>

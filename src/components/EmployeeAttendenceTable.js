@@ -174,32 +174,42 @@ const EmployeeAttendenceTable = () => {
   ];
 
   return (
-    <div style={{ padding: '40px' }}>
+    <div>
       {/* Search Bar */}
-      <Input
-        placeholder="Search employee"
-        prefix={<SearchOutlined style={{ color: 'blue' }} />}
-        value={searchTerm}
-        onChange={handleSearch}
-        style={{ marginBottom: '16px', width: '300px', position: 'absolute', top: 10, right: '940px' }}
-      /><Row>
-<Col>
-      {/* Add Button */}
-      <Button
-        type="primary"
-        style={{ position: 'absolute', top: 10, right: 40 }}
-        onClick={handleAddClick}
-      >
-        Add
-      </Button></Col>
-    <Col>  <Button
-        type="primary"
-        style={{ position: 'absolute', top: 10, right: 40 }}
-        // onClick={handleAddClick}
-      >
-       Send Email
-      </Button></Col></Row>
+      <Row>
+        <Col span={6}>
+          <Input
+            placeholder="Search employee"
+            prefix={<SearchOutlined style={{ color: 'blue' }} />}
+            value={searchTerm}
+            onChange={handleSearch}
+          />
+        </Col>
 
+        <Col span={5} offset={13}  >
+
+          <Row gutter={16}>
+            <Col span={12}>
+              <Button
+              block
+                type="primary"
+              // onClick={handleAddClick}
+              >
+                Send Email
+              </Button>
+            </Col>
+            <Col span={12} >
+              <Button
+              block
+                type="primary"
+                onClick={handleAddClick}
+              >
+                Add
+              </Button>
+            </Col>
+          </Row>
+        </Col>
+      </Row>
       {/* Employee Table */}
       <Table columns={columns} dataSource={filteredData} />
 

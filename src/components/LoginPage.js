@@ -5,13 +5,11 @@ import { MailOutlined, LockOutlined } from '@ant-design/icons';
 const LoginPage = () => {
   const onFinish = (values) => {
     console.log('Success:', values);
-    // Display a success alert when login is successful
     message.success('Login successful!');
   };
 
   const onFinishFailed = (errorInfo) => {
     console.log('Failed:', errorInfo);
-    // Display an error alert when a field is empty or validation fails
     message.error('Please fill in all required fields!');
   };
 
@@ -20,8 +18,9 @@ const LoginPage = () => {
       justify="center"
       align="middle"
       style={{
-        height: '100vh',
         backgroundColor: '#f0f2f5',
+        padding: '20px 0', // Add padding to the top and bottom
+        minHeight: '100vh',
       }}
     >
       <Col
@@ -36,6 +35,8 @@ const LoginPage = () => {
           boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
           borderRadius: '10px',
           overflow: 'hidden',
+          minHeight: '80vh', // Adjust the minimum height
+          boxSizing: "content-box",
         }}
       >
         <Col
@@ -43,6 +44,10 @@ const LoginPage = () => {
           md={12}
           style={{
             backgroundColor: '#f0f2f5',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            position: 'relative',
           }}
         >
           <img
@@ -78,7 +83,7 @@ const LoginPage = () => {
             display: 'flex',
             alignItems: 'center',
             flexDirection: 'column',
-            padding: '10px',
+            padding: '20px',
             backgroundColor: 'white',
           }}
         >
@@ -87,7 +92,7 @@ const LoginPage = () => {
             style={{
               fontSize: '24px',
               fontWeight: 'bold',
-              marginTop: '40px',
+              marginTop: '20px',
               color: 'darkblue',
             }}
           >
@@ -95,14 +100,14 @@ const LoginPage = () => {
           </Typography.Title>
           <Typography.Title
             style={{
-              fontSize: '54px',
-              marginBottom: '30px',
+              fontSize: '32px',
+              marginBottom: '20px',
               color: 'darkblue',
               textAlign: 'center',
               marginTop: '2px',
             }}
           >
-            Welcome To <span style={{ fontSize: '54px', color: 'darkblue' }}>Craxinno CRM</span>
+            Welcome To <span style={{ fontSize: '32px', color: 'darkblue' }}>Craxinno CRM</span>
           </Typography.Title>
 
           <Form
@@ -111,7 +116,7 @@ const LoginPage = () => {
             onFinish={onFinish}
             onFinishFailed={onFinishFailed}
             layout="vertical"
-            style={{ width: '70%' }}
+            style={{ width: '80%' }}
           >
             <Form.Item
               label={<span style={{ color: 'darkslateblue' }}>Email</span>}
