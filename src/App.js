@@ -21,19 +21,25 @@ const { Sider, Content } = Layout;
 
 const App = () => {
   const [collapsed, setCollapsed] = useState(false);
-  const location = window.location.pathname === "/Login" || "/login";
+  const location = window.location.pathname;
   console.log("location: ", window.location.pathname);
+  if(location){
+   console.log("l ", window.location.pathname);
+  }
   const {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
 
+  const handleLocation = location === "/login" || location ==="/Login" || location === "/Signup" || location === "/Signup"? false : true;
+
+  console.log("handleLocation: ", handleLocation);
   return (
     <Router>
       <Routes>
         <Route path="/login" element={<LoginPage />} />
-        <Route path="/signUpForm" element={<SignUpForm/>} />
+        <Route path="/Signup" element={<SignUpForm/>} />
       </Routes>
-      {!location && (
+      {handleLocation && (
         <Layout style={{ minHeight: "100vh" }}>
           <Sider
             trigger={null}

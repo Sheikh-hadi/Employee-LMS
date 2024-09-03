@@ -7,26 +7,26 @@ const AttendenceDashboard = () => {
 
 
   return (
-    <Row gutter={16} style={{ marginTop: 20,  }}>
-      <Col span={12}>
-        <Card>
-          <h3>Today's Attendance</h3>
+    <Row gutter={16} style={{ marginTop: 20, }}>
+      <Col span={12} >
+        <Card style={{ height: "100%" }}>
+          <h3>Today Attendance</h3>
           <Row>
-            <Col span={6}>
+            <Col span={5} style={{ textAlign: 'center', padding: '20px', borderRadius: '20px', backgroundColor: 'lightblue' }}>
               <div style={{ fontSize: 24, color: 'green' }}>0</div>
-              <div>Present</div>
+              <div><b>Present </b></div>
             </Col>
-            <Col span={6}>
+            <Col span={5} offset={1} style={{ textAlign: 'center', padding: '20px', borderRadius: '20px', backgroundColor: 'lightblue' }}>
               <div style={{ fontSize: 24, color: 'red' }}>0</div>
-              <div>Absent</div>
+              <div><b>Absent </b></div>
             </Col>
-            <Col span={6}>
+            <Col span={5} offset={1} style={{ textAlign: 'center', padding: '20px', borderRadius: '20px', backgroundColor: 'lightblue' }}>
               <div style={{ fontSize: 24, color: 'orange' }}>0</div>
-              <div>Half Day</div>
+              <div><b> Half Day</b></div>
             </Col>
-            <Col span={6}>
+            <Col span={5} offset={1} style={{ textAlign: 'center', padding: '20px', borderRadius: '20px', backgroundColor: 'lightblue' }}>
               <div style={{ fontSize: 24, color: 'gray' }}>0</div>
-              <div>Unmarked</div>
+              <div><b>Unmarked</b></div>
             </Col>
           </Row>
         </Card>
@@ -41,7 +41,7 @@ const AttendenceDashboard = () => {
 
       {/* Update this Card to show Birthdays */}
       <Col span={8}>
-        <BirthdayCard/>
+        <BirthdayCard />
       </Col>
     </Row>
   );
