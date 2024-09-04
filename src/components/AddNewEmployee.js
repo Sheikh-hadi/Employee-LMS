@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { Button, Modal, Form } from "antd"; // Import Modal from Ant Design
-import { UserAddOutlined , UserOutlined} from "@ant-design/icons";
+import { UserAddOutlined, UserOutlined } from "@ant-design/icons";
 import EmployeeDetailForm from "./EmployeeDetailForm";
 import BankDetailForm from "./bankDetailForm";
 import GurdaianDetailForm from "./GurdaianDetailForm";
+import handlePostData from "../Hooks/usePostHook";
 
 const AddNewEmployee = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -11,8 +12,7 @@ const AddNewEmployee = () => {
   const [form] = Form.useForm();
 
   const onFinish = (values) => {
-    const length = Object.keys(values).length;
-    console.log(length);
+    handlePostData("http://localhost:4000/api/v1/employee", values)
     console.log("Received values of form: ", values);
     form.resetFields();
     setIsModalOpen(false);
@@ -27,13 +27,13 @@ const AddNewEmployee = () => {
         type="primary"
         onClick={() => setIsModalOpen(true)}
         icon={<UserAddOutlined />}
-        // style={{ margin: "5px 10px" }}
+      // style={{ margin: "5px 10px" }}
       >
         Add New Employee
       </Button>
       <Modal
         style={{ position: "absolute", top: 0, right: 0 }}
-         title="ADD NEW EMPLOYEE"
+        title="ADD NEW EMPLOYEE"
         open={isModalOpen}
         onOk={() => setIsModalOpen(false)}
         onCancel={() => setIsModalOpen(false)}
@@ -61,7 +61,7 @@ const AddNewEmployee = () => {
               style={{ float: "right" }}
               type="primary"
               htmlType="submit"
-              icon={<UserOutlined/>}
+              icon={<UserOutlined />}
             >
               {" "}
               Submit

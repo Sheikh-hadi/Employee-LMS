@@ -29,7 +29,7 @@ const employeeDepartmentDropdownOptions = [
   {
     id: 5,
     value: "productManager",
-    label: "Pro.Manager",
+    label: "Product Manager",
     icon: <TagsOutlined style={{ fontSize: '16px', paddingRight: '10px' }} />
   },
   {

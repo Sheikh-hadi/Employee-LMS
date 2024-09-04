@@ -59,7 +59,6 @@ const EmployeeDetailForm = () => {
         name="phoneNumber"
         rules={[
           { required: true, message: "Please input your phone number!" },
-          { pattern: /^\d{4}-\d{7}$/, message: "Please enter a valid phone number (e.g., 0000-0000000)!" },
         ]}
       >
         <Input

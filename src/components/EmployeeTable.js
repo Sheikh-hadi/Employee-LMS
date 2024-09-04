@@ -7,15 +7,15 @@ import {
 } from "@ant-design/icons";
 import employeeDapartmentDropdownOptions from "./../models/employeeDapartmentModel";
 import { toWords } from "number-to-words";
-
 import "../App.css";
 
-const EmployeeTable = ({employees}) => {
+const EmployeeTable = ({ employees }) => {
+  console.log("employees: ", employees)
   // State to hold the filtered data and search input
   const [filteredData, setFilteredData] = useState(employees);
   const [searchTerm, setSearchTerm] = useState("");
 
-  const handleDepartmentChange = (value, key) => {};
+  const handleDepartmentChange = (value, key) => { };
 
   // Columns definition
   const columns = [
@@ -125,8 +125,8 @@ const EmployeeTable = ({employees}) => {
     },
     {
       title: "Address",
-      dataIndex: "currentAddress",
-      key: "currentAddress",
+      dataIndex: "address",
+      key: "address",
       width: "25%",
       render: (text) => (
         <Tooltip
