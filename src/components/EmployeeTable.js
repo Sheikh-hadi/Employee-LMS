@@ -48,16 +48,17 @@ const EmployeeTable = ({ employees }) => {
           placement="right"
           title={
             <div style={{ lineHeight: "1.3" }}>
-              <span>Name: {text}</span>
-              <p style={{ margin: 0 }}>{record.contact}</p>
+              <span>Name: {`${record.firstName} ${record.lastName}`}</span>
+              <p style={{ margin: 0 }}>{record.phoneNumber}</p>
               <p style={{ margin: 0 }}>Email: {record.email}</p>
               <p style={{ margin: 0 }}>SkypeID: </p>
             </div>
           }
         >
           <div style={{ lineHeight: "1.3" }}>
-            <span>{text}</span>
-            <p style={{ margin: 0 }}>{record.contact}</p>
+            <span>{`${record.firstName} ${record.lastName}`}</span>
+
+            <p style={{ margin: 0 }}>{record.phoneNumber}</p>
             <span style={{ margin: 0, color: "blue" }}>{record.email}</span>
           </div>
         </Tooltip>
@@ -71,7 +72,7 @@ const EmployeeTable = ({ employees }) => {
       render: (text, record) => (
         <Select
           defaultValue={text}
-          style={{ width: "80%" }}
+          style={{ width: "100%" }}
           onChange={(value) => handleDepartmentChange(value, record.key)}
           options={employeeDapartmentDropdownOptions}
         />
@@ -118,7 +119,8 @@ const EmployeeTable = ({ employees }) => {
               margin: "0",
             }}
           >
-            {record.joiningDate}
+            {record.createdAt
+}
           </p>
         </span>
       ),
@@ -173,12 +175,12 @@ const EmployeeTable = ({ employees }) => {
     const value = e.target.value.toLowerCase();
     setSearchTerm(value);
 
-    const filtered = employees.filter(
+    const filtered = employees.filter (
       (item) =>
-        item.name.toLowerCase().includes(value) ||
-        item.email.toLowerCase().includes(value) ||
-        item.contact.toLowerCase().includes(value) ||
-        item.salary.toLowerCase().includes(value)
+        item.firstName?.toLowerCase().includes(value) ||
+        item.email?.toLowerCase().includes(value) ||
+        item.phoneNumber?.toLowerCase().includes(value) ||
+        item.salary?.includes(value)
     );
 
     setFilteredData(filtered);
