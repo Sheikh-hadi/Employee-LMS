@@ -5,15 +5,14 @@ import {
   SearchOutlined,
   EditOutlined,
 } from "@ant-design/icons";
-import { employeesColumn } from "../models/employeeColumnModel";
 import employeeDapartmentDropdownOptions from "./../models/employeeDapartmentModel";
 import { toWords } from "number-to-words";
 
 import "../App.css";
 
-const EmployeeTable = () => {
+const EmployeeTable = ({employees}) => {
   // State to hold the filtered data and search input
-  const [filteredData, setFilteredData] = useState(employeesColumn);
+  const [filteredData, setFilteredData] = useState(employees);
   const [searchTerm, setSearchTerm] = useState("");
 
   const handleDepartmentChange = (value, key) => {};
@@ -174,7 +173,7 @@ const EmployeeTable = () => {
     const value = e.target.value.toLowerCase();
     setSearchTerm(value);
 
-    const filtered = employeesColumn.filter(
+    const filtered = employees.filter(
       (item) =>
         item.name.toLowerCase().includes(value) ||
         item.email.toLowerCase().includes(value) ||
