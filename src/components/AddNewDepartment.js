@@ -1,26 +1,21 @@
 import React from "react";
-import { Button, Modal, Form, Input } from "antd";
+import { Button, Modal, Form, Input, Row, Col } from "antd";
 import { UserAddOutlined } from "@ant-design/icons";
 
 const AddNewDepartment = () => {
-  let formInstance;
+  const [form] = Form.useForm();
 
   const showModal = () => {
     Modal.confirm({
       title: "ADD NEW DEPARTMENT",
-      icon: <UserAddOutlined style={{ color: "#1677ff" }}/>,
-      width: "31%",
+      icon: <UserAddOutlined style={{ color: "#1677ff" }} />,
       content: (
         <Form
-          ref={(form) => {
-            formInstance = form;
-          }}
-          layout="horizontal"
-          labelCol={{ span: 24 }}
-          wrapperCol={{ span: 24 }}
+          form={form}
+          layout="vertical"
           onFinish={(values) => {
             console.log("Received values of form: ", values);
-            formInstance.resetFields();
+            form.resetFields();
           }}
         >
           <Form.Item
@@ -33,18 +28,19 @@ const AddNewDepartment = () => {
         </Form>
       ),
       onOk() {
-        formInstance.submit();
+        form.submit();
       },
-      onCancel() {},
     });
   };
 
   return (
-    <div style={{ display: "flex", justifyContent: "flex-end" }}>
-      <Button type="primary" onClick={showModal} icon={<UserAddOutlined  color="blue"/>}>
-        Add New Department
-      </Button>
-    </div>
+    <Row justify="center" style={{ padding: "10px" }}>
+      <Col xs={29} sm={27} md={8} lg={6} style={{ textAlign: "center" }}>
+        <Button type="primary" onClick={showModal} icon={<UserAddOutlined />}>
+          Add New Department
+        </Button>
+      </Col>
+    </Row>
   );
 };
 

@@ -20,41 +20,69 @@ const DepartmentComponent = () => {
       title: "Sr",
       dataIndex: "id",
       key: "id",
+      width:"6%"
     },
     {
-      title: "Department Name",
+      title: (
+        <span style={{ display: "block", textAlign: "center", width: "100%" }}>
+          Department Name
+        </span>
+      ),
       dataIndex: "label",
       key: "department",
+      width: "40%",
+      render: (text) => (
+        <span style={{ display: "block", textAlign: "center" }}>
+          {text}
+        </span>
+      ),
     },
+    
+    
     {
       title: "Action",
       key: "action",
+      width:"15%",
       render: () => (
         <>
-          <Button
-            type="primary"
-            icon={<EditOutlined />}
-            style={{
-              marginRight: 8,
-              backgroundColor: "green",
-              borderColor: "green",
-            }}
-          >
-            Edit
-          </Button>
-          <Button
-            type="danger"
-            icon={<DeleteOutlined />}
-            style={{
-              backgroundColor: "red",
-              borderColor: "red",
-              color: "white",
-            }}
-          >
-            Delete
-          </Button>
+          <Row  gutter={[16,16]}>
+            <Col xs={24} sm={24} md={12} lg={12} xxl={12}>
+              <Button
+               block
+                icon={<EditOutlined />}
+                style={{
+                  marginRight: 8,
+                  backgroundColor: "green",
+                  borderColor: "green",
+                  color: "white",
+                }}
+              >
+                Edit
+              </Button>
+            </Col>
+            <Col xs={24} sm={24} md={12} lg={12} xxl={12}>
+            <Button 
+            block
+              type="danger"
+              icon={<DeleteOutlined />}
+              style={{
+                backgroundColor: "red",
+                borderColor: "red",
+                color: "white",
+              }}
+            >
+              Delete
+            </Button>
+            </Col>
+          </Row>
         </>
       ),
+    },
+    {
+      title: "",
+      dataIndex: "",
+      key: "",
+
     },
   ];
 
@@ -73,7 +101,7 @@ const DepartmentComponent = () => {
 
   return (
     <>
-      <Row >
+      <Row>
         {/* Search Input */}
         <Col span={4}>
           {" "}
@@ -86,7 +114,7 @@ const DepartmentComponent = () => {
             style={{ width: "100%" }}
           />
         </Col>
-        <Col span={6} offset={14} >
+        <Col span={6} offset={14}>
           <AddNewDepartment />
         </Col>{" "}
       </Row>

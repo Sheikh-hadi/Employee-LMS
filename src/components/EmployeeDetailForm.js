@@ -125,7 +125,7 @@ const EmployeeDetailForm = () => {
       <Form.Item
         label="Duration"
         name="duration"
-        rules={[{ required: true, message: "Please input your duration!" }]}
+      
       >
         <Input
           placeholder="Enter duration"

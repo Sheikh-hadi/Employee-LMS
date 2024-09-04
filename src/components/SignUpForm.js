@@ -63,7 +63,7 @@ const SignUpForm = () => {
             >
               <Form.Item
                 label={<span style={{ color: 'darkslateblue' }}>Name</span>}
-                name="name"
+                name="fullName"
                 hasFeedback
                 prefix={<UserOutlined style={{ color: "#F51636", fontSize: "18px" }} />}
                 rules={[

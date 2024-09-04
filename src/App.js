@@ -91,7 +91,7 @@ const App = () => {
                 <Link to="/attendence">Attendence</Link>
               </Menu.Item>
               <Menu.Item key="4" icon={<CreditCardOutlined />}>
-                <Link to="/dapartment">Dapartment</Link>
+                <Link to="/department">Department</Link>
               </Menu.Item>
               <Menu.Item key="5" icon={<CreditCardOutlined />}>
                 <Link to="/Payment">Payment</Link>
@@ -117,7 +117,7 @@ const App = () => {
                 <Route path="/employee" element={<Employee />} />
                 <Route path="/attendence" element={<Attendence />} />
                 <Route path="/Payment" element={<Payment />} />
-                <Route path="/dapartment" element={<Dapartment />} />
+                <Route path="/department" element={<Dapartment />} />
               </Routes>
             </Content>
           </Layout>
