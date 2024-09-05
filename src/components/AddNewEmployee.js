@@ -38,7 +38,7 @@ const AddNewEmployee = () => {
       console.log("error: ", error);
       notification.error({
         message: 'Error',
-        description: `Employee addition failed: ${error?.response?.message || 'Unknown error'}`,
+        description: `Employee addition failed: ${error?.response?.data?.message || 'Unknown error'}`,
       });
       console.error('error: ', error);
       setIsModalOpen(false);

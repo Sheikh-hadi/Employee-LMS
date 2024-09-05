@@ -16,6 +16,7 @@ import Dashboard from "./Pages/Dashboard";
 import LoginPage from "./components/LoginPage";
 import Dapartment from "./Pages/Department";
 import SignUpForm from "./components/SignUpForm";
+import SalaryForm from "./Pages/SalaryForm";
 
 const { Sider, Content } = Layout;
 
@@ -33,6 +34,7 @@ const App = () => {
   return (
     <Router>
       <Routes>
+      <Route path="/salary" element={<SalaryForm/>} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignUpForm/>} />
       </Routes>
