@@ -18,6 +18,7 @@ const GurdaianDetailForm = () => {
             required: true,
             message: "Please input your guardian name!",
           },
+          { pattern: /^[a-zA-Z\s]+$/, message: "Please enter a valid name (only letters and spaces are allowed)" }
         ]}
       >
         <Input

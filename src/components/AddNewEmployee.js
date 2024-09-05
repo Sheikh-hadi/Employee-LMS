@@ -1,11 +1,13 @@
 import React, { useState } from "react";
-import { Button, Modal, Form, Alert, notification } from "antd";
+import { Button, Modal, Form, notification } from "antd";
 import { UserAddOutlined, UserOutlined } from "@ant-design/icons";
 import EmployeeDetailForm from "./EmployeeDetailForm";
 import BankDetailForm from "./BankDetailForm";
 import GurdaianDetailForm from "./GurdaianDetailForm";
 import axios from "axios";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, QueryClient } from "@tanstack/react-query";
+
+const queryClient = new QueryClient();
 
 const AddNewEmployee = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -22,12 +24,23 @@ const AddNewEmployee = () => {
       return response.data;
     },
     onSuccess: (data) => {
-      console.log("data: ", data);
-      Alert.success({ content: 'Employee added successfully' });
+      notification.success({
+        message: 'Success',
+        description: 'Employee added successfully',
+      });
+      console.log('data: ', data);
+      setIsModalOpen(false);
+      form.resetFields();
+      queryClient.invalidateQueries(['employees']);
     },
     onError: (error) => {
-      console.error("error: ", error);
-      Alert.error({ content: 'Error adding employee' });
+      notification.error({
+        message: 'Error',
+        description: `Employee addition failed: ${error.message}`,
+      });
+      console.error('error: ', error);
+      setIsModalOpen(false);
+      form.resetFields();
     },
   });
 
@@ -35,7 +48,6 @@ const AddNewEmployee = () => {
 
   const onFinish = (values) => {
     mutation.mutate(values);
-    // handlePostData("http://localhost:4000/api/v1/employee", values)
     console.log("Received values of form: ", values);
     form.resetFields();
     setIsModalOpen(false);
@@ -62,7 +74,6 @@ const AddNewEmployee = () => {
         type="primary"
         onClick={() => setIsModalOpen(true)}
         icon={<UserAddOutlined />}
-      // style={{ margin: "5px 10px" }}
       >
         Add New Employee
       </Button>

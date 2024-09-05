@@ -1,7 +1,7 @@
 import React from "react";
 import EmployeeTable from "../components/EmployeeTable";
 import AddNewEmployee from "../components/AddNewEmployee";
-import { Skeleton } from "antd";
+import {Skeleton } from "antd";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 
@@ -14,7 +14,7 @@ const Employee = () => {
       return response.data; 
     },
   });
-  // console.log("data: ", data?.data);
+  console.log("data: ", data?.data);
 
 
   if (isLoading) {
