@@ -10,7 +10,8 @@ import { toWords } from "number-to-words";
 import "../App.css";
 
 const EmployeeTable = ({ employees }) => {
-  console.log("employees: ", employees)
+
+  // console.log("employees: ", employees)
   // State to hold the filtered data and search input
   const [filteredData, setFilteredData] = useState(employees);
   const [searchTerm, setSearchTerm] = useState("");
@@ -120,7 +121,7 @@ const EmployeeTable = ({ employees }) => {
             }}
           >
             {record.createdAt
-}
+            }
           </p>
         </span>
       ),
@@ -158,7 +159,7 @@ const EmployeeTable = ({ employees }) => {
       title: "Author",
       key: "actions",
       width: "10%",
-      render: () => (
+      render: (text, record) => (
         <span style={{ display: "flex", gap: "10px" }}>
           <Tooltip title="Created Employee" color="blue" placement="right">
             <span>Hadi</span>
@@ -175,7 +176,7 @@ const EmployeeTable = ({ employees }) => {
     const value = e.target.value.toLowerCase();
     setSearchTerm(value);
 
-    const filtered = employees.filter (
+    const filtered = employees.filter(
       (item) =>
         item.firstName?.toLowerCase().includes(value) ||
         item.email?.toLowerCase().includes(value) ||
