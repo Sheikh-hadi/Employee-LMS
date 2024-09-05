@@ -5,11 +5,12 @@ import EmployeeDetailForm from "./EmployeeDetailForm";
 import BankDetailForm from "./BankDetailForm";
 import GurdaianDetailForm from "./GurdaianDetailForm";
 import axios from "axios";
-import { useMutation, QueryClient } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
-const queryClient = new QueryClient();
+
 
 const AddNewEmployee = () => {
+  const queryClient = useQueryClient();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const mutation = useMutation({
     mutationKey: ["employees"],
@@ -26,14 +27,15 @@ const AddNewEmployee = () => {
     onSuccess: (data) => {
       notification.success({
         message: 'Success',
-        description: 'Employee added successfully',
+        description: data.message,
       });
       console.log('data: ', data);
       setIsModalOpen(false);
       form.resetFields();
-      queryClient.invalidateQueries(['employees']);
+      queryClient.invalidateQueries('employees');
     },
     onError: (error) => {
+      console.log("error: ", error);
       notification.error({
         message: 'Error',
         description: `Employee addition failed: ${error.message}`,

@@ -123,7 +123,9 @@ const EmployeeDetailForm = () => {
       <Form.Item
         label="Date of Birth"
         name="dateOfBirth"
-        rules={[{ required: true, message: "Please input your date of birth!" }]}
+        rules={[
+          { required: true, message: "Please input your date of birth!" },
+          ]}
       >
         <DatePicker disabledDate={disabledDate}
           format="YYYY-MM-DD"
