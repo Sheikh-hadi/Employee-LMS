@@ -1,7 +1,7 @@
 import React from "react";
 import { Form, Input } from "antd";
 import { BankOutlined } from "@ant-design/icons";
-const bankDetailForm = () => {
+const BankDetailForm = () => {
   return (
     <>
       <hr />
@@ -67,4 +67,4 @@ const bankDetailForm = () => {
   );
 };
 
-export default bankDetailForm;
+export default BankDetailForm;
