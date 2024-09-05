@@ -38,7 +38,7 @@ const AddNewEmployee = () => {
       console.log("error: ", error);
       notification.error({
         message: 'Error',
-        description: `Employee addition failed: ${error.message}`,
+        description: `Employee addition failed: ${error?.response?.message || 'Unknown error'}`,
       });
       console.error('error: ', error);
       setIsModalOpen(false);
@@ -98,7 +98,7 @@ const AddNewEmployee = () => {
           scrollToFirstError={true}
           initialValues={{
             contract: "true",
-            gender: "other",
+            gender: "male",
             designation: "engineering",
             guardianRelationship: "father",
           }}
