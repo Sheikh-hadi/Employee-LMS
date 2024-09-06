@@ -48,6 +48,7 @@ const App = () => {
             collapsed={collapsed}
             style={{
               position: "fixed",
+              width: "20px",
               height: "100vh",
               left: 0,
               top: 0,
