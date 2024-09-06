@@ -24,7 +24,7 @@ const AddNewEmployee = () => {
       console.log("response: ", response);
       return response.data;
     },
-    onSuccess: (data) => {
+    onSuccess: async (data) => {
       notification.success({
         message: 'Success',
         description: data.message,
@@ -32,7 +32,7 @@ const AddNewEmployee = () => {
       console.log('data: ', data);
       setIsModalOpen(false);
       form.resetFields();
-      queryClient.invalidateQueries('employees');
+      await queryClient.invalidateQueries("employees")
     },
     onError: (error) => {
       console.log("error: ", error);
