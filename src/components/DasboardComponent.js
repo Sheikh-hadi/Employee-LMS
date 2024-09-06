@@ -1,12 +1,13 @@
 import React from "react";
 import { Card, Col, Row } from "antd";
 import "../App.css";
+import { useEmployeeContext } from "../context/EmployeeContext";
 import { UserOutlined, TeamOutlined, LogoutOutlined } from "@ant-design/icons";
 import employeeDepartmentDropdownOptions from "../models/employeeDapartmentModel";
-import { employeesColumn } from "../models/employeeColumnModel";
 
 const EmployeeDashboard = () => {
-  const employees = employeesColumn?.length || 0;
+  const { employees } = useEmployeeContext(); 
+  const employee = employees?.length || 0;
   const departments = employeeDepartmentDropdownOptions?.length || 0;
 
   // Get today's month and day
@@ -119,7 +120,7 @@ const EmployeeDashboard = () => {
               <div style={cardIconStyle}>
                 <TeamOutlined />
               </div>
-              <div style={cardTitleStyle}>{employees}</div>
+              <div style={cardTitleStyle}>{employee}</div>
               <div style={cardDescriptionStyle}>Employees</div>
               <div style={cardMoreInfoStyle}>More Info ➔</div>
             </Card>

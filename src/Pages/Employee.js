@@ -35,7 +35,7 @@ const Employee = () => {
   return (
     <div>
       <AddNewEmployee />
-      <EmployeeTable employees={data?.data} />
+      <EmployeeTable />
     </div>
   );
 };

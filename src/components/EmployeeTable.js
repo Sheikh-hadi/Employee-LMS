@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useEmployeeContext } from "../context/EmployeeContext";
 import { Table, Tooltip, Select, Switch, Input, Modal } from "antd";
 import {
   DeleteOutlined,
@@ -13,7 +14,8 @@ import "../App.css";
 import UseDeleteEmployee from "../Hooks/Employee/UseDeleteEmployeeHook";
 import EditEmployeeForm from "./EditEmployeeForm";
 
-const EmployeeTable = ({ employees }) => {
+const EmployeeTable = () => {
+  const { employees } = useEmployeeContext(); 
   const queryClient = useQueryClient()
   // console.log("employees: ", employees)
   // State to hold the filtered data and search input
