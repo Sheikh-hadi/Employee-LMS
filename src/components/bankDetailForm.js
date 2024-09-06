@@ -53,7 +53,7 @@ const BankDetailForm = () => {
           },
           {
             pattern: /^\d+$/,
-            message: "Please enter a valid salary (only whole numbers are allowed)"
+            message: "Please enter a valid account number (only whole numbers are allowed)"
           }
         ]}
       >
