@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Row, Col } from "antd";
 import { Input } from 'antd';
 
@@ -29,15 +29,6 @@ const Payslip = () => {
     otherDeductions: "0.00",
   };
 
-  const [formData, setFormData] = useState(fakeData);
-
-  const handleInputChange = (field, value) => {
-    setFormData({
-      ...formData,
-      [field]: value,
-    });
-  };
-
   return (
     <div style={{
       border: "4px solid black",
@@ -60,11 +51,11 @@ const Payslip = () => {
         </Col>
         <Col span={16}>
           <Input 
-            value={formData.name} 
-            onChange={(e) => handleInputChange("name", e.target.value)} 
-            placeholder="Enter name" 
+            value={fakeData.name} 
+            disabled 
             style={{
               border: "none",
+              color: "black",
               outline: "none",
               boxShadow: "none",
               backgroundColor: "transparent"
@@ -76,12 +67,12 @@ const Payslip = () => {
         </Col>
         <Col span={16}>
           <Input 
-            value={formData.designation} 
-            onChange={(e) => handleInputChange("designation", e.target.value)} 
-            placeholder="Enter designation" 
+            value={fakeData.designation} 
+            disabled 
             style={{
               border: "none",
               outline: "none",
+              color: "black",
               boxShadow: "none",
               backgroundColor: "transparent"
             }}
@@ -92,12 +83,12 @@ const Payslip = () => {
         </Col>
         <Col span={16}>
           <Input 
-            value={formData.doj} 
-            onChange={(e) => handleInputChange("doj", e.target.value)} 
-            placeholder="Enter DOJ" 
+            value={fakeData.doj} 
+            disabled 
             style={{
               border: "none",
               outline: "none",
+              color: "black",
               boxShadow: "none",
               backgroundColor: "transparent"
             }}
@@ -112,98 +103,73 @@ const Payslip = () => {
         <Col span={24}>
           <InputField 
             label="BASIC SALARY" 
-            value={formData.basicSalary} 
-            onChange={(e) => handleInputChange("basicSalary", e.target.value)} 
-            placeholder="Enter basic salary" 
+            value={fakeData.basicSalary} 
             currency 
           />
           <InputField 
             label="TRANSPORT" 
-            value={formData.transport} 
-            onChange={(e) => handleInputChange("transport", e.target.value)} 
-            placeholder="Enter transport allowance" 
+            value={fakeData.transport} 
             currency 
           />
           <InputField 
             label="MEDICAL ALLOWANCE" 
-            value={formData.medicalAllowance} 
-            onChange={(e) => handleInputChange("medicalAllowance", e.target.value)} 
-            placeholder="Enter medical allowance" 
+            value={fakeData.medicalAllowance} 
             currency 
           />
           <InputField 
             label="HOUSING" 
-            value={formData.housing} 
-            onChange={(e) => handleInputChange("housing", e.target.value)} 
-            placeholder="Enter housing allowance" 
+            value={fakeData.housing} 
             currency 
           />
           <InputField 
             label="MEAL" 
-            value={formData.meal} 
-            onChange={(e) => handleInputChange("meal", e.target.value)} 
-            placeholder="Enter meal allowance" 
+            value={fakeData.meal} 
             currency 
           />
           <InputField 
             label="MOBILE ALLOWANCE" 
-            value={formData.mobileAllowance} 
-            onChange={(e) => handleInputChange("mobileAllowance", e.target.value)} 
-            placeholder="Enter mobile allowance" 
+            value={fakeData.mobileAllowance} 
             currency 
           />
           <InputField 
             label="ARREARS" 
-            value={formData.arrears} 
-            onChange={(e) => handleInputChange("arrears", e.target.value)} 
-            placeholder="Enter arrears" 
+            value={fakeData.arrears} 
             currency 
           />
           <InputField 
             label="REWARD" 
-            value={formData.reward} 
-            onChange={(e) => handleInputChange("reward", e.target.value)} 
-            placeholder="Enter reward" 
+            value={fakeData.reward} 
             currency 
           />
           <InputField 
             label="E. O. T. M" 
-            value={formData.eotm} 
-            onChange={(e) => handleInputChange("eotm", e.target.value)} 
-            placeholder="Enter EOTM" 
+            value={fakeData.eotm} 
             currency 
           />
           <InputField 
             label="BONUS" 
-            value={formData.bonus} 
-            onChange={(e) => handleInputChange("bonus", e.target.value)} 
-            placeholder="Enter bonus" 
+            value={fakeData.bonus} 
             currency 
           />
           <InputField 
             label="INCENTIVE" 
-            value={formData.incentive} 
-            onChange={(e) => handleInputChange("incentive", e.target.value)} 
-            placeholder="Enter incentive" 
+            value={fakeData.incentive} 
             currency 
           />
         </Col>
       
         <Col span={24} style={{ fontWeight:"600", padding: "10px 0", borderTop: "2px solid black" }}>
-  <InputField 
-    label="Total" 
-    value={
-      parseFloat(formData.basicSalary) + 
-      parseFloat(formData.transport) + 
-      parseFloat(formData.incentive) + 
-      parseFloat(formData.housing)
-    } 
-    disabled
-    currency
-  />
-</Col>
-    
-
+          <InputField 
+            label="Total" 
+            value={
+              parseFloat(fakeData.basicSalary) + 
+              parseFloat(fakeData.transport) + 
+              parseFloat(fakeData.incentive) + 
+              parseFloat(fakeData.housing)
+            } 
+            currency
+          />
+        </Col>
       </Row>
 
       <Row style={{ padding: "10px 0", borderTop: "2px solid black", borderBottom: "2px solid black" }}>
@@ -213,95 +179,83 @@ const Payslip = () => {
         <Col span={24}>
           <InputField 
             label="TAX" 
-            value={formData.tax} 
-            onChange={(e) => handleInputChange("tax", e.target.value)} 
-            placeholder="Enter tax" 
+            value={fakeData.tax} 
+            disabled
             currency 
           />
           <InputField 
             label="PROVIDENT FUND" 
-            value={formData.providentFund} 
-            onChange={(e) => handleInputChange("providentFund", e.target.value)} 
-            placeholder="Enter provident fund" 
+            value={fakeData.providentFund} 
             currency 
           />
           <InputField 
             label="ADVANCE/LOAN" 
-            value={formData.advanceLoan} 
-            onChange={(e) => handleInputChange("advanceLoan", e.target.value)} 
-            placeholder="Enter advance/loan" 
+            value={fakeData.advanceLoan} 
             currency 
           />
           <InputField 
             label="ADVANCE SALARIES" 
-            value={formData.advanceSalaries} 
-            onChange={(e) => handleInputChange("advanceSalaries", e.target.value)} 
-            placeholder="Enter advance salaries" 
+            value={fakeData.advanceSalaries} 
             currency 
           />
           <InputField 
             label="ABSENT" 
-            value={formData.absent} 
-            onChange={(e) => handleInputChange("absent", e.target.value)} 
-            placeholder="Enter absent" 
+            value={fakeData.absent} 
             currency 
           />
           <InputField 
             label="LATE DEDUCTIONS" 
-            value={formData.lateDeductions} 
-            onChange={(e) => handleInputChange("lateDeductions", e.target.value)} 
-            placeholder="Enter late deductions" 
+            value={fakeData.lateDeductions} 
             currency 
           />
           <InputField 
             label="OTHER DEDUCTIONS" 
-            value={formData.otherDeductions} 
-            onChange={(e) => handleInputChange("otherDeductions", e.target.value)} 
-            placeholder="Enter other deductions" 
+            value={fakeData.otherDeductions} 
             currency 
           />
         </Col>
-        <Col span={24} style={{ fontWeight:"500",padding: "10px 0", borderTop: "2px solid black" }}>
-  <InputField 
-    label="Total Deductions" 
-    value={
-      parseFloat(formData.providentFund) + 
-      parseFloat(formData.lateDeductions) + 
-      parseFloat(formData.tax) + 
-      parseFloat(formData.otherDeductions)
-    } 
-    disabled
-    currency
-  />
-</Col>
-<Col span={24} style={{ fontWeight:"600", padding: "10px 0", borderTop: "2px solid black" }}>
-  <InputField 
-    label="Net Payable" 
-    value={
-      (
-        parseFloat(formData.basicSalary) + 
-        parseFloat(formData.transport) + 
-        parseFloat(formData.incentive) + 
-        parseFloat(formData.housing)
-      ) - (
-        parseFloat(formData.providentFund) + 
-        parseFloat(formData.lateDeductions) + 
-        parseFloat(formData.tax) + 
-        parseFloat(formData.otherDeductions)
-      )
-    } 
-    disabled
-    currency
-  />
-</Col>
+
+        <Col span={24} style={{ fontWeight:"500", padding: "10px 0", borderTop: "2px solid black" }}>
+          <InputField 
+            label="Total Deductions" 
+            value={
+              parseFloat(fakeData.providentFund) + 
+              parseFloat(fakeData.lateDeductions) + 
+              parseFloat(fakeData.tax) + 
+              parseFloat(fakeData.otherDeductions)
+            } 
+            currency
+          />
+        </Col>
+
+        <Col span={24} style={{ fontWeight:"600", padding: "10px 0", borderTop: "2px solid black" }}>
+          <InputField 
+            label="Net Payable" 
+            value={
+              (
+                parseFloat(fakeData.basicSalary) + 
+                parseFloat(fakeData.transport) + 
+                parseFloat(fakeData.incentive) + 
+                parseFloat(fakeData.housing)
+              ) - (
+                parseFloat(fakeData.providentFund) + 
+                parseFloat(fakeData.lateDeductions) + 
+                parseFloat(fakeData.tax) + 
+                parseFloat(fakeData.otherDeductions)
+              )
+            } 
+            currency
+          />
+        </Col>
+
         <Col span={24} style={{ textAlign: "center", paddingTop: "20px" }}>
-          <strong>Amount In Words:</strong> Thirty two thousand five forty eighty Rupees Only
+          <strong>Amount In Words:</strong> Thirty-two thousand five forty eighty Rupees Only
         </Col>
       </Row>
 
       <Row style={{ textAlign: "center", paddingTop: "20px" }}>
         <Col span={24}>
-          The figures herein are generated electronically. Hence, does not require signature except for alteration.
+          The figures herein are generated electronically. Hence, they do not require a signature except for alterations.
         </Col>
       </Row>
     </div>
