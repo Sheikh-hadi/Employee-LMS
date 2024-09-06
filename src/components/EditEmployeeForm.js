@@ -16,9 +16,9 @@ import guardianRelationDropdownOption from "../models/gardianRealationDropdownMo
 const { TextArea } = Input;
 const { Option } = Select;
 
-const EditEmployeeForm = ({ setHandleValue }) => {
+const EditEmployeeForm = ({ setHandleValue, values }) => {
   const [form] = Form.useForm();
-
+  console.log("values: ", values)
   const onFinish = (values) => {
     console.log("Received values of form: ", values);
     setHandleValue(
@@ -37,6 +37,8 @@ const EditEmployeeForm = ({ setHandleValue }) => {
       description: 'Required fields are missing or incorrect. Please check the form and try again.',
       duration: 5,
     });
+
+
     setHandleValue(
       {
         model: false,
@@ -52,7 +54,9 @@ const EditEmployeeForm = ({ setHandleValue }) => {
         <Form
           layout="vertical"
           form={form}
-          // initialValues={}
+          initialValues={
+            values
+          }
           onFinish={onFinish}
           onFinishFailed={onFinishFailed}
           autoComplete="off"
@@ -217,14 +221,15 @@ const EditEmployeeForm = ({ setHandleValue }) => {
                 {/* Contract Status */}
                 <Col xs={24} sm={24} md={8} lg={8}>
                   <Form.Item
-                    label="Contract Status"
+                    label="Contract"
                     name="contract"
-                    rules={[{ required: true, message: "Please select contract status!" }]}
+                    rules={[{ required: true, message: "Please select your contract status!" }]}
                   >
                     <Select placeholder="Select contract status">
-                      {booleanDropdownOptions.map((option) => (
+                      {booleanDropdownOptions.map(option => (
                         <Option key={option.value} value={option.value}>
-                          {option.icon} {option.label}
+                          {option.icon}
+                          {option.label}
                         </Option>
                       ))}
                     </Select>

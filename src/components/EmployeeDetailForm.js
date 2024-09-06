@@ -101,6 +101,7 @@ const EmployeeDetailForm = () => {
         <TextArea
           autoSize={{ minRows: 4 }}
           placeholder="Enter your address "
+          maxLength={80}
         />
       </Form.Item>
 
@@ -125,7 +126,7 @@ const EmployeeDetailForm = () => {
         name="dateOfBirth"
         rules={[
           { required: true, message: "Please input your date of birth!" },
-          ]}
+        ]}
       >
         <DatePicker disabledDate={disabledDate}
           format="YYYY-MM-DD"
@@ -165,9 +166,9 @@ const EmployeeDetailForm = () => {
         name="salary"
         rules={[
           { required: true, message: "Please input your salary!" },
-          { 
-            pattern: /^\d+$/, 
-            message: "Please enter a valid salary (only whole numbers are allowed)" 
+          {
+            pattern: /^\d+$/,
+            message: "Please enter a valid salary (only whole numbers are allowed)"
           }]}
       >
         <Input

@@ -26,7 +26,7 @@ const EmployeeTable = ({ employees }) => {
     edit: false,
     record: null,
   });
-
+  console.log("handleValue: ", handleValue)
   const { mutate: mutateDelete } = UseDeleteEmployee();
   const showModel = (id) => {
     setHandleValue({
@@ -44,10 +44,10 @@ const EmployeeTable = ({ employees }) => {
 
   };
 
-  const showModelEdit = (record) => {
+  const showModelEdit = (id, record) => {
     setHandleValue({
       edit: true,
-      id: record.id,
+      id: id,
       record: record,
     });
   };
@@ -55,7 +55,7 @@ const EmployeeTable = ({ employees }) => {
     setHandleValue({ edit: false, id: null });
   };
 
-  
+
   const columns = [
     {
       title: "Sr.",
@@ -106,7 +106,7 @@ const EmployeeTable = ({ employees }) => {
       title: "Address",
       dataIndex: "address",
       key: "address",
-      width: "10%",
+      width: "15%",
       render: (text) => (
         <Tooltip
           title={text.toLocaleUpperCase()}
@@ -114,13 +114,14 @@ const EmployeeTable = ({ employees }) => {
           placement="right"
         >
           <span
-            style={{
-              textAlign: "justify",
-              display: "inline-block",
-              maxWidth: "250px",  // Adjust as needed
-              wordWrap: "break-word", // Breaks long words
-              whiteSpace: "normal",   // Allows text to wrap
-            }}
+            // style={{
+            //   textAlign: "justify",
+            //   display: "inline-block",
+            //   maxWidth: "500px",  // Adjust as needed
+            //   wordWrap: "break-word", // Breaks long words
+            //   whiteSpace: "normal",
+            //   border: "2px solid black"
+            // }}
           >
             {text}
           </span>
@@ -132,7 +133,7 @@ const EmployeeTable = ({ employees }) => {
       title: "Designation",
       dataIndex: "designation",
       key: "designation",
-      width: "13%",
+      width: "12%",
       render: (text, record) => (
         <Select
           defaultValue={text}
@@ -145,7 +146,7 @@ const EmployeeTable = ({ employees }) => {
       title: "Salary",
       dataIndex: "salary",
       key: "salary",
-      width: "12%",
+      width: "11%",
       render: (salary) =>
         salary ? (
           <Tooltip
@@ -163,7 +164,7 @@ const EmployeeTable = ({ employees }) => {
       title: "Date",
       dataIndex: "date",
       key: "date",
-      width: "15%",
+      width: "13%",
       render: (text, record) => (
         <span>
           <p
@@ -192,7 +193,7 @@ const EmployeeTable = ({ employees }) => {
       title: "Status",
       dataIndex: "status",
       key: "status",
-      width: "10%",
+      width: "9%",
       render: (text) => (
         <Switch
           checked={text}
@@ -212,7 +213,7 @@ const EmployeeTable = ({ employees }) => {
             <span>Hadi</span>
           </Tooltip>
 
-          <EditOutlined className="icon-edit" onClick={() => showModelEdit(record.id)} />
+          <EditOutlined className="icon-edit" onClick={() => showModelEdit(record.id, record)} />
           <DeleteOutlined
             className="icon-delete"
             onClick={() => showModel(record.id)}
@@ -231,8 +232,7 @@ const EmployeeTable = ({ employees }) => {
       (item) =>
         item.firstName?.toLowerCase().includes(value) ||
         item.email?.toLowerCase().includes(value) ||
-        item.phoneNumber?.toLowerCase().includes(value) ||
-        item.salary?.includes(value)
+        item.phoneNumber?.toLowerCase().includes(value)
     );
 
     setFilteredData(filtered);
@@ -269,7 +269,7 @@ const EmployeeTable = ({ employees }) => {
         width={"80%"}
       >
 
-        <EditEmployeeForm  setHandleValue={setHandleValue}/>
+        <EditEmployeeForm setHandleValue={setHandleValue} values={handleValue.record} />
 
       </Modal>
       <Modal
