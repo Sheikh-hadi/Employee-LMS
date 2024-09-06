@@ -5,20 +5,41 @@ import {
   SearchOutlined,
   EditOutlined,
 } from "@ant-design/icons";
-import employeeDapartmentDropdownOptions from "./../models/employeeDapartmentModel";
+import { useQueryClient } from "@tanstack/react-query";
 import { toWords } from "number-to-words";
+import moment from "moment";
+import employeeDapartmentDropdownOptions from "./../models/employeeDapartmentModel";
 import "../App.css";
-import EditEmployeeForm from "./EditEmployeeForm"; // Import the EditEmployeeForm component
+import UseDeleteEmployee from "../Hooks/Employee/UseDeleteEmployeeHook";
 
 const EmployeeTable = ({ employees }) => {
+  const queryClient = useQueryClient()
+  // console.log("employees: ", employees)
+  // State to hold the filtered data and search input
   const [filteredData, setFilteredData] = useState(employees);
   const [searchTerm, setSearchTerm] = useState("");
-  const [isModalVisible, setIsModalVisible] = useState(false);
-  const [currentEmployee, setCurrentEmployee] = useState(null);
+  const [handleDelete, setHandleDelete] = useState({
+    model: false,
+    id: null,
+  });
 
-  const handleDepartmentChange = (value, key) => { };
+  const { mutate: mutateDelete } = UseDeleteEmployee();
+  const showModel = (id) => {
+    setHandleDelete({
+      model: true,
+      id: id
+    });
+  };
 
-  // Columns definition
+
+  const handleOk = async () => {
+    mutateDelete(handleDelete.id);
+    await queryClient.invalidateQueries("employees")
+    setHandleDelete({ model: false, id: null });
+
+
+  };
+
   const columns = [
     {
       title: "Sr.",
@@ -42,7 +63,7 @@ const EmployeeTable = ({ employees }) => {
       title: "Detail",
       dataIndex: "name",
       key: "name",
-      width: "10%",
+      width: "12%",
       render: (text, record) => (
         <Tooltip
           color="blue"
@@ -66,15 +87,40 @@ const EmployeeTable = ({ employees }) => {
       ),
     },
     {
+      title: "Address",
+      dataIndex: "address",
+      key: "address",
+      width: "10%",
+      render: (text) => (
+        <Tooltip
+          title={text.toLocaleUpperCase()}
+          color="blue"
+          placement="right"
+        >
+          <span
+            style={{
+              textAlign: "justify",
+              display: "inline-block",
+              maxWidth: "250px",  // Adjust as needed
+              wordWrap: "break-word", // Breaks long words
+              whiteSpace: "normal",   // Allows text to wrap
+            }}
+          >
+            {text}
+          </span>
+        </Tooltip>
+      ),
+    },
+
+    {
       title: "Designation",
       dataIndex: "designation",
       key: "designation",
-      width: "10%",
+      width: "13%",
       render: (text, record) => (
         <Select
           defaultValue={text}
           style={{ width: "100%" }}
-          onChange={(value) => handleDepartmentChange(value, record.key)}
           options={employeeDapartmentDropdownOptions}
         />
       ),
@@ -83,7 +129,7 @@ const EmployeeTable = ({ employees }) => {
       title: "Salary",
       dataIndex: "salary",
       key: "salary",
-      width: "10%",
+      width: "12%",
       render: (salary) =>
         salary ? (
           <Tooltip
@@ -101,7 +147,7 @@ const EmployeeTable = ({ employees }) => {
       title: "Date",
       dataIndex: "date",
       key: "date",
-      width: "10%",
+      width: "15%",
       render: (text, record) => (
         <span>
           <p
@@ -120,27 +166,12 @@ const EmployeeTable = ({ employees }) => {
               margin: "0",
             }}
           >
-            {record.createdAt
-            }
+            {moment(record.createdAt).format('YYYY-MM-DD')}
           </p>
         </span>
       ),
     },
-    {
-      title: "Address",
-      dataIndex: "address",
-      key: "address",
-      width: "25%",
-      render: (text) => (
-        <Tooltip
-          title={text.toLocaleUpperCase()}
-          color="blue"
-          placement="right"
-        >
-          <span style={{ textAlign: "justify" }}>{text}</span>
-        </Tooltip>
-      ),
-    },
+
     {
       title: "Status",
       dataIndex: "status",
@@ -158,20 +189,17 @@ const EmployeeTable = ({ employees }) => {
     {
       title: "Actions",
       key: "actions",
-      width: "10%",
+      width: "12%",
       render: (text, record) => (
         <span style={{ display: "flex", gap: "10px" }}>
           <Tooltip title="Created Employee" color="blue" placement="right">
             <span>Hadi</span>
           </Tooltip>
-          <EditOutlined
-            className="icon-edit"
-            onClick={() => {
-              setCurrentEmployee(record);
-              setIsModalVisible(true);
-            }}
+          <EditOutlined className="icon-edit" />
+          <DeleteOutlined
+            className="icon-delete"
+            onClick={() => showModel(record.id)}
           />
-          <DeleteOutlined className="icon-delete" />
         </span>
       ),
     },
@@ -193,13 +221,6 @@ const EmployeeTable = ({ employees }) => {
     setFilteredData(filtered);
   };
 
-  const handleModalOk = () => {
-    setIsModalVisible(false);
-  };
-
-  const handleModalCancel = () => {
-    setIsModalVisible(false);
-  };
 
   return (
     <div style={{ textAlign: "left", marginTop: "-16px" }}>
@@ -217,24 +238,13 @@ const EmployeeTable = ({ employees }) => {
         pagination={false}
         rowKey="id"
       />
-
       <Modal
-        title="Edit Employee"
-        visible={isModalVisible}
-        onOk={handleModalOk}
-        onCancel={handleModalCancel}
-        footer={null}
+        title="Confirm Deletion"
+        open={handleDelete.model}
+        onOk={handleOk}
+        onCancel={() => setHandleDelete({ model: false, id: null })}
       >
-        {currentEmployee && (
-          <EditEmployeeForm
-            initialValues={currentEmployee}
-            onSubmit={(values) => {
-              // Handle form submission
-              console.log("Updated values:", values);
-              setIsModalVisible(false);
-            }}
-          />
-        )}
+        <h6>{`Are you sure you want to delete employee with ID: ${handleDelete.id}?`}</h6>
       </Modal>
     </div>
   );
