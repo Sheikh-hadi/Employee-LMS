@@ -1,5 +1,5 @@
 import React from 'react'
-import BusinessCard from '../components/BusinessCard'
+import BusinessCard from '../components/SalaryCard'
 import Payslip from '../components/Payslip'
 
 const SalaryForm = () => {
