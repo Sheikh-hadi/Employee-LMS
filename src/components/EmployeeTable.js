@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Table, Tooltip, Select, Switch, Input } from "antd";
+import { Table, Tooltip, Select, Switch, Input, Modal } from "antd";
 import {
   DeleteOutlined,
   SearchOutlined,
@@ -8,13 +8,13 @@ import {
 import employeeDapartmentDropdownOptions from "./../models/employeeDapartmentModel";
 import { toWords } from "number-to-words";
 import "../App.css";
+import EditEmployeeForm from "./EditEmployeeForm"; // Import the EditEmployeeForm component
 
 const EmployeeTable = ({ employees }) => {
-
-  // console.log("employees: ", employees)
-  // State to hold the filtered data and search input
   const [filteredData, setFilteredData] = useState(employees);
   const [searchTerm, setSearchTerm] = useState("");
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [currentEmployee, setCurrentEmployee] = useState(null);
 
   const handleDepartmentChange = (value, key) => { };
 
@@ -156,7 +156,7 @@ const EmployeeTable = ({ employees }) => {
       ),
     },
     {
-      title: "Author",
+      title: "Actions",
       key: "actions",
       width: "10%",
       render: (text, record) => (
@@ -164,7 +164,13 @@ const EmployeeTable = ({ employees }) => {
           <Tooltip title="Created Employee" color="blue" placement="right">
             <span>Hadi</span>
           </Tooltip>
-          <EditOutlined className="icon-edit" />
+          <EditOutlined
+            className="icon-edit"
+            onClick={() => {
+              setCurrentEmployee(record);
+              setIsModalVisible(true);
+            }}
+          />
           <DeleteOutlined className="icon-delete" />
         </span>
       ),
@@ -187,6 +193,14 @@ const EmployeeTable = ({ employees }) => {
     setFilteredData(filtered);
   };
 
+  const handleModalOk = () => {
+    setIsModalVisible(false);
+  };
+
+  const handleModalCancel = () => {
+    setIsModalVisible(false);
+  };
+
   return (
     <div style={{ textAlign: "left", marginTop: "-16px" }}>
       <Input
@@ -203,6 +217,25 @@ const EmployeeTable = ({ employees }) => {
         pagination={false}
         rowKey="id"
       />
+
+      <Modal
+        title="Edit Employee"
+        visible={isModalVisible}
+        onOk={handleModalOk}
+        onCancel={handleModalCancel}
+        footer={null}
+      >
+        {currentEmployee && (
+          <EditEmployeeForm
+            initialValues={currentEmployee}
+            onSubmit={(values) => {
+              // Handle form submission
+              console.log("Updated values:", values);
+              setIsModalVisible(false);
+            }}
+          />
+        )}
+      </Modal>
     </div>
   );
 };

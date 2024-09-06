@@ -17,30 +17,32 @@ import LoginPage from "./components/LoginPage";
 import Dapartment from "./Pages/Department";
 import SignUpForm from "./components/SignUpForm";
 import SalaryForm from "./Pages/SalaryForm";
+import EditEmployeeForm from "./components/EditEmployeeForm";
 
-// const { Sider, Content } = Layout;
+const { Sider, Content } = Layout;
 
 const App = () => {
   const [collapsed, setCollapsed] = useState(false);
   const location = window.location.pathname;
-  // console.log("location: ", window.location.pathname);
+  console.log("location: ", window.location.pathname);
   const {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
 
   const handleLocation = location === "/login" || location ==="/Login" || location === "/signup" || location === "/Signup"? false : true;
 
-  // console.log("handleLocation: ", handleLocation);
+  console.log("handleLocation: ", handleLocation);
   return (
     <Router>
       <Routes>
       <Route path="/salary" element={<SalaryForm/>} />
+      <Route path="/editForm" element={<EditEmployeeForm/>} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignUpForm/>} />
       </Routes>
       {handleLocation && (
         <Layout style={{ minHeight: "100vh" }}>
-          {/* <Sider
+          <Sider
             trigger={null}
             collapsible
             collapsed={collapsed}
@@ -96,14 +98,14 @@ const App = () => {
                 <Link to="/Payment">Payment</Link>
               </Menu.Item>
             </Menu>
-          </Sider> */}
+          </Sider>
           <Layout
             style={{
               marginLeft: collapsed ? "80px" : "200px", // Adjust this based on your collapsed width
               transition: "margin-left 0.2s",
             }}
           >
-            {/* <Content
+            <Content
               style={{
                 margin: "5px 16px",
                 minHeight: 280,
@@ -118,7 +120,7 @@ const App = () => {
                 <Route path="/Payment" element={<Payment />} />
                 <Route path="/department" element={<Dapartment />} />
               </Routes>
-            </Content> */}
+            </Content>
           </Layout>
         </Layout>
       )}
