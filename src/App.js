@@ -18,7 +18,7 @@ import Dapartment from "./Pages/Department";
 import SignUpForm from "./components/SignUpForm";
 import SalaryForm from "./Pages/SalaryForm";
 
-const { Sider, Content } = Layout;
+// const { Sider, Content } = Layout;
 
 const App = () => {
   const [collapsed, setCollapsed] = useState(false);
@@ -40,7 +40,7 @@ const App = () => {
       </Routes>
       {handleLocation && (
         <Layout style={{ minHeight: "100vh" }}>
-          <Sider
+          {/* <Sider
             trigger={null}
             collapsible
             collapsed={collapsed}
@@ -96,14 +96,14 @@ const App = () => {
                 <Link to="/Payment">Payment</Link>
               </Menu.Item>
             </Menu>
-          </Sider>
+          </Sider> */}
           <Layout
             style={{
               marginLeft: collapsed ? "80px" : "200px", // Adjust this based on your collapsed width
               transition: "margin-left 0.2s",
             }}
           >
-            <Content
+            {/* <Content
               style={{
                 margin: "5px 16px",
                 minHeight: 280,
@@ -118,7 +118,7 @@ const App = () => {
                 <Route path="/Payment" element={<Payment />} />
                 <Route path="/department" element={<Dapartment />} />
               </Routes>
-            </Content>
+            </Content> */}
           </Layout>
         </Layout>
       )}

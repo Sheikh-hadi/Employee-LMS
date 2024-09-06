@@ -10,8 +10,8 @@ const BusinessCard = () => {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        height: "30vh", // Makes the div take up the full height of the viewport
-        margin: "40px auto", // Centers the card horizontally
+        height: "50vh", 
+        margin: "40px auto", 
       }}
     >
       <Row align="middle" style={{ width: "100%" }}>

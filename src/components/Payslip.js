@@ -5,7 +5,6 @@ import { Input } from 'antd';
 import InputField from "./InputField";
 
 const Payslip = () => {
-  // Fake data or initial placeholders
   const fakeData = {
     name: "Faizan Haider",
     designation: "UI/UX Designer",
@@ -30,7 +29,6 @@ const Payslip = () => {
     otherDeductions: "0.00",
   };
 
-  // State management
   const [formData, setFormData] = useState(fakeData);
 
   const handleInputChange = (field, value) => {
@@ -190,9 +188,22 @@ const Payslip = () => {
             currency 
           />
         </Col>
-        <Col span={24} style={{ textAlign: "right", paddingTop: "10px", borderTop: "2px solid black" }}>
-          <strong>Total</strong> =N= {parseFloat(formData.basicSalary) + parseFloat(formData.transport) + parseFloat(formData.incentive)}
-        </Col>
+      
+        <Col span={24} style={{ fontWeight:"600", padding: "10px 0", borderTop: "2px solid black" }}>
+  <InputField 
+    label="Total" 
+    value={
+      parseFloat(formData.basicSalary) + 
+      parseFloat(formData.transport) + 
+      parseFloat(formData.incentive) + 
+      parseFloat(formData.housing)
+    } 
+    disabled
+    currency
+  />
+</Col>
+    
+
       </Row>
 
       <Row style={{ padding: "10px 0", borderTop: "2px solid black", borderBottom: "2px solid black" }}>
@@ -250,12 +261,39 @@ const Payslip = () => {
             currency 
           />
         </Col>
-        <Col span={24} style={{ textAlign: "right", paddingTop: "10px", borderTop: "2px solid black" }}>
-          <strong>Total Deductions</strong> =N= {parseFloat(formData.providentFund) + parseFloat(formData.lateDeductions)}
-        </Col>
-        <Col span={24} style={{ textAlign: "right", paddingTop: "10px", borderTop: "2px solid black" }}>
-          <strong>Net Payable</strong> =N= {35000.00 - 2460.00}
-        </Col>
+        <Col span={24} style={{ fontWeight:"500",padding: "10px 0", borderTop: "2px solid black" }}>
+  <InputField 
+    label="Total Deductions" 
+    value={
+      parseFloat(formData.providentFund) + 
+      parseFloat(formData.lateDeductions) + 
+      parseFloat(formData.tax) + 
+      parseFloat(formData.otherDeductions)
+    } 
+    disabled
+    currency
+  />
+</Col>
+<Col span={24} style={{ fontWeight:"600", padding: "10px 0", borderTop: "2px solid black" }}>
+  <InputField 
+    label="Net Payable" 
+    value={
+      (
+        parseFloat(formData.basicSalary) + 
+        parseFloat(formData.transport) + 
+        parseFloat(formData.incentive) + 
+        parseFloat(formData.housing)
+      ) - (
+        parseFloat(formData.providentFund) + 
+        parseFloat(formData.lateDeductions) + 
+        parseFloat(formData.tax) + 
+        parseFloat(formData.otherDeductions)
+      )
+    } 
+    disabled
+    currency
+  />
+</Col>
         <Col span={24} style={{ textAlign: "center", paddingTop: "20px" }}>
           <strong>Amount In Words:</strong> Thirty two thousand five forty eighty Rupees Only
         </Col>
