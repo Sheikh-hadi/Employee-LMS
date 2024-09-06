@@ -11,6 +11,7 @@ import moment from "moment";
 import employeeDapartmentDropdownOptions from "./../models/employeeDapartmentModel";
 import "../App.css";
 import UseDeleteEmployee from "../Hooks/Employee/UseDeleteEmployeeHook";
+import EditEmployeeForm from "./EditEmployeeForm";
 
 const EmployeeTable = ({ employees }) => {
   const queryClient = useQueryClient()
@@ -18,14 +19,17 @@ const EmployeeTable = ({ employees }) => {
   // State to hold the filtered data and search input
   const [filteredData, setFilteredData] = useState(employees);
   const [searchTerm, setSearchTerm] = useState("");
-  const [handleDelete, setHandleDelete] = useState({
+
+  const [handleValue, setHandleValue] = useState({
     model: false,
     id: null,
+    edit: false,
+    record: null,
   });
 
   const { mutate: mutateDelete } = UseDeleteEmployee();
   const showModel = (id) => {
-    setHandleDelete({
+    setHandleValue({
       model: true,
       id: id
     });
@@ -33,13 +37,25 @@ const EmployeeTable = ({ employees }) => {
 
 
   const handleOk = async () => {
-    mutateDelete(handleDelete.id);
+    mutateDelete(handleValue.id);
     await queryClient.invalidateQueries("employees")
-    setHandleDelete({ model: false, id: null });
+    setHandleValue({ model: false, id: null });
 
 
   };
 
+  const showModelEdit = (record) => {
+    setHandleValue({
+      edit: true,
+      id: record.id,
+      record: record,
+    });
+  };
+  const handleOkEditModel = () => {
+    setHandleValue({ edit: false, id: null });
+  };
+
+  
   const columns = [
     {
       title: "Sr.",
@@ -195,7 +211,8 @@ const EmployeeTable = ({ employees }) => {
           <Tooltip title="Created Employee" color="blue" placement="right">
             <span>Hadi</span>
           </Tooltip>
-          <EditOutlined className="icon-edit" />
+
+          <EditOutlined className="icon-edit" onClick={() => showModelEdit(record.id)} />
           <DeleteOutlined
             className="icon-delete"
             onClick={() => showModel(record.id)}
@@ -222,6 +239,9 @@ const EmployeeTable = ({ employees }) => {
   };
 
 
+
+
+
   return (
     <div style={{ textAlign: "left", marginTop: "-16px" }}>
       <Input
@@ -238,16 +258,31 @@ const EmployeeTable = ({ employees }) => {
         pagination={false}
         rowKey="id"
       />
+
+      <Modal
+        style={{ position: "relative" }}
+        title="Edit Employee"
+        open={handleValue.edit}
+        onOk={handleOkEditModel}
+        onCancel={() => setHandleValue({ edit: false, id: null })}
+        footer={null}
+        width={"80%"}
+      >
+
+        <EditEmployeeForm  setHandleValue={setHandleValue}/>
+
+      </Modal>
       <Modal
         title="Confirm Deletion"
-        open={handleDelete.model}
+        open={handleValue.model}
         onOk={handleOk}
-        onCancel={() => setHandleDelete({ model: false, id: null })}
+        onCancel={() => setHandleValue({ model: false, id: null })}
       >
-        <h6>{`Are you sure you want to delete employee with ID: ${handleDelete.id}?`}</h6>
+        <h6>{`Are you sure you want to delete employee with ID: ${handleValue.id}?`}</h6>
       </Modal>
     </div>
-  );
+  )
 };
+
 
 export default EmployeeTable;
