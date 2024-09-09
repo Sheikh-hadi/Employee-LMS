@@ -126,7 +126,8 @@ const EmployeeDashboard = () => {
               <div style={cardIconStyle}>
                 <TeamOutlined />
               </div>
-              <div style={cardTitleStyle}>{employee }</div>
+              <div style={cardTitleStyle}>{employee 
+              }</div>
               <div style={cardDescriptionStyle}>Employees</div>
               <div style={cardMoreInfoStyle}>More Info ➔</div>
             </Card>
