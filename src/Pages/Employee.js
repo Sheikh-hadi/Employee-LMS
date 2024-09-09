@@ -8,7 +8,6 @@ const Employee = () => {
   
  const {data : employees, isLoading, isError, error } = UseFetchEmployee()
 
-  // console.log("data: ", employees);
 
   if (isLoading) {
     return <Skeleton active />;
