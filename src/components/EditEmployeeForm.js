@@ -9,15 +9,19 @@ import {
   BankOutlined
 } from "@ant-design/icons";
 import genderDropdownOptions from "../models/genderDropdownModel";
-import employeeDepartmentDropdownOptions from "../models/employeeDapartmentModel";
+// import employeeDepartmentDropdownOptions from "../models/employeeDapartmentModel";
 import booleanDropdownOptions from "../models/booleanDropdownModel";
 import guardianRelationDropdownOption from "../models/gardianRealationDropdownModel";
 import usePutEmployee from './../Hooks/Employee/UsePutEmployeeHook';
+import useGetDepartment from "../Hooks/Department/useGetDepartmentHook";
 
 const { TextArea } = Input;
 const { Option } = Select;
 
 const EditEmployeeForm = ({ setHandleValue, values }) => {
+  const { data } = useGetDepartment()
+  // console.log("data: ", data)
+  const Designation = data?.data;
   const { mutate } = usePutEmployee({ value: values.id });
   const [form] = Form.useForm();
 
@@ -220,7 +224,7 @@ const EditEmployeeForm = ({ setHandleValue, values }) => {
                     rules={[{ required: true, message: "Please select designation!" }]}
                   >
                     <Select placeholder="Select designation">
-                      {employeeDepartmentDropdownOptions.map((option) => (
+                      {Designation?.length && Designation.map((option) => (
                         <Option key={option.value} value={option.value}>
                           {option.icon} {option.label}
                         </Option>

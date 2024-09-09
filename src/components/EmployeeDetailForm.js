@@ -9,13 +9,16 @@ import {
 } from "@ant-design/icons";
 import moment from "moment";
 import genderDropdownOptions from "../models/genderDropdownModel";
-import employeeDepartmentDropdownOptions from "../models/employeeDapartmentModel";
 import booleanDropdownOptions from "../models/booleanDropdownModel";
+import useGetDepartment from "../Hooks/Department/useGetDepartmentHook";
 
 const { TextArea } = Input;
 const { Option } = Select;
 
 const EmployeeDetailForm = () => {
+  const {data} = useGetDepartment()
+  // console.log("data: ", data)
+  const Designation = data?.data;
   const disabledDate = (current) => {
     return current && current > moment().endOf('day');
   };
@@ -163,10 +166,9 @@ const EmployeeDetailForm = () => {
         rules={[{ required: true, message: "Please select your designation!" }]}
       >
         <Select placeholder="Select your designation">
-          {employeeDepartmentDropdownOptions.map(option => (
+          {Designation?.lenght && Designation.map(option => (
             <Option key={option.value} value={option.value}>
-              {option.icon}
-              {option.label}
+              {option.name}
             </Option>
           ))}
         </Select>

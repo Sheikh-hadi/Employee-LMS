@@ -3,14 +3,17 @@ import { Card, Col, Row } from "antd";
 import "../App.css";
 // import { useEmployeeContext } from "../context/EmployeeContext";
 import { UserOutlined, TeamOutlined, LogoutOutlined } from "@ant-design/icons";
-import employeeDepartmentDropdownOptions from "../models/employeeDapartmentModel";
+// import employeeDepartmentDropdownOptions from "../models/employeeDapartmentModel";
 import UseFetchEmployee from "../Hooks/Employee/UseFetchEmployeeHook";
+import useGetDepartment from "../Hooks/Department/useGetDepartmentHook";
 
 const EmployeeDashboard = () => {
-  // const { employees } = useEmployeeContext(); 
-  const {data} = UseFetchEmployee()
+  const { data } = UseFetchEmployee()
+  const {data: department} = useGetDepartment()
   const employee = data?.length || 0;
-  const departments = employeeDepartmentDropdownOptions?.length || 0;
+  const departments =department?.data?.length || 0;
+  console.log("data: ", employee)
+  console.log("department: ", department)
 
   // Get today's month and day
   const today = new Date();
@@ -34,7 +37,7 @@ const EmployeeDashboard = () => {
     color: "#333",
     fontSize: "28px",
     fontWeight: "bold",
-   
+
   };
 
   const subtitleStyle = {
@@ -122,7 +125,7 @@ const EmployeeDashboard = () => {
               <div style={cardIconStyle}>
                 <TeamOutlined />
               </div>
-              <div style={cardTitleStyle}>{employee}</div>
+              <div style={cardTitleStyle}>{employee }</div>
               <div style={cardDescriptionStyle}>Employees</div>
               <div style={cardMoreInfoStyle}>More Info ➔</div>
             </Card>

@@ -5,8 +5,8 @@ import { notification } from "antd";
 const usePutEmployee = () => {
 
     const putData = async (value) => {
-        console.log("values: ", value);
-        console.log("id", value.id);
+        // console.log("values: ", value);
+        // console.log("id", value.id);
         const response = await axios.put(`http://localhost:4000/api/v1/employee/${value.id}`, value, {
             headers: {
                 "Content-Type": "application/json",
@@ -20,8 +20,8 @@ const usePutEmployee = () => {
         mutationFn: putData,
         onSuccess: async (data) => {
             notification.success({
-                key: 'new-employee',
-                message: 'Add New Employee Successfully',
+                key: 'Update-employee',
+                message: 'Update Employee Successfully',
                 description: data.message,
                 duration: 3,
                 style: {
@@ -38,8 +38,8 @@ const usePutEmployee = () => {
         onError: (error) => {
             console.log("error: ", error);
             notification.error({
-                key: 'error-new-employee',
-                message: 'Add New Employee Failed: ',
+                key: 'error-Update-employee',
+                message: 'Update Employee Failed: ',
                 description: `${error?.response?.data?.message || 'Unknown error'}`,
                 showProgress: true,
                 duration: 3,
