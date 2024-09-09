@@ -19,6 +19,7 @@ import SignUpForm from "./components/SignUpForm";
 import SalaryForm from "./Pages/SalaryForm";
 import EditEmployeeForm from "./components/EditEmployeeForm";
 import EmployeeAttendenceTracking from "./components/EmployeeAttendenceTracking";
+import UserdetailPage from "./Pages/UserdetailPage";
 
 const { Sider, Content } = Layout;
 
@@ -40,6 +41,7 @@ const App = () => {
       <Route path="/editForm" element={<EditEmployeeForm/>} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignUpForm/>} />
+        <Route path="/userDetails" element={<UserdetailPage/>} />
         <Route path="/EmployeeAttendenceRecord" element={<EmployeeAttendenceTracking/>} />
       </Routes>
       {handleLocation && (

@@ -8,8 +8,10 @@ import "../App.css";
 const EmployeeAttendenceTable = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [filteredData, setFilteredData] = useState(employeesColumn);
+  const [isFineModalVisible, setIsFineModalVisible] = useState(false);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [form] = Form.useForm();
+  const [fineForm] = Form.useForm();
 
   // Handle search input change
   const handleSearch = (e) => {
@@ -26,6 +28,25 @@ const EmployeeAttendenceTable = () => {
   // Handle Add button click
   const handleAddClick = () => {
     setIsModalVisible(true);
+  };
+
+  // Handle Fine button click
+  const handleFineClick = () => {
+    setIsFineModalVisible(true);
+  };
+
+  // Handle Modal OK click for Fine
+  const handleFineOk = () => {
+    fineForm.validateFields()
+      .then((values) => {
+        console.log('Fine values:', values);
+        // Handle fine logic here
+        setIsFineModalVisible(false);
+        fineForm.resetFields();
+      })
+      .catch((info) => {
+        console.log('Validate Failed:', info);
+      });
   };
 
   // Handle Modal OK click
@@ -46,6 +67,11 @@ const EmployeeAttendenceTable = () => {
   const handleCancel = () => {
     setIsModalVisible(false);
     form.resetFields();
+  };
+
+  const handleFineCancel = () => {
+    setIsFineModalVisible(false);
+    fineForm.resetFields();
   };
 
   const columns = [
@@ -186,27 +212,36 @@ const EmployeeAttendenceTable = () => {
           />
         </Col>
 
-        <Col span={5} offset={13}  >
+        <Col span={7} offset={11}  >
 
           <Row gutter={16}>
-            <Col span={12}>
+            <Col span={8}>
               <Button
-              block
+                block
                 type="primary"
-              // onClick={handleAddClick}
+                onClick={handleFineClick}
+              >
+                Set Fine
+              </Button>
+            </Col>
+            <Col span={8}>
+              <Button
+                block
+                type="primary"
               >
                 Send Email
               </Button>
             </Col>
-            <Col span={12} >
+            <Col span={8} >
               <Button
-              block
+                block
                 type="primary"
                 onClick={handleAddClick}
               >
                 Add
               </Button>
             </Col>
+
           </Row>
         </Col>
       </Row>
@@ -234,6 +269,38 @@ const EmployeeAttendenceTable = () => {
             rules={[{ required: true, message: 'Please enter the provident fund amount!' }]}
           >
             <InputNumber min={0} style={{ width: '100%' }} placeholder="Enter provident fund" />
+          </Form.Item>
+        </Form>
+      </Modal>
+
+      {/* Modal for Setting Fines */}
+      <Modal
+        title="Set Fines"
+        visible={isFineModalVisible}
+        onOk={handleFineOk}
+        onCancel={handleFineCancel}
+      >
+        <Form form={fineForm} layout="vertical">
+          <Form.Item
+            name="lateFine"
+            label="Late Fine"
+            rules={[{ required: true, message: 'Please enter the late fine!' }]}
+          >
+            <InputNumber min={0} style={{ width: '100%' }} placeholder="Enter late fine" />
+          </Form.Item>
+          <Form.Item
+            name="absentFine"
+            label="Absent Fine"
+            rules={[{ required: true, message: 'Please enter the absent fine!' }]}
+          >
+            <InputNumber min={0} style={{ width: '100%' }} placeholder="Enter absent fine" />
+          </Form.Item>
+          <Form.Item
+            name="halfDayFine"
+            label="Half Day Fine"
+            rules={[{ required: true, message: 'Please enter the half-day fine!' }]}
+          >
+            <InputNumber min={0} style={{ width: '100%' }} placeholder="Enter half-day fine" />
           </Form.Item>
         </Form>
       </Modal>
