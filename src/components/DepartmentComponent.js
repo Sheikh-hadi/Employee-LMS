@@ -1,14 +1,12 @@
+import React, { useState } from "react";
 import { Table, Button, Row, Col, Input } from "antd";
-import {
-  DeleteOutlined,
-  EditOutlined,
-} from "@ant-design/icons";
-// Adjust the import path
+import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import AddNewDepartment from "./AddNewDepartment";
-const { Search } = Input;
-const DepartmentComponent = ({ data }) => {
- 
 
+const { Search } = Input;
+
+const DepartmentComponent = ({ data }) => {
+  const [filteredData, setFilteredData] = useState(data);
 
   // Columns definition
   const columns = [
@@ -16,7 +14,7 @@ const DepartmentComponent = ({ data }) => {
       title: "Sr",
       dataIndex: "id",
       key: "id",
-      width: "6%"
+      width: "6%",
     },
     {
       title: (
@@ -33,8 +31,6 @@ const DepartmentComponent = ({ data }) => {
         </span>
       ),
     },
-
-
     {
       title: "Action",
       key: "action",
@@ -74,39 +70,37 @@ const DepartmentComponent = ({ data }) => {
         </>
       ),
     },
-    {
-      title: "",
-      dataIndex: "",
-      key: "",
-
-    },
   ];
 
-
-
-
-
+  const handleSearch = (value) => {
+    console.log("value: ", value);
+    const filtered = data.filter((item) =>
+      item.name?.toLowerCase().includes(value.toLowerCase())
+    );
+    setFilteredData(filtered);
+  };
 
   return (
     <>
-      <Row align={"middle"} >
-        {/* Search Input */}
+      <Row align={"middle"}>
         <Col span={6}>
           <Search
             placeholder="input search text"
             enterButton="Search"
             size="small"
-            onSearch={value => console.log(value)}
+            onSearch={handleSearch}
+            onChange={(e) => handleSearch(e.target.value)} 
+            allowClear
           />
         </Col>
         <Col span={6} offset={11}>
           <AddNewDepartment />
-        </Col>{" "}
+        </Col>
       </Row>
 
       <Table
         style={{ marginTop: "10px" }}
-        dataSource={data}
+        dataSource={filteredData}
         columns={columns}
         rowKey="id"
       />

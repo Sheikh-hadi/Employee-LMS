@@ -1,8 +1,7 @@
 import React, { useState } from "react";
-import { Table, Tooltip, Select, Switch, Input, Modal } from "antd";
+import { Table, Tooltip, Switch, Input, Modal } from "antd";
 import {
   DeleteOutlined,
-  SearchOutlined,
   EditOutlined,
 } from "@ant-design/icons";
 import { toWords } from "number-to-words";
@@ -10,10 +9,11 @@ import moment from "moment";
 import "../App.css";
 import UseDeleteEmployee from "../Hooks/Employee/UseDeleteEmployeeHook";
 import EditEmployeeForm from "./EditEmployeeForm";
+
+const { Search } = Input;
 const EmployeeTable = ({ employees }) => {
   // console.log("employees: ", employees)
   const [filteredData, setFilteredData] = useState(employees);
-  const [searchTerm, setSearchTerm] = useState("");
   const [handleValue, setHandleValue] = useState({
     model: false,
     id: null,
@@ -222,9 +222,7 @@ const EmployeeTable = ({ employees }) => {
   ];
 
   // Handle the search input change
-  const handleSearch = (e) => {
-    const value = e.target.value.toLowerCase();
-    setSearchTerm(value);
+  const handleSearch = (value) => {
 
     const filtered = employees.filter(
       (item) =>
@@ -242,14 +240,13 @@ const EmployeeTable = ({ employees }) => {
 
   return (
     <div style={{ textAlign: "left", marginTop: "-16px" }}>
-      <Input
-        placeholder="Search by name, email, or contact"
-        prefix={<SearchOutlined style={{ color: "blue" }} />}
-        value={searchTerm}
-        onChange={handleSearch}
-        style={{ marginTop: "-20px", width: "250px", margin: "0 auto" }}
+      <Search
+        placeholder="input search text"
+        enterButton="Search"
+        size="small"
+        onSearch={handleSearch}
+        allowClear
       />
-
       <Table
         columns={columns}
         dataSource={filteredData}
