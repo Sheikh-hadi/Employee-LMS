@@ -14,7 +14,7 @@ const DepartmentComponent = ({ data }) => {
     name: item.name,
     value: item.value,
   }))
-  console.log("employeeDepartmentDropdownOptions: ", option);
+  // console.log("employeeDepartmentDropdownOptions: ", option);
   const [searchTerm, setSearchTerm] = useState("");
   const [filteredData, setFilteredData] = useState(
     option
@@ -48,7 +48,7 @@ const DepartmentComponent = ({ data }) => {
     {
       title: "Action",
       key: "action",
-      width: "15%",
+      width: "20%",
       render: () => (
         <>
           <Row gutter={[16, 16]}>

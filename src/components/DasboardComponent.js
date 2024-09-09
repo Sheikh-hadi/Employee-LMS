@@ -1,17 +1,18 @@
 import React from "react";
 import { Card, Col, Row } from "antd";
+import {useDepartmentContext} from "../context/DepartmentContext";
 import "../App.css";
 // import { useEmployeeContext } from "../context/EmployeeContext";
 import { UserOutlined, TeamOutlined, LogoutOutlined } from "@ant-design/icons";
 // import employeeDepartmentDropdownOptions from "../models/employeeDapartmentModel";
 import UseFetchEmployee from "../Hooks/Employee/UseFetchEmployeeHook";
-import useGetDepartment from "../Hooks/Department/useGetDepartmentHook";
 
 const EmployeeDashboard = () => {
   const { data } = UseFetchEmployee()
-  const {data: department} = useGetDepartment()
+ const {departments} = useDepartmentContext()
+ console.log("department: ", departments)
   const employee = data?.length || 0;
-  const departments =department?.data?.length || 0;
+  const department =departments?.data?.length || 0;
   console.log("data: ", employee)
   console.log("department: ", department)
 
@@ -111,7 +112,7 @@ const EmployeeDashboard = () => {
               <div style={cardIconStyle}>
                 <UserOutlined />
               </div>
-              <div style={cardTitleStyle}>{departments}</div>
+              <div style={cardTitleStyle}>{department}</div>
               <div style={cardDescriptionStyle}>Departments</div>
               <div style={cardMoreInfoStyle}>More Info ➔</div>
             </Card>
