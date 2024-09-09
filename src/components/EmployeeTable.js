@@ -7,11 +7,9 @@ import {
 } from "@ant-design/icons";
 import { toWords } from "number-to-words";
 import moment from "moment";
-import employeeDapartmentDropdownOptions from "./../models/employeeDapartmentModel";
 import "../App.css";
 import UseDeleteEmployee from "../Hooks/Employee/UseDeleteEmployeeHook";
 import EditEmployeeForm from "./EditEmployeeForm";
-
 const EmployeeTable = ({ employees }) => {
   // console.log("employees: ", employees)
   const [filteredData, setFilteredData] = useState(employees);
@@ -134,13 +132,13 @@ const EmployeeTable = ({ employees }) => {
       dataIndex: "designation",
       key: "designation",
       width: "12%",
-      render: (text, record) => (
-        <Select
-          defaultValue={text}
-          style={{ width: "100%" }}
-          options={employeeDapartmentDropdownOptions}
-        />
-      ),
+      // render: (text, record) => (
+      //   <Select
+      //     defaultValue={text}
+      //     style={{ width: "100%" }}
+      //     options={employeeDapartmentDropdownOptions}
+      //   />
+      // ),
     },
     {
       title: "Salary",
