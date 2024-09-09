@@ -1,12 +1,10 @@
 import React, { useState } from "react";
-import { useEmployeeContext } from "../context/EmployeeContext";
 import { Table, Tooltip, Select, Switch, Input, Modal } from "antd";
 import {
   DeleteOutlined,
   SearchOutlined,
   EditOutlined,
 } from "@ant-design/icons";
-import { useQueryClient } from "@tanstack/react-query";
 import { toWords } from "number-to-words";
 import moment from "moment";
 import employeeDapartmentDropdownOptions from "./../models/employeeDapartmentModel";
@@ -14,24 +12,21 @@ import "../App.css";
 import UseDeleteEmployee from "../Hooks/Employee/UseDeleteEmployeeHook";
 import EditEmployeeForm from "./EditEmployeeForm";
 
-const EmployeeTable = () => {
-  const { employees } = useEmployeeContext(); 
-  const queryClient = useQueryClient()
+const EmployeeTable = ({ employees }) => {
   // console.log("employees: ", employees)
-  // State to hold the filtered data and search input
   const [filteredData, setFilteredData] = useState(employees);
   const [searchTerm, setSearchTerm] = useState("");
-
   const [handleValue, setHandleValue] = useState({
     model: false,
     id: null,
     edit: false,
     record: null,
   });
-  console.log("handleValue: ", handleValue)
+  // console.log("handleValue: ", handleValue)
   const { mutate: mutateDelete } = UseDeleteEmployee();
   const showModel = (id) => {
     setHandleValue({
+      ...handleValue,
       model: true,
       id: id
     });
@@ -39,22 +34,25 @@ const EmployeeTable = () => {
 
 
   const handleOk = async () => {
+    // console.log("handleValue: ", handleValue);
     mutateDelete(handleValue.id);
-    await queryClient.invalidateQueries("employees")
-    setHandleValue({ model: false, id: null });
 
-
+    setHandleValue({
+      ...handleValue,
+      model: false
+    });
   };
 
   const showModelEdit = (id, record) => {
     setHandleValue({
+      ...handleValue,
       edit: true,
       id: id,
       record: record,
     });
   };
   const handleOkEditModel = () => {
-    setHandleValue({ edit: false, id: null });
+    setHandleValue({ ...handleValue, edit: false, id: null });
   };
 
 
@@ -116,14 +114,14 @@ const EmployeeTable = () => {
           placement="right"
         >
           <span
-            // style={{
-            //   textAlign: "justify",
-            //   display: "inline-block",
-            //   maxWidth: "500px",  // Adjust as needed
-            //   wordWrap: "break-word", // Breaks long words
-            //   whiteSpace: "normal",
-            //   border: "2px solid black"
-            // }}
+          // style={{
+          //   textAlign: "justify",
+          //   display: "inline-block",
+          //   maxWidth: "500px",  // Adjust as needed
+          //   wordWrap: "break-word", // Breaks long words
+          //   whiteSpace: "normal",
+          //   border: "2px solid black"
+          // }}
           >
             {text}
           </span>
@@ -266,7 +264,7 @@ const EmployeeTable = () => {
         title="Edit Employee"
         open={handleValue.edit}
         onOk={handleOkEditModel}
-        onCancel={() => setHandleValue({ edit: false, id: null })}
+        onCancel={() => setHandleValue({ ...handleValue, edit: false, id: null })}
         footer={null}
         width={"80%"}
       >
@@ -278,7 +276,7 @@ const EmployeeTable = () => {
         title="Confirm Deletion"
         open={handleValue.model}
         onOk={handleOk}
-        onCancel={() => setHandleValue({ model: false, id: null })}
+        onCancel={() => setHandleValue({ ...handleValue, model: false, id: null, record: null })}
       >
         <h6>{`Are you sure you want to delete employee with ID: ${handleValue.id}?`}</h6>
       </Modal>

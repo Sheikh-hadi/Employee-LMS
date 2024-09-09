@@ -1,13 +1,15 @@
 import React from "react";
 import { Card, Col, Row } from "antd";
 import "../App.css";
-import { useEmployeeContext } from "../context/EmployeeContext";
+// import { useEmployeeContext } from "../context/EmployeeContext";
 import { UserOutlined, TeamOutlined, LogoutOutlined } from "@ant-design/icons";
 import employeeDepartmentDropdownOptions from "../models/employeeDapartmentModel";
+import UseFetchEmployee from "../Hooks/Employee/UseFetchEmployeeHook";
 
 const EmployeeDashboard = () => {
-  const { employees } = useEmployeeContext(); 
-  const employee = employees?.length || 0;
+  // const { employees } = useEmployeeContext(); 
+  const {data} = UseFetchEmployee()
+  const employee = data?.length || 0;
   const departments = employeeDepartmentDropdownOptions?.length || 0;
 
   // Get today's month and day

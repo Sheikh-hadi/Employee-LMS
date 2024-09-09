@@ -1,7 +1,7 @@
 import React from "react";
 import { Form, Input, Select } from "antd";
 import guardianRelationDropdownOption from "../models/gardianRealationDropdownModel";
-import { UserOutlined, PhoneOutlined,  } from "@ant-design/icons";
+import { UserOutlined, PhoneOutlined, } from "@ant-design/icons";
 
 const GurdaianDetailForm = () => {
   return (
@@ -13,12 +13,13 @@ const GurdaianDetailForm = () => {
       <Form.Item
         label="Name"
         name="guardianName"
+        hasFeedback
         rules={[
           {
             required: true,
             message: "Please input your guardian name!",
           },
-          { pattern: /^[a-zA-Z\s]+$/, message: "Please enter a valid name (only letters and spaces are allowed)" }
+          { pattern: /^[a-zA-Z\s]+$/, message: "Please enter a valid name (only Alphabets are allowed)" }
         ]}
       >
         <Input
@@ -31,6 +32,7 @@ const GurdaianDetailForm = () => {
       <Form.Item
         label="Phone Number"
         name="guardianPhoneNumber"
+        hasFeedback
         rules={[
           {
             required: true,
@@ -44,7 +46,7 @@ const GurdaianDetailForm = () => {
       >
         <Input
           placeholder="0000-0000000"
-          maxLength={12}
+          maxLength={11}
           prefix={<PhoneOutlined rotate={90} style={{ fontSize: '18px', paddingRight: '10px' }} />}
         />
       </Form.Item>
@@ -52,6 +54,7 @@ const GurdaianDetailForm = () => {
       <Form.Item
         label="Relationship"
         name="guardianRelationship"
+        hasFeedback
         rules={[
           {
             required: true,

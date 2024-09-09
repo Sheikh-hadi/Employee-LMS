@@ -3,7 +3,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { notification } from 'antd';
 
 
-const useDeleteEmployee = () => {
+const UseDeleteEmployee = () => {
     const queryClient = useQueryClient()
 
     return useMutation({
@@ -13,12 +13,14 @@ const useDeleteEmployee = () => {
             return data;
         },
         onSuccess: async (data) => {
-            console.log("first: ", data)
+            // console.log("data: ", data)
+            queryClient.invalidateQueries("employees");
+            // console.log("first: ", data)
             notification.success({
                 message: 'Success',
-                description: `Employee with ID ${data.id} has been deleted.`,
+                description: data?.message || 'Employee deleted successfully',
             })
-            await queryClient.invalidateQueries("employees");
+
         },
         onError: (error) => {
 
@@ -26,9 +28,9 @@ const useDeleteEmployee = () => {
                 message: 'Error',
                 description: `Employee deletion failed: ${error?.response?.data?.message || 'Unknown error'}`,
             });
-            console.error('error: ', error);
+            // console.error('error: ', error);
         },
     });
 };
 
-export default useDeleteEmployee;
+export default UseDeleteEmployee;

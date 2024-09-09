@@ -17,7 +17,6 @@ const { Option } = Select;
 
 const EmployeeDetailForm = () => {
   const disabledDate = (current) => {
-    // Can not select days after today
     return current && current > moment().endOf('day');
   };
   return (
@@ -25,9 +24,10 @@ const EmployeeDetailForm = () => {
       <Form.Item
         label="First Name"
         name="firstName"
+        hasFeedback
         rules={[
           { required: true, message: "Please input your first name!" },
-          { pattern: /^[a-zA-Z\s]+$/, message: "Please enter a valid name (only letters and spaces are allowed)" }
+          { pattern: /^[a-zA-Z\s]+$/, message: "Please enter a valid name (only Alphabets are allowed)" }
         ]}
       >
         <Input
@@ -39,9 +39,10 @@ const EmployeeDetailForm = () => {
       <Form.Item
         label="Last Name"
         name="lastName"
+        hasFeedback
         rules={[
           { required: true, message: "Please input your last name!" },
-          { pattern: /^[a-zA-Z\s]+$/, message: "Please enter a valid name (only letters and spaces are allowed)" }
+          { pattern: /^[a-zA-Z\s]+$/, message: "Please enter a valid name (only Alphabets are allowed)" }
         ]}
       >
         <Input
@@ -53,6 +54,7 @@ const EmployeeDetailForm = () => {
       <Form.Item
         label="Email"
         name="email"
+        hasFeedback
         rules={[
           { required: true, message: "Please input your email!" },
           { type: "email", message: "Please enter a valid email!" },
@@ -67,6 +69,7 @@ const EmployeeDetailForm = () => {
       <Form.Item
         label="Phone Number"
         name="phoneNumber"
+        hasFeedback
         rules={[
           { required: true, message: "Please input your phone number!" },
           { pattern: /^\d{11}$/, message: "Please enter a valid 11-digit phone number!" },
@@ -74,7 +77,8 @@ const EmployeeDetailForm = () => {
       >
         <Input
           placeholder="0000-0000000"
-          maxLength={12}
+          maxLength={11}
+          showCount
           prefix={<PhoneOutlined rotate={90} style={{ fontSize: '18px', paddingRight: '10px' }} />}
         />
       </Form.Item>
@@ -82,6 +86,7 @@ const EmployeeDetailForm = () => {
       <Form.Item
         label="CNIC"
         name="cnic"
+        hasFeedback
         rules={[
           { required: true, message: "Please input your CNIC!" },
           { pattern: /^\d{13}$/, message: "Please enter a valid 13-digit CNIC!" },
@@ -89,6 +94,8 @@ const EmployeeDetailForm = () => {
       >
         <Input
           placeholder="Enter your CNIC"
+          maxLength={13}
+          showCount
           prefix={<IdcardOutlined style={{ fontSize: '18px', paddingRight: '10px' }} />}
         />
       </Form.Item>
@@ -96,6 +103,7 @@ const EmployeeDetailForm = () => {
       <Form.Item
         label="Address"
         name="address"
+        hasFeedback
         rules={[{ required: true, message: "Please input your address!" }]}
       >
         <TextArea
@@ -108,6 +116,7 @@ const EmployeeDetailForm = () => {
       <Form.Item
         label="Gender"
         name="gender"
+        hasFeedback
         rules={[{ required: true, message: "Please select your gender!" }]}
       >
         <Select placeholder="Select your gender">
@@ -124,6 +133,7 @@ const EmployeeDetailForm = () => {
       <Form.Item
         label="Date of Birth"
         name="dateOfBirth"
+        hasFeedback
         rules={[
           { required: true, message: "Please input your date of birth!" },
         ]}
@@ -149,6 +159,7 @@ const EmployeeDetailForm = () => {
       <Form.Item
         label="Designation"
         name="designation"
+        hasFeedback
         rules={[{ required: true, message: "Please select your designation!" }]}
       >
         <Select placeholder="Select your designation">
@@ -164,6 +175,7 @@ const EmployeeDetailForm = () => {
       <Form.Item
         label="Salary"
         name="salary"
+        hasFeedback
         rules={[
           { required: true, message: "Please input your salary!" },
           {
@@ -180,6 +192,7 @@ const EmployeeDetailForm = () => {
       <Form.Item
         label="Contract"
         name="contract"
+        hasFeedback
         rules={[{ required: true, message: "Please select your contract status!" }]}
       >
         <Select placeholder="Select contract status">

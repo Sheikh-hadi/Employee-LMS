@@ -11,7 +11,8 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>
-   <EmployeeProvider>  <App /></EmployeeProvider> 
+      <EmployeeProvider> 
+       <App /></EmployeeProvider>
     </QueryClientProvider>
   </React.StrictMode>
 );

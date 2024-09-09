@@ -12,15 +12,21 @@ import genderDropdownOptions from "../models/genderDropdownModel";
 import employeeDepartmentDropdownOptions from "../models/employeeDapartmentModel";
 import booleanDropdownOptions from "../models/booleanDropdownModel";
 import guardianRelationDropdownOption from "../models/gardianRealationDropdownModel";
+import usePutEmployee from './../Hooks/Employee/UsePutEmployeeHook';
 
 const { TextArea } = Input;
 const { Option } = Select;
 
 const EditEmployeeForm = ({ setHandleValue, values }) => {
+  const { mutate } = usePutEmployee({ value: values.id });
   const [form] = Form.useForm();
-  console.log("values: ", values)
-  const onFinish = (values) => {
-    console.log("Received values of form: ", values);
+
+  // console.log("values: ", values)
+  const onFinish = (formValue) => {
+    const updatedValues = { formValue, id: values.id };
+    // console.log("Received values of form: ", updatedValues);
+    // console.log("values: ", values)
+    mutate(updatedValues);
     setHandleValue(
       {
         model: false,
@@ -31,11 +37,17 @@ const EditEmployeeForm = ({ setHandleValue, values }) => {
   }
 
   const onFinishFailed = (errorInfo) => {
-    console.log("Failed:", errorInfo);
+    // console.log("Failed:", errorInfo);
     notification.error({
       message: 'Form Submission Failed',
-      description: 'Required fields are missing or incorrect. Please check the form and try again.',
+      description: 'Required fields are missing. Please check the form and try again.',
       duration: 5,
+      Progress: true,
+      style: {
+        borderLeft: `4px solid red`, // Green for success, red for error
+        position: 'relative',
+        color: 'red'
+      },
     });
 
 
@@ -47,6 +59,12 @@ const EditEmployeeForm = ({ setHandleValue, values }) => {
         record: null
       })
   };
+
+  React.useEffect(() => {
+    if (values) {
+      form.setFieldsValue(values);  // Manually update form fields
+    }
+  }, [values, form]);
 
   return (
     <div style={styles.container}>
@@ -71,9 +89,10 @@ const EditEmployeeForm = ({ setHandleValue, values }) => {
                   <Form.Item
                     label="First Name"
                     name="firstName"
+                    hasFeedback
                     rules={[
                       { required: true, message: "Please input the first name!" },
-                      { pattern: /^[a-zA-Z\s]+$/, message: "Please enter a valid name" },
+                      { pattern: /^[a-zA-Z\s]+$/, message: "Please enter a valid name ( only Alphabets are allowed )" },
                     ]}
                   >
                     <Input
@@ -88,9 +107,10 @@ const EditEmployeeForm = ({ setHandleValue, values }) => {
                   <Form.Item
                     label="Last Name"
                     name="lastName"
+                    hasFeedback
                     rules={[
                       { required: true, message: "Please input the last name!" },
-                      { pattern: /^[a-zA-Z\s]+$/, message: "Please enter a valid name" },
+                      { pattern: /^[a-zA-Z\s]+$/, message: "Please enter a valid name. ( only Alphabets are allowed )" },
                     ]}
                   >
                     <Input
@@ -105,6 +125,7 @@ const EditEmployeeForm = ({ setHandleValue, values }) => {
                   <Form.Item
                     label="Email"
                     name="email"
+                    hasFeedback
                     rules={[
                       { required: true, message: "Please input your email!" },
                       { type: "email", message: "Please enter a valid email!" },
@@ -129,6 +150,7 @@ const EditEmployeeForm = ({ setHandleValue, values }) => {
                   <Form.Item
                     label="Phone Number"
                     name="phoneNumber"
+                    hasFeedback
                     rules={[
                       { required: true, message: "Please input the phone number!" },
                       { pattern: /^\d{11}$/, message: "Please enter a valid 11-digit phone number!" },
@@ -137,6 +159,7 @@ const EditEmployeeForm = ({ setHandleValue, values }) => {
                     <Input
                       placeholder="0000-0000000"
                       maxLength={11}
+                      showCount
                       prefix={<PhoneOutlined rotate={90} />}
                     />
                   </Form.Item>
@@ -147,6 +170,7 @@ const EditEmployeeForm = ({ setHandleValue, values }) => {
                   <Form.Item
                     label="CNIC"
                     name="cnic"
+                    hasFeedback
                     rules={[
                       { required: true, message: "Please input the CNIC!" },
                       { pattern: /^\d{13}$/, message: "Please enter a valid 13-digit CNIC!" },
@@ -154,16 +178,19 @@ const EditEmployeeForm = ({ setHandleValue, values }) => {
                   >
                     <Input
                       placeholder="Enter CNIC"
+                      maxLength={13}
+                      showCount
                       prefix={<IdcardOutlined />}
                     />
                   </Form.Item>
                 </Col>
 
-                {/* Email */}
+                {/* Gender */}
                 <Col xs={24} sm={24} md={8} lg={8}>
                   <Form.Item
                     label="Gender"
                     name="gender"
+                    hasFeedback
                     rules={[{ required: true, message: "Please select gender!" }]}
                   >
                     <Select placeholder="Select gender">
@@ -189,6 +216,7 @@ const EditEmployeeForm = ({ setHandleValue, values }) => {
                   <Form.Item
                     label="Designation"
                     name="designation"
+                    hasFeedback
                     rules={[{ required: true, message: "Please select designation!" }]}
                   >
                     <Select placeholder="Select designation">
@@ -206,9 +234,10 @@ const EditEmployeeForm = ({ setHandleValue, values }) => {
                   <Form.Item
                     label="Salary"
                     name="salary"
+                    hasFeedback
                     rules={[
                       { required: true, message: "Please input the salary!" },
-                      { pattern: /^\d+$/, message: "Please enter a valid salary (whole numbers only)!" },
+                      { pattern: /^\d+$/, message: "Please enter a valid salary ( only numbers are allowed )!" },
                     ]}
                   >
                     <Input
@@ -223,6 +252,7 @@ const EditEmployeeForm = ({ setHandleValue, values }) => {
                   <Form.Item
                     label="Contract"
                     name="contract"
+                    hasFeedback
                     rules={[{ required: true, message: "Please select your contract status!" }]}
                   >
                     <Select placeholder="Select contract status">
@@ -244,22 +274,23 @@ const EditEmployeeForm = ({ setHandleValue, values }) => {
             <Col xs={24} sm={24} md={24} lg={24}>
               <Row gutter={[16, 16]}>
 
-                {/* Designation */}
+                {/* bank branch name */}
                 <Col xs={24} sm={24} md={8} lg={8}>
                   <Form.Item
                     label="Bank Name"
                     name="bankName"
+                    hasFeedback
                     rules={[
                       {
                         required: true,
-                        message: "Please input your bank name!",
+                        message: "Please input your bank branch name!",
                       },
-                      { pattern: /^[a-zA-Z\s]+$/, message: "Please enter a valid name (only letters and spaces are allowed)" }
+                      { pattern: /^[a-zA-Z\s]+$/, message: "Please enter a valid name (only letters are allowed)" },
                     ]}
                   >
                     <Input
                       type="text"
-                      placeholder="Enter your bank name"
+                      placeholder="Enter your bank branch name"
                       prefix={<BankOutlined style={{ fontSize: '18px', paddingRight: '10px' }} />}
                     />
                   </Form.Item>
@@ -270,12 +301,13 @@ const EditEmployeeForm = ({ setHandleValue, values }) => {
                   <Form.Item
                     label="Account Title"
                     name="accountTitle"
+                    hasFeedback
                     rules={[
                       {
                         required: true,
-                        message: "Please input your account Title!",
+                        message: "Please input your bank account Title!",
                       },
-                      { pattern: /^[a-zA-Z\s]+$/, message: "Please enter a valid name (only letters and spaces are allowed)" }
+                      { pattern: /^[a-zA-Z\s]+$/, message: "Please enter a valid name (only Alphabets are allowed)" },
                     ]}
                   >
                     <Input
@@ -286,11 +318,12 @@ const EditEmployeeForm = ({ setHandleValue, values }) => {
                   </Form.Item>
                 </Col>
 
-                {/* Contract Status */}
+                {/* Account Number */}
                 <Col xs={24} sm={24} md={8} lg={8}>
                   <Form.Item
                     label="Account Number"
                     name="accountNumber"
+                    hasFeedback
                     rules={[
                       {
                         required: true,
@@ -298,7 +331,7 @@ const EditEmployeeForm = ({ setHandleValue, values }) => {
                       },
                       {
                         pattern: /^\d+$/,
-                        message: "Please enter a valid salary (only whole numbers are allowed)"
+                        message: "Please enter a valid salary (only numbers are allowed)"
                       }
                     ]}
                   >
@@ -317,11 +350,12 @@ const EditEmployeeForm = ({ setHandleValue, values }) => {
             <Col xs={24} sm={24} md={24} lg={24}>
               <Row gutter={[16, 16]}>
 
-                {/* Designation */}
+                {/* Guardian Name */}
                 <Col xs={24} sm={24} md={8} lg={8}>
                   <Form.Item
                     label="Name"
                     name="guardianName"
+                    hasFeedback
                     rules={[
                       {
                         required: true,
@@ -338,7 +372,7 @@ const EditEmployeeForm = ({ setHandleValue, values }) => {
                   </Form.Item>
                 </Col>
 
-                {/* Salary */}
+                {/* Guardian Phone Number */}
                 <Col xs={24} sm={24} md={8} lg={8}>
                   <Form.Item
                     label="Phone Number"
@@ -356,13 +390,14 @@ const EditEmployeeForm = ({ setHandleValue, values }) => {
                   >
                     <Input
                       placeholder="0000-0000000"
-                      maxLength={12}
+                      maxLength={11}
+                      showCount
                       prefix={<PhoneOutlined rotate={90} style={{ fontSize: '18px', paddingRight: '10px' }} />}
                     />
                   </Form.Item>
                 </Col>
 
-                {/* Contract Status */}
+                {/* Guardian Relationship */}
                 <Col xs={24} sm={24} md={8} lg={8}>
                   <Form.Item
                     label="Relationship"

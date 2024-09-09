@@ -10,12 +10,13 @@ const BankDetailForm = () => {
       <Form.Item
         label="Bank Name"
         name="bankName"
+        hasFeedback
         rules={[
           {
             required: true,
             message: "Please input your bank name!",
           },
-          { pattern: /^[a-zA-Z\s]+$/, message: "Please enter a valid name (only letters and spaces are allowed)" }
+          { pattern: /^[a-zA-Z\s]+$/, message: "Please enter a valid name (only Alphabets are allowed)" }
         ]}
       >
         <Input
@@ -28,12 +29,13 @@ const BankDetailForm = () => {
       <Form.Item
         label="Account Title"
         name="accountTitle"
+        hasFeedback
         rules={[
           {
             required: true,
-            message: "Please input your account Title!",
+            message: "Please input your bank account Title!",
           },
-          { pattern: /^[a-zA-Z\s]+$/, message: "Please enter a valid name (only letters and spaces are allowed)" }
+          { pattern: /^[a-zA-Z\s]+$/, message: "Please enter a valid name (only Alphabets are allowed)" }
         ]}
       >
         <Input
@@ -46,6 +48,7 @@ const BankDetailForm = () => {
       <Form.Item
         label="Account Number"
         name="accountNumber"
+        hasFeedback
         rules={[
           {
             required: true,
@@ -53,7 +56,7 @@ const BankDetailForm = () => {
           },
           {
             pattern: /^\d+$/,
-            message: "Please enter a valid account number (only whole numbers are allowed)"
+            message: "Please enter a valid account number (only  numbers are allowed)"
           }
         ]}
       >

@@ -165,7 +165,7 @@ const LoginPage = () => {
 
             <Form.Item style={{ marginTop: '20px' }}>
               <p>
-                Don’t have an account? <a href="/signup" style={{ color: "darkslateblue" }}>Create here</a>
+                Don’t have an account? <a href="/signUpForm" style={{ color: "darkslateblue" }}>Create here</a>
               </p>
             </Form.Item>
           </Form>
