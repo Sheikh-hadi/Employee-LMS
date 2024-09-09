@@ -7,7 +7,7 @@ const SignUpForm = () => {
 
   const onFinish = (values) => {
     const { Name, userName, email, password, confirmPassword } = values;
-    if (!Name || !userName || !email || !password || !confirmPassword) {
+    if (!fullName || !userName || !email || !password || !confirmPassword) {
       message.error('Please fill in all fields!');
       return;
     }
