@@ -1,24 +1,14 @@
-import React, { useState } from "react";
-import { Table, Button, Input, Row, Col } from "antd";
+import { Table, Button, Row, Col, Input } from "antd";
 import {
   DeleteOutlined,
   EditOutlined,
-  SearchOutlined,
 } from "@ant-design/icons";
 // Adjust the import path
 import AddNewDepartment from "./AddNewDepartment";
-
+const { Search } = Input;
 const DepartmentComponent = ({ data }) => {
-  const option = data.map((item) => ({
-    id: item.id,
-    name: item.name,
-    value: item.value,
-  }))
-  // console.log("employeeDepartmentDropdownOptions: ", option);
-  const [searchTerm, setSearchTerm] = useState("");
-  const [filteredData, setFilteredData] = useState(
-    option
-  );
+ 
+
 
   // Columns definition
   const columns = [
@@ -92,42 +82,31 @@ const DepartmentComponent = ({ data }) => {
     },
   ];
 
-  // Handle search input change
-  const handleSearch = (e) => {
-    const value = e.target.value.toLowerCase(); // Convert to lowercase for case-insensitive comparison
-    setSearchTerm(value);
 
-    // Filter the data based on the search term
-    const filtered = option.filter((item) =>
-      item.label.toLowerCase().includes(value)
-    );
 
-    setFilteredData(filtered);
-  };
+
+
 
   return (
     <>
-      <Row>
+      <Row align={"middle"} >
         {/* Search Input */}
-        <Col span={4}>
-          {" "}
-          <Input
-            placeholder="Search departments"
-            prefix={<SearchOutlined style={{ color: "blue" }} />}
-            value={searchTerm}
-            onChange={handleSearch}
-            // style={{ width: '200px',  }}
-            style={{ width: "100%" }}
+        <Col span={6}>
+          <Search
+            placeholder="input search text"
+            enterButton="Search"
+            size="small"
+            onSearch={value => console.log(value)}
           />
         </Col>
-        <Col span={6} offset={14}>
+        <Col span={6} offset={11}>
           <AddNewDepartment />
         </Col>{" "}
       </Row>
-      {/* Filtered Table */}
+
       <Table
         style={{ marginTop: "10px" }}
-        dataSource={filteredData}
+        dataSource={data}
         columns={columns}
         rowKey="id"
       />
