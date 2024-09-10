@@ -66,7 +66,7 @@ const EditEmployeeForm = ({ setHandleValue, values }) => {
 
   React.useEffect(() => {
     if (values) {
-      form.setFieldsValue(values);  // Manually update form fields
+      form.setFieldsValue(values);  
     }
   }, [values, form]);
 

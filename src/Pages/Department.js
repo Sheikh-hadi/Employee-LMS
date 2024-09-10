@@ -9,17 +9,17 @@ const Department = () => {
   const { data, isLoading, isError, error, isFetching } = useGetDepartment();
 
   useEffect(() => {
-    console.log("data: ", data);
+    // console.log("data: ", data);
     setDepartments(data?.data);
   }, [data, setDepartments]);
 
   // Logging isLoading, isFetching, isError, and error.message to the console
-  console.log("isLoading: ", isLoading);
-  console.log("isFetching: ", isFetching);
-  console.log("isError: ", isError);
-  console.log("departments: ", departments);
+  // console.log("isLoading: ", isLoading);
+  // console.log("isFetching: ", isFetching);
+  // console.log("isError: ", isError);
+  // console.log("departments: ", departments);
   if (isError) {
-    console.log("error message: ", error.message);
+    // console.log("error message: ", error.message);
   }
 
   if (isLoading || isFetching) {

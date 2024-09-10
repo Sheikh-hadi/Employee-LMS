@@ -26,14 +26,14 @@ const { Sider, Content } = Layout;
 const App = () => {
   const [collapsed, setCollapsed] = useState(false);
   const location = window.location.pathname;
-  console.log("location: ", window.location.pathname);
+  // console.log("location: ", window.location.pathname);
   const {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
 
   const handleLocation = location === "/login" || location ==="/Login" || location === "/signup" || location === "/Signup"? false : true;
 
-  console.log("handleLocation: ", handleLocation);
+  // console.log("handleLocation: ", handleLocation);
   return (
     <Router>
       <Routes>

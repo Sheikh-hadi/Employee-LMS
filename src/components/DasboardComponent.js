@@ -10,11 +10,11 @@ import UseFetchEmployee from "../Hooks/Employee/UseFetchEmployeeHook";
 const EmployeeDashboard = () => {
   const { data } = UseFetchEmployee()
  const {departments} = useDepartmentContext()
- console.log("department: ", departments)
+//  console.log("department: ", departments)
   const employee = data?.length || 0;
   const department =departments?.data?.length || 0;
-  console.log("data: ", employee)
-  console.log("department: ", department)
+  // console.log("data: ", employee)
+  // console.log("department: ", department)
 
   // Get today's month and day
   const today = new Date();

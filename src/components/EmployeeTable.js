@@ -241,6 +241,7 @@ const EmployeeTable = ({ employees }) => {
   return (
     <div style={{ textAlign: "left", marginTop: "-16px" }}>
       <Search
+        style={{ width: "20%" }}
         placeholder="input search text"
         enterButton="Search"
         size="small"
