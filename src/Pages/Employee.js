@@ -5,8 +5,8 @@ import { Skeleton } from "antd";
 import UseFetchEmployee from "../Hooks/Employee/UseFetchEmployeeHook";
 
 const Employee = () => {
-  
- const {data : employees, isLoading, isError, error } = UseFetchEmployee()
+
+  const { data: employees, isLoading, isError, error } = UseFetchEmployee()
 
 
   if (isLoading) {
@@ -14,7 +14,11 @@ const Employee = () => {
   }
 
   if (isError) {
-    return <div>Error: {error.message || "An unknown error occurred"}</div>;
+    // console.log("error message: ", error.response.data.message );
+    // console.log("error: ", isError);
+    if (error.response.data.message === 'Employee not found' ) {
+      return <EmployeeTable employees={employees} />
+    } return <div>Error: {error.message}</div>
   }
 
   return (

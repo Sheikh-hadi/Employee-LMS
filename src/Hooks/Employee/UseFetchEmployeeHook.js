@@ -18,6 +18,9 @@ const useFetchEmployee = () => {
         onSuccess: (data) => {
             console.log("data in UseFetch hook: ", data);
             setEmployees(data);
+        },
+        onError: (error) => {
+            console.log(error);
         }
     });
     // console.log("result: ", result);

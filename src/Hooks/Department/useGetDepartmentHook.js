@@ -12,10 +12,10 @@ const useGetDepartment = () => {
             queryKey: ['department'],
             queryFn: fetchDepartment,
             onSuccess: (data) => {
-                // console.log("data: ", data);
+                console.log("data: ", data);
             },
             onError: (error) => {
-                // console.log("error: ", error);
+                console.log("error: ", error);
             }
         })
 

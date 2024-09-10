@@ -246,6 +246,7 @@ const EmployeeTable = ({ employees }) => {
         enterButton="Search"
         size="small"
         onSearch={handleSearch}
+        onChange={(e)=> handleSearch(e.target.value)}
         allowClear
       />
       <Table

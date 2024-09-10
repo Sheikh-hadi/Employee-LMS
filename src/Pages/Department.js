@@ -14,20 +14,23 @@ const Department = () => {
   }, [data, setDepartments]);
 
   // Logging isLoading, isFetching, isError, and error.message to the console
-  // console.log("isLoading: ", isLoading);
-  // console.log("isFetching: ", isFetching);
-  // console.log("isError: ", isError);
-  // console.log("departments: ", departments);
-  if (isError) {
-    // console.log("error message: ", error.message);
-  }
+  console.log("isLoading: ", isLoading);
+  console.log("isFetching: ", isFetching);
+  console.log("isError: ", isError);
+  console.log("departments: ", departments);
+ 
+
 
   if (isLoading || isFetching) {
     return <Skeleton />;
   }
 
   if (isError) {
-    return <div>Error: {error.message}</div>;
+    // console.log("error message: ", error.response.data.message );
+    // console.log("error: ", isError);
+if(error.response.data.message === "Not Record Found"){
+   return <DepartmentComponent data={data?.data} />
+  } return <div>Error: {error.message}</div>
   }
 
   return (
