@@ -1,11 +1,13 @@
 import React from 'react';
 import { Form, Input, Button, Checkbox, Typography, message, Row, Col } from 'antd';
 import { MailOutlined, LockOutlined } from '@ant-design/icons';
+import usePostLoginHook from '../Hooks/User/usePostLoginHook';
 
 const LoginPage = () => {
+  const {mutate: mutateSCignIn} = usePostLoginHook();
   const onFinish = (values) => {
     console.log('Success:', values);
-    message.success('Login successful!');
+    mutateSCignIn(values);
   };
 
   const onFinishFailed = (errorInfo) => {

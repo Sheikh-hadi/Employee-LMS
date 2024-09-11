@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Table, Tooltip, Switch,  Modal } from "antd";
+import { Table, Tooltip, Switch, Input, Modal } from "antd";
 import {
   DeleteOutlined,
   EditOutlined,
@@ -10,10 +10,10 @@ import "../App.css";
 import UseDeleteEmployee from "../Hooks/Employee/UseDeleteEmployeeHook";
 import EditEmployeeForm from "./EditEmployeeForm";
 
-
+const { Search } = Input;
 const EmployeeTable = ({ employees }) => {
   // console.log("employees: ", employees)
-  
+  const [filteredData, setFilteredData] = useState(employees);
   const [handleValue, setHandleValue] = useState({
     model: false,
     id: null,
@@ -222,20 +222,37 @@ const EmployeeTable = ({ employees }) => {
   ];
 
   // Handle the search input change
- 
+  const handleSearch = (value) => {
+
+    const filtered = employees.filter(
+      (item) =>
+        item.firstName?.toLowerCase().includes(value) ||
+        item.email?.toLowerCase().includes(value) ||
+        item.phoneNumber?.toLowerCase().includes(value)
+    );
+
+    setFilteredData(filtered);
+  };
+
 
 
 
 
   return (
-    <>
-  
 
-
-     
+    <div style={{ textAlign: "left", marginTop: "-16px" }}>
+      <Search
+        style={{ width: "20%" }}
+        placeholder="input search text"
+        enterButton="Search"
+        size="small"
+        onSearch={handleSearch}
+        onChange={(e)=> handleSearch(e.target.value)}
+        allowClear
+      />
       <Table
         columns={columns}
-        dataSource={employees}
+        dataSource={filteredData}
         pagination={false}
         rowKey="id"
       />
@@ -261,7 +278,7 @@ const EmployeeTable = ({ employees }) => {
       >
         <h6>{`Are you sure you want to delete employee with ID: ${handleValue.id}?`}</h6>
       </Modal>
-    </>
+    </div>
   )
 };
 

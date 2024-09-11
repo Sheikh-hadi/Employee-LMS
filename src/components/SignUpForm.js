@@ -1,19 +1,17 @@
 import React from 'react';
-import { Form, Input, Button, message, Typography, Row, Col } from 'antd';
+import { Form, Input, Button, Typography, Row, Col } from 'antd';
 import { MailOutlined, LockOutlined, UserOutlined } from '@ant-design/icons';
+import usePostRegisterUser from './../Hooks/User/usePostRegisterUser';
 
 const SignUpForm = () => {
+  const { mutate: mutateSignUp } = usePostRegisterUser();
   const [form] = Form.useForm();
 
   const onFinish = (values) => {
-    const { Name, userName, email, password, confirmPassword } = values;
-    if (!Name || !userName || !email || !password || !confirmPassword) {
-      message.error('Please fill in all fields!');
-      return;
-    }
+    console.log('Received values of form: ', values);
+    mutateSignUp(values);
 
-    message.success('Successfully signed up!');
-  };
+  }
 
   const onFinishFailed = (errorInfo) => {
     console.log('Failed:', errorInfo);

@@ -6,8 +6,6 @@ import UseFetchEmployee from "../Hooks/Employee/UseFetchEmployeeHook";
 
 const Employee = () => {
   const { data: employees = [], isLoading, isError, error } = UseFetchEmployee();
-  const [filteredData, setFilteredData] = React.useState(employees);
-  console.log("filteredData: ", filteredData)
 
 
   if (isLoading) {
@@ -19,8 +17,8 @@ const Employee = () => {
     if (error.response.data.message === "Employee Not Found") {
       return (
         <div>
-          <AddNewEmployee  />
-          <EmployeeTable employees={filteredData} />
+          <AddNewEmployee />
+          <EmployeeTable employees={employees} />
         </div>
       );
     }  
@@ -30,8 +28,8 @@ const Employee = () => {
 
   return (
     <div>
-      <AddNewEmployee employees={employees} setFilteredData={setFilteredData}/>
-      <EmployeeTable employees={filteredData} />
+      <AddNewEmployee />
+      <EmployeeTable employees={employees} />
     </div>
   );
 };
