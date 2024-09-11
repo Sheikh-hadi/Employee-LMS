@@ -239,16 +239,23 @@ const EmployeeTable = ({ employees }) => {
 
 
   return (
-    <div style={{ textAlign: "left", marginTop: "-16px" }}>
-      <Search
-        style={{ width: "20%" }}
-        placeholder="input search text"
-        enterButton="Search"
-        size="small"
-        onSearch={handleSearch}
-        onChange={(e)=> handleSearch(e.target.value)}
-        allowClear
-      />
+    <div style={{ textAlign: "left", marginTop: "-16px", marginLeft: "10px" }}>
+  <Search
+    style={{
+      width: "18%",
+      height: "40px", // Adjust height as needed
+      display: "flex",
+      marginBottom:"20px",
+      alignItems: "center"
+    }}
+    placeholder="input search text"
+    enterButton="Search"
+    size="large" // Use 'large' to increase the font size and overall height of the input
+    onSearch={handleSearch}
+    onChange={(e) => handleSearch(e.target.value)}
+    allowClear
+  />
+
       <Table
         columns={columns}
         dataSource={filteredData}
