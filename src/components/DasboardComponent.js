@@ -1,6 +1,6 @@
 import React from "react";
 import { Card, Col, Row } from "antd";
-import {useDepartmentContext} from "../context/DepartmentContext";
+import { useDepartmentContext } from "../context/DepartmentContext";
 import "../App.css";
 // import { useEmployeeContext } from "../context/EmployeeContext";
 import { UserOutlined, TeamOutlined, LogoutOutlined } from "@ant-design/icons";
@@ -9,10 +9,10 @@ import UseFetchEmployee from "../Hooks/Employee/UseFetchEmployeeHook";
 
 const EmployeeDashboard = () => {
   const { data } = UseFetchEmployee()
- const {departments} = useDepartmentContext()
-//  console.log("department: ", departments)
+  const { departments } = useDepartmentContext()
+  console.log("department: ", departments)
   const employee = data?.length || 0;
-  const department =departments?.data?.length || 0;
+  const departmentLength = departments?.data?.length || 0;
   // console.log("data: ", employee)
   // console.log("department: ", department)
 
@@ -112,7 +112,7 @@ const EmployeeDashboard = () => {
               <div style={cardIconStyle}>
                 <UserOutlined />
               </div>
-              <div style={cardTitleStyle}>{department}</div>
+              <div style={cardTitleStyle}>{departments?.data?.length || 0}</div>
               <div style={cardDescriptionStyle}>Departments</div>
               <div style={cardMoreInfoStyle}>More Info ➔</div>
             </Card>
@@ -126,7 +126,7 @@ const EmployeeDashboard = () => {
               <div style={cardIconStyle}>
                 <TeamOutlined />
               </div>
-              <div style={cardTitleStyle}>{employee 
+              <div style={cardTitleStyle}>{employee
               }</div>
               <div style={cardDescriptionStyle}>Employees</div>
               <div style={cardMoreInfoStyle}>More Info ➔</div>

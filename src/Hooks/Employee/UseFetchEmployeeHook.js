@@ -21,7 +21,10 @@ const useFetchEmployee = () => {
         },
         onError: (error) => {
             console.log(error);
-        }
+        },
+        staleTime: 0, // Ensure that data is fresh
+        cacheTime: 600000, // Cache for 10 minutes
+        refetchOnWindowFocus: false, // Optionally refetch on window focus
     });
     // console.log("result: ", result);
     return result;

@@ -1,9 +1,9 @@
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import { notification } from "antd";
 
 const usePutEmployee = () => {
-
+const queryClient = useQueryClient();
     const putData = async (value) => {
         // console.log("values: ", value);
         // console.log("id", value.id);
@@ -31,9 +31,10 @@ const usePutEmployee = () => {
                 },
                 showProgress: true,
             });
-            console.log('data: ', data);
+            // console.log('data: ', data);
             // setIsModalOpen(false);
             // form.resetFields();
+            queryClient.invalidateQueries(['employees']);
         },
         onError: (error) => {
             console.log("error: ", error);

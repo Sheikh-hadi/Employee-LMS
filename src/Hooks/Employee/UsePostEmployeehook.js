@@ -1,8 +1,11 @@
-import { useMutation } from "@tanstack/react-query";
-import axios from "axios";
-import { notification } from "antd";
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import axios from 'axios';
+import { notification } from 'antd';
+
 
 const usePostEmployee = ({ setIsModalOpen, form, values }) => {
+    const queryClient = useQueryClient();
+
 // console.log("values: ", values);
 // console.log("form: ", form);
 // console.log("setIsModalOpen: ", setIsModalOpen);
@@ -35,6 +38,7 @@ const usePostEmployee = ({ setIsModalOpen, form, values }) => {
             console.log('data: ', data);
             setIsModalOpen(false);
             form.resetFields();
+            queryClient.invalidateQueries(['employees']);
         },
         onError: (error) => {
             console.log("error: ", error);

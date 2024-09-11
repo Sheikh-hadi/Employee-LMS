@@ -1,9 +1,9 @@
-import { useMutation } from "@tanstack/react-query";
-import axios from "axios";
-import { notification } from "antd";
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import axios from 'axios';
+import { notification } from 'antd';
 
 const useUpdateDepartment = () => {
-
+    const queryClient = useQueryClient();
     const updateDepartment = async (values) => {
         // console.log("values: ", values)
         // console.log("values.id: ", values.id)
@@ -21,6 +21,7 @@ const useUpdateDepartment = () => {
                 message: "Success",
                 description: data?.message || "Department updated successfully",
             });
+            queryClient.invalidateQueries(['department']);
         },
         onError: (error) => {
             notification.error({
