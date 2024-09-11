@@ -2,12 +2,14 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Form, Input, Button, Checkbox, Typography, message, Row, Col } from 'antd';
 import { MailOutlined, LockOutlined } from '@ant-design/icons';
+import usePostLoginHook from '../Hooks/User/usePostLoginHook';
 
 const LoginPage = () => {
   const Navigate=useNavigate()
+  const {mutate: mutateSCignIn} = usePostLoginHook();
   const onFinish = (values) => {
     console.log('Success:', values);
-    message.success('Login successful!');
+    mutateSCignIn(values);
   };
 
   const onFinishFailed = (errorInfo) => {
