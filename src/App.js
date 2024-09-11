@@ -42,7 +42,7 @@ const App = () => {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignUpForm/>} />
         <Route path="/userDetails" element={<UserdetailPage/>} />
-        <Route path="/EmployeeAttendenceRecord" element={<EmployeeAttendenceTracking/>} />
+        <Route path="/employeeAttendenceRecord" element={<EmployeeAttendenceTracking/>} />
       </Routes>
       {handleLocation && (
         <Layout style={{ minHeight: "100vh" }}>
