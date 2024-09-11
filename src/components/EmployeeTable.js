@@ -112,14 +112,6 @@ const EmployeeTable = ({ employees }) => {
           placement="right"
         >
           <span
-          // style={{
-          //   textAlign: "justify",
-          //   display: "inline-block",
-          //   maxWidth: "500px",  // Adjust as needed
-          //   wordWrap: "break-word", // Breaks long words
-          //   whiteSpace: "normal",
-          //   border: "2px solid black"
-          // }}
           >
             {text}
           </span>
@@ -132,13 +124,7 @@ const EmployeeTable = ({ employees }) => {
       dataIndex: "designation",
       key: "designation",
       width: "12%",
-      // render: (text, record) => (
-      //   <Select
-      //     defaultValue={text}
-      //     style={{ width: "100%" }}
-      //     options={employeeDapartmentDropdownOptions}
-      //   />
-      // ),
+     
     },
     {
       title: "Salary",

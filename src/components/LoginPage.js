@@ -1,8 +1,10 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Form, Input, Button, Checkbox, Typography, message, Row, Col } from 'antd';
 import { MailOutlined, LockOutlined } from '@ant-design/icons';
 
 const LoginPage = () => {
+  const Navigate=useNavigate()
   const onFinish = (values) => {
     console.log('Success:', values);
     message.success('Login successful!');
@@ -146,9 +148,9 @@ const LoginPage = () => {
             <Form.Item>
               <Row justify="space-between">
                 <Checkbox style={{ color: "darkslateblue" }}>Remember Me</Checkbox>
-                <a href="/" style={{ color: "darkslateblue" }}>
+                <span  onClick={()=>{Navigate("/forgetPassword")}}style={{ color: "darkslateblue" ,cursor:"pointer"}}>
                   Forgot Password?
-                </a>
+                </span>
               </Row>
             </Form.Item>
 

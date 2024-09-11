@@ -20,6 +20,9 @@ import SalaryForm from "./Pages/SalaryForm";
 import EditEmployeeForm from "./components/EditEmployeeForm";
 import EmployeeAttendenceTracking from "./components/EmployeeAttendenceTracking";
 import UserdetailPage from "./Pages/UserdetailPage";
+import ForgotPasswordOtp from "./components/ForgotPasswordOtp";
+import UserPage from "./Pages/UserPage";
+import CompanyDetail from "./Pages/CompanyDetail";
 
 const { Sider, Content } = Layout;
 
@@ -41,7 +44,11 @@ const App = () => {
       <Route path="/editForm" element={<EditEmployeeForm/>} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignUpForm/>} />
+        <Route path="/sentOtp" element={<ForgotPasswordOtp/>} />
+        <Route path="/forgetPassword" element={<ForgotPasswordOtp/>} />
         <Route path="/userDetails" element={<UserdetailPage/>} />
+        <Route path="/company" element={<CompanyDetail/>} />
+        <Route path="/user" element={<UserPage/>} />
         <Route path="/employeeAttendenceRecord" element={<EmployeeAttendenceTracking/>} />
       </Routes>
       {handleLocation && (
@@ -100,6 +107,12 @@ const App = () => {
               </Menu.Item>
               <Menu.Item key="5" icon={<CreditCardOutlined />}>
                 <Link to="/Payment">Payment</Link>
+              </Menu.Item>
+              <Menu.Item key="6" icon={<CreditCardOutlined />}>
+                <Link to="/user">User Details</Link>
+              </Menu.Item>
+              <Menu.Item key="7" icon={<CreditCardOutlined />}>
+                <Link to="/company">Company Details</Link>
               </Menu.Item>
             </Menu>
           </Sider>
