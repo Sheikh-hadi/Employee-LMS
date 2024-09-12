@@ -32,6 +32,7 @@ const EmployeeDashboard = () => {
   // Inline styles
   const containerStyle = {
     padding: "20px",
+   
   };
 
   const titleStyle = {
@@ -52,7 +53,7 @@ const EmployeeDashboard = () => {
     textAlign: "center",
     padding: "30px",
     cursor: "pointer",
-    height: "160px",
+    height:"25vh",
     position: "relative",
     transition: "transform 0.2s, box-shadow 0.2s",
   };

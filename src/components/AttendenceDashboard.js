@@ -4,7 +4,7 @@ import BirthdayCard from './BirthdayCard';
 
 const AttendenceDashboard = () => {
   return (
-    <Row gutter={[16, 16]} style={{ marginTop: 20,border:"2px solid black"}}>
+    <Row gutter={[16, 16]} style={{ marginTop: 20,}}>
       <Col xs={24} md={11} >
         <Card style={{ height: '100%' }}>
           <h3>Today's Attendance</h3>
@@ -23,7 +23,7 @@ const AttendenceDashboard = () => {
             </Col>
             <Col xs={20} sm={6} style={{ textAlign: 'center', padding: '20px', borderRadius: '10px', backgroundColor: 'lightblue' ,}}>
               <div style={{ fontSize: 24, color: 'gray' }}>0</div>
-              <div style={{ textAlign: 'left' ,fontSize:"13px"}}><b>Unmarked</b></div>
+              <div style={{ textAlign: 'center' ,fontSize:"13px"}}><b>Unmarked</b></div>
             </Col>
           </Row>
         </Card>

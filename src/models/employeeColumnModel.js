@@ -8,7 +8,7 @@ const employeesColumn = [
     designation: "Team Leader",
     email: "jefferylalor@example.com",
     contact: "0301-1234567",
-    dob: "1985-09-02",
+    dob: "1985-09-12",
     currentAddress: "123 Elm Street, Springfield",
     joiningDate: "2022-09-02",
     endDate: null,

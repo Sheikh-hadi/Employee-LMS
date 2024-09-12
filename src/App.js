@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState } from "react"; 
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import {
   MenuFoldOutlined,
@@ -14,43 +14,52 @@ import Attendence from "./Pages/Attendence";
 import Payment from "./Pages/Payment";
 import Dashboard from "./Pages/Dashboard";
 import LoginPage from "./components/LoginPage";
-import Dapartment from "./Pages/Department";
+import Department from "./Pages/Department";
 import SignUpForm from "./components/SignUpForm";
 import SalaryForm from "./Pages/SalaryForm";
 import EditEmployeeForm from "./components/EditEmployeeForm";
 import EmployeeAttendenceTracking from "./components/EmployeeAttendenceTracking";
-import UserdetailPage from "./Pages/UserdetailPage";
+
 import ForgotPasswordOtp from "./components/ForgotPasswordOtp";
 import UserPage from "./Pages/UserPage";
 import CompanyDetail from "./Pages/CompanyDetail";
-
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+import Error from "./components/ErrorUnauthorizedAccess";
+import ErrorForbidden from "./components/ErrorForbidden";
+import UserdetailPage from "./Pages/UserdetailPage";
 const { Sider, Content } = Layout;
+const { SubMenu } = Menu; // Importing SubMenu from Ant Design's Menu
 
 const App = () => {
   const [collapsed, setCollapsed] = useState(false);
   const location = window.location.pathname;
-  // console.log("location: ", window.location.pathname);
+
   const {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
 
-  const handleLocation = location === "/login" || location ==="/Login" || location === "/signup" || location === "/Signup"? false : true;
+  const handleLocation = location === "/login" || location === "/Login" || location === "/signup" || location === "/Signup"? false : true;
 
-  // console.log("handleLocation: ", handleLocation);
   return (
     <Router>
       <Routes>
-      <Route path="/salary" element={<SalaryForm/>} />
-      <Route path="/editForm" element={<EditEmployeeForm/>} />
+        <Route path="/salary" element={<SalaryForm />} />
+        <Route path="/editForm" element={<EditEmployeeForm />} />
+        <Route path="/header" element={<Header />} />
+        <Route path="/footer" element={<Footer />} />
+        <Route path="/error" element={<Error />} />
+        <Route path="/error403" element={<ErrorForbidden />} />
         <Route path="/login" element={<LoginPage />} />
-        <Route path="/signup" element={<SignUpForm/>} />
-        <Route path="/sentOtp" element={<ForgotPasswordOtp/>} />
-        <Route path="/forgetPassword" element={<ForgotPasswordOtp/>} />
+        <Route path="/signup" element={<SignUpForm />} />
+        <Route path="/sentOtp" element={<ForgotPasswordOtp />} />
+        <Route path="/forgetPassword" element={<ForgotPasswordOtp />} />
         <Route path="/userDetails" element={<UserdetailPage/>} />
-        <Route path="/company" element={<CompanyDetail/>} />
-        <Route path="/user" element={<UserPage/>} />
-        <Route path="/employeeAttendenceRecord" element={<EmployeeAttendenceTracking/>} />
+        <Route path="/company" element={<CompanyDetail />} />
+        <Route path="/user" element={<UserPage />} />
+        <Route path="/employeeAttendenceRecord" element={<EmployeeAttendenceTracking />} />
       </Routes>
+
       {handleLocation && (
         <Layout style={{ minHeight: "100vh" }}>
           <Sider
@@ -100,37 +109,46 @@ const App = () => {
                 <Link to="/employee">Employee</Link>
               </Menu.Item>
               <Menu.Item key="3" icon={<BarChartOutlined />}>
-                <Link to="/attendence">Attendence</Link>
+                <Link to="/attendence">Attendance</Link>
               </Menu.Item>
               <Menu.Item key="4" icon={<CreditCardOutlined />}>
                 <Link to="/department">Department</Link>
               </Menu.Item>
               <Menu.Item key="5" icon={<CreditCardOutlined />}>
-                <Link to="/Payment">Payment</Link>
+                <Link to="/payment">Payment</Link>
               </Menu.Item>
-              <Menu.Item key="6" icon={<CreditCardOutlined />}>
-                <Link to="/user">User Details</Link>
-              </Menu.Item>
+
+              {/* Submenu for "User" */}
+              <SubMenu key="6" icon={<UserOutlined />} title="User">
+                <Menu.Item key="6-1">
+                  <Link to="/user">User Table</Link>
+                </Menu.Item>
+                <Menu.Item key="6-2">
+                  <Link to="/userDetails">User Details</Link>
+                </Menu.Item>
+               
+              </SubMenu>
+
               <Menu.Item key="7" icon={<CreditCardOutlined />}>
                 <Link to="/company">Company Details</Link>
               </Menu.Item>
             </Menu>
           </Sider>
+
           <Layout
             style={{
-              marginLeft: collapsed ? "80px" : "200px", // Adjust this based on your collapsed width
+              marginLeft: collapsed ? "80px" : "200px",
               transition: "margin-left 0.2s",
             }}
           >
-            <Content
-             
-            >
+            <Content>
               <Routes>
                 <Route path="/" element={<Dashboard />} />
                 <Route path="/employee" element={<Employee />} />
                 <Route path="/attendence" element={<Attendence />} />
-                <Route path="/Payment" element={<Payment />} />
-                <Route path="/department" element={<Dapartment />} />
+                <Route path="/payment" element={<Payment />} />
+                <Route path="/department" element={<Department />} />
+                <Route path="/" element={<UserPage />} />
               </Routes>
             </Content>
           </Layout>
