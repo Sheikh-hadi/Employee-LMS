@@ -1,38 +1,37 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
-import { notification } from "antd";
+import { message } from "antd";
+import { useNavigate } from "react-router-dom"; // Use useNavigate hook
 
 const usePostLoginHook = () => {
     const queryClient = useQueryClient();
+    const navigate = useNavigate(); // Get navigate function
+
     const loginUser = async (values) => {
-        const response = await axios.post("http://localhost:4000/api/v1/users/login", values);
-        return response.data;
+        try {
+            const response = await axios.post("http://localhost:4000/api/v1/users/login", values);
+            return response.data;
+        } catch (error) {
+            console.log("Error in loginUser:", error);
+            throw error;
+        }
     };
+
     return useMutation({
         mutationFn: loginUser,
         onSuccess: (data) => {
-            console.log("data in UseFetch hook: ", data);
-            notification.success({
-                message: "User Login Successfully",
-                // description: "User Login Success
-            })
+            console.log("data in onSuccess: ", data);
+            message.success("User Login Successfully");
+            
+            // Navigate to homepage after success
+            navigate("/");
         },
 
-        onErrorrror: (error) => {
-            console.log(error);
-            notification.error({
-                message: "User Login Failed",
-                description: `${error?.response?.data?.message || 'User Login Failed'}`,
-                duration: 5,
-                style: {
-                    borderLeft: `4px solid red`, // Red for error, green for success
-                    position: 'relative',
-                    color: 'red'
-                },
-                showProgress: true,
-            });
+        onError: (error) => {
+            console.log("Error in onError:", error);
+            message.error(error?.response?.data?.message || "User Login Failed");
         },
-    })
-    
-}
+    });
+};
+
 export default usePostLoginHook;
