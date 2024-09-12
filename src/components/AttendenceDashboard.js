@@ -5,7 +5,7 @@ import BirthdayCard from './BirthdayCard';
 const AttendenceDashboard = () => {
   return (
     <Row gutter={[16, 16]} style={{ marginTop: 20,border:"2px solid black"}}>
-      <Col xs={24} md={11} offset={1}>
+      <Col xs={24} md={11} >
         <Card style={{ height: '100%' }}>
           <h3>Today's Attendance</h3>
           <Row gutter={[16, 10]}style={{ display: 'flex', justifyContent: 'space-between' }}>
