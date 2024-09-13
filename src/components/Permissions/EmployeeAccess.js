@@ -1,7 +1,7 @@
 import React from 'react';
 import { Checkbox, Row, Col } from 'antd';
 
-const UserAccess = ({ permissions, setPermissions }) => {
+const EmployeeAccess = ({ permissions, setPermissions }) => {
   // Handle individual checkbox changes
   const handleCheckboxChange = (e) => {
     const { name, checked } = e.target;
@@ -9,43 +9,43 @@ const UserAccess = ({ permissions, setPermissions }) => {
   };
 
   return (
-    <div style={{ backgroundColor: '#fff', padding: '20px', borderRadius: '10px', width:"100%", boxShadow: '0 2px 8px rgba(0, 0, 0, 0.1)' }}>
-      <h3 style={{ fontSize: '18px', fontWeight: 'bold', marginBottom: '20px' }}>User access:</h3>
-      <Row gutter={[2, 16]} style={{ lineHeight: '10px' }}>
+    <div style={{ backgroundColor: '#fff', width: '100%', padding: '20px', borderRadius: '10px', boxShadow: '0 2px 0px rgba(0, 0, 0, 0)' }}>
+      <h3 style={{ fontSize: '18px', fontWeight: 'bold', marginBottom: '20px' }}>Employee access:</h3>
+      <Row gutter={[0, 16]}>
         <Col span={24}>
           <Checkbox
-            name="editUser"
-            checked={permissions.editUser}
+            name="editEmployee"
+            checked={permissions.editEmployee}
             onChange={handleCheckboxChange}
           >
-            Edit User
+            Edit Employee
           </Checkbox>
         </Col>
         <Col span={24}>
           <Checkbox
-            name="createUser"
-            checked={permissions.createUser}
+            name="createEmployee"
+            checked={permissions.createEmployee}
             onChange={handleCheckboxChange}
           >
-            Create User
+            Create Employee
           </Checkbox>
         </Col>
         <Col span={24}>
           <Checkbox
-            name="deleteUser"
-            checked={permissions.deleteUser}
+            name="deleteEmployee"
+            checked={permissions.deleteEmployee}
             onChange={handleCheckboxChange}
           >
-            Delete User
+            Delete Employee
           </Checkbox>
         </Col>
         <Col span={24}>
           <Checkbox
-            name="updateUser"
-            checked={permissions.updateUser}
+            name="updateEmployee"
+            checked={permissions.updateEmployee}
             onChange={handleCheckboxChange}
           >
-            Update User
+            Update Employee
           </Checkbox>
         </Col>
       </Row>
@@ -53,4 +53,4 @@ const UserAccess = ({ permissions, setPermissions }) => {
   );
 };
 
-export default UserAccess;
+export default EmployeeAccess;
