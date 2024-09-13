@@ -6,8 +6,8 @@ import PermissionsPage from './PermissionsPage'
 const UserdetailPage = () => {
   return (
     <div>
-      <UserDetails/>
- <PermissionsPage/>
+      <UserDetails />
+      <PermissionsPage />
 
     </div>
   )
