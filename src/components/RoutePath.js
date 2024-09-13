@@ -26,6 +26,7 @@ const RoutePath = () => {
             <Route path="/header" element={<Header />} />
             <Route path="/footer" element={<Footer />} />
             <Route path="/error" element={<Error />} />
+            <Route path="/attendenceTracking" element={<EmployeeAttendenceTracking/>} />
             <Route path="/error403" element={<ErrorForbidden />} />
             <Route path="/error404" element={<PageNotFoundError/>} />
             <Route path="/sentOtp" element={<ForgotPasswordOtp />} />

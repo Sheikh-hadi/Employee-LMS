@@ -50,14 +50,14 @@ const CompanyDetailsForm = () => {
       <Row>
         <Col span={2}>
           <img
-            src="GPSlogo.png" 
+            src="gpslogo.png" 
             alt="Company Logo"
-            style={{ borderRadius: '50%' }}
+            style={{ borderRadius: '10%' }}
           />
         </Col>
         <Col span={20}>
           <h2 style={{ marginBottom: '0', marginLeft: "150px" }}>Game Pixel Studio</h2>
-          <a href="GPSlogo.png" style={{ fontSize: '14px', color: '#666', marginLeft: "150px" }}>
+          <a href="gpslogo.png" style={{ fontSize: '14px', color: '#666', marginLeft: "150px" }}>
             gamepixelstudio@gmail.com
           </a>
         </Col>
@@ -91,7 +91,7 @@ const CompanyDetailsForm = () => {
           <img
             src="GPSlogo.png"
             alt="Company Logo"
-            style={{ borderRadius: '50%', width: '100%' }}
+            style={{ borderRadius: '10%', width: '100%' }}
           />
         </Col>
         <Col span={20}>

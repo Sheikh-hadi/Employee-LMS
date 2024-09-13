@@ -13,6 +13,7 @@ import LoginPage from "./components/LoginPage";
 import SignUpForm from "./components/SignUpForm";
 import ForgotPasswordOtp from "./components/ForgotPasswordOtp";
 import RoutePath from "./components/RoutePath";
+import Attendence from './Pages/Attendence';
 
 
 const { Sider, Content } = Layout;
@@ -84,10 +85,15 @@ const App = () => {
               <Menu.Item key="2" icon={<UserOutlined />}>
                 <Link to="/employee">Employee</Link>
               </Menu.Item>
-              <Menu.Item key="3" icon={<BarChartOutlined />}>
-                <Link to="/attendence">Attendance</Link>
-              </Menu.Item>
-              <Menu.Item key="4" icon={<CreditCardOutlined />}>
+              <SubMenu key="3" icon={<BarChartOutlined />} title="Attendance">
+              <Menu.Item key="6-1">
+                  <Link to="/attendence">Attendence Table</Link>
+                </Menu.Item>
+                <Menu.Item key="6-2">
+                  <Link to="/attendenceTracking">Attendence Details</Link>
+                </Menu.Item>
+              </SubMenu>
+              <Menu.Item key="4" icon={<CreditCardOutlined />} >
                 <Link to="/department">Department</Link>
               </Menu.Item>
               <Menu.Item key="5" icon={<CreditCardOutlined />}>

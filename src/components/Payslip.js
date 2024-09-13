@@ -1,265 +1,221 @@
 import React from "react";
 import { Row, Col } from "antd";
-import { Input } from 'antd';
 
-import InputField from "./InputField";
-
-const Payslip = () => {
-  const fakeData = {
-    name: "Faizan Haider",
-    designation: "UI/UX Designer",
-    doj: "July 18, 2022",
-    basicSalary: "24500.00",
-    transport: "2625.00",
-    medicalAllowance: "0.00",
-    housing: "2625.00",
-    meal: "0.00",
-    mobileAllowance: "0.00",
-    arrears: "0.00",
-    reward: "0.00",
-    eotm: "0.00",
-    bonus: "0.00",
-    incentive: "5250.00",
-    tax: "0.00",
-    providentFund: "1960.00",
-    advanceLoan: "0.00",
-    advanceSalaries: "0.00",
-    absent: "0.00",
-    lateDeductions: "500.00",
-    otherDeductions: "0.00",
+const PaySlip = () => {
+ 
+  const tdStyle = {
+    padding: "10px",
+    textAlign: "left",
+    borderBottom: "1px solid #ccc", // Only bottom line for row separation
   };
 
+  const tdRightStyle = {
+    ...tdStyle,
+    textAlign: "right",
+  };
+
+  const footerStyle = {
+    backgroundColor: "#4a4a4a",
+    padding: "10px",
+    color: "#fff",
+    fontWeight: "bold",
+  };
+
+  
+ 
   return (
-    <div style={{
-      border: "4px solid black",
-      maxWidth: "900px",
+    <div style={{  padding: "20px",
+      maxWidth: "800px",
       margin: "0 auto",
-      padding: "20px",
-    }}>
-      <Row style={{ borderBottom: "2px solid black", paddingBottom: "10px" }}>
+      backgroundColor: "#f8f8f8",
+      borderRadius: "10px",
+      border: "1px solid #e5e5e5",}}>
+
+      {/* Existing Content */}
+      {/* Header Row */}
+      <Row style={{ backgroundColor: "#4a4a4a",
+    padding: "20px",
+    color: "#fff",
+    borderRadius: "10px 10px 0 0",}}>
         <Col span={12}>
-          <h2>Payslip</h2>
+          <p>
+            Name: <strong>Name here</strong>
+          </p>
+          <p>
+            Designation: <strong>Game Developer</strong>
+          </p>
         </Col>
         <Col span={12} style={{ textAlign: "right" }}>
-          <h2>Salary Slip For August-2024</h2>
+          <p>
+            DOB: <strong>Oct 18, 2000</strong>
+          </p>
         </Col>
       </Row>
 
-      <Row style={{ borderBottom: "2px solid black", padding: "10px 0" }}>
-        <Col span={8}>
-          <strong>Name</strong>
-        </Col>
-        <Col span={16}>
-          <Input 
-            value={fakeData.name} 
-            disabled 
-            style={{
-              border: "none",
-              color: "black",
-              outline: "none",
-              boxShadow: "none",
-              backgroundColor: "transparent"
-            }}
-          />
-        </Col>
-        <Col span={8}>
-          <strong>Designation</strong>
-        </Col>
-        <Col span={16}>
-          <Input 
-            value={fakeData.designation} 
-            disabled 
-            style={{
-              border: "none",
-              outline: "none",
-              color: "black",
-              boxShadow: "none",
-              backgroundColor: "transparent"
-            }}
-          />
-        </Col>
-        <Col span={8}>
-          <strong>DOJ</strong>
-        </Col>
-        <Col span={16}>
-          <Input 
-            value={fakeData.doj} 
-            disabled 
-            style={{
-              border: "none",
-              outline: "none",
-              color: "black",
-              boxShadow: "none",
-              backgroundColor: "transparent"
-            }}
-          />
+      {/* Salary Distribution Header */}
+      <Row>
+        <Col span={24} style={{
+    padding: "10px 0",
+    textAlign: "center",
+    fontSize: "25px",
+    fontWeight: "bold",}}>
+          Salary Distribution
         </Col>
       </Row>
 
-      <Row style={{ padding: "10px 0" }}>
+      <Row>
         <Col span={24}>
-          <h3>Salary Distribution</h3>
-        </Col>
-        <Col span={24}>
-          <InputField 
-            label="BASIC SALARY" 
-            value={fakeData.basicSalary} 
-            currency 
-          />
-          <InputField 
-            label="TRANSPORT" 
-            value={fakeData.transport} 
-            currency 
-          />
-          <InputField 
-            label="MEDICAL ALLOWANCE" 
-            value={fakeData.medicalAllowance} 
-            currency 
-          />
-          <InputField 
-            label="HOUSING" 
-            value={fakeData.housing} 
-            currency 
-          />
-          <InputField 
-            label="MEAL" 
-            value={fakeData.meal} 
-            currency 
-          />
-          <InputField 
-            label="MOBILE ALLOWANCE" 
-            value={fakeData.mobileAllowance} 
-            currency 
-          />
-          <InputField 
-            label="ARREARS" 
-            value={fakeData.arrears} 
-            currency 
-          />
-          <InputField 
-            label="REWARD" 
-            value={fakeData.reward} 
-            currency 
-          />
-          <InputField 
-            label="E. O. T. M" 
-            value={fakeData.eotm} 
-            currency 
-          />
-          <InputField 
-            label="BONUS" 
-            value={fakeData.bonus} 
-            currency 
-          />
-          <InputField 
-            label="INCENTIVE" 
-            value={fakeData.incentive} 
-            currency 
-          />
-        </Col>
-      
-        <Col span={24} style={{ fontWeight:"600", padding: "10px 0", borderTop: "2px solid black" }}>
-          <InputField 
-            label="Total" 
-            value={
-              parseFloat(fakeData.basicSalary) + 
-              parseFloat(fakeData.transport) + 
-              parseFloat(fakeData.incentive) + 
-              parseFloat(fakeData.housing)
-            } 
-            currency
-          />
+          <table style={{ width: "100%",
+    borderCollapse: "collapse",
+    marginTop: "10px",}}>
+            <tbody>
+              <tr>
+                <td style={tdStyle}>BASIC SALARY</td>
+                <td style={tdRightStyle}>0.00</td>
+              </tr>
+              <tr>
+                <td style={tdStyle}>TRANSPORT</td>
+                <td style={tdRightStyle}>0.00</td>
+              </tr>
+              <tr>
+                <td style={tdStyle}>MEDICAL ALLOWANCE</td>
+                <td style={tdRightStyle}>0.00</td>
+              </tr>
+              <tr>
+                <td style={tdStyle}>HOUSING</td>
+                <td style={tdRightStyle}>0.00</td>
+              </tr>
+              <tr>
+                <td style={tdStyle}>MEAL</td>
+                <td style={tdRightStyle}>0.00</td>
+              </tr>
+              <tr>
+                <td style={tdStyle}>MOBILE ALLOWANCE</td>
+                <td style={tdRightStyle}>0.00</td>
+              </tr>
+              <tr>
+                <td style={tdStyle}>ARREARS</td>
+                <td style={tdRightStyle}>0.00</td>
+              </tr>
+              <tr>
+                <td style={tdStyle}>REWARD</td>
+                <td style={tdRightStyle}>0.00</td>
+              </tr>
+              <tr>
+                <td style={tdStyle}>E. O. T. M</td>
+                <td style={tdRightStyle}>0.00</td>
+              </tr>
+              <tr>
+                <td style={tdStyle}>BONUS</td>
+                <td style={tdRightStyle}>0.00</td>
+              </tr>
+              <tr>
+                <td style={tdStyle}>INCENTIVE</td>
+                <td style={tdRightStyle}>0.00</td>
+              </tr>
+            </tbody>
+          </table>
         </Col>
       </Row>
 
-      <Row style={{ padding: "10px 0", borderTop: "2px solid black", borderBottom: "2px solid black" }}>
-        <Col span={24}>
-          <h3>Deductions</h3>
-        </Col>
-        <Col span={24}>
-          <InputField 
-            label="TAX" 
-            value={fakeData.tax} 
-            disabled
-            currency 
-          />
-          <InputField 
-            label="PROVIDENT FUND" 
-            value={fakeData.providentFund} 
-            currency 
-          />
-          <InputField 
-            label="ADVANCE/LOAN" 
-            value={fakeData.advanceLoan} 
-            currency 
-          />
-          <InputField 
-            label="ADVANCE SALARIES" 
-            value={fakeData.advanceSalaries} 
-            currency 
-          />
-          <InputField 
-            label="ABSENT" 
-            value={fakeData.absent} 
-            currency 
-          />
-          <InputField 
-            label="LATE DEDUCTIONS" 
-            value={fakeData.lateDeductions} 
-            currency 
-          />
-          <InputField 
-            label="OTHER DEDUCTIONS" 
-            value={fakeData.otherDeductions} 
-            currency 
-          />
-        </Col>
-
-        <Col span={24} style={{ fontWeight:"500", padding: "10px 0", borderTop: "2px solid black" }}>
-          <InputField 
-            label="Total Deductions" 
-            value={
-              parseFloat(fakeData.providentFund) + 
-              parseFloat(fakeData.lateDeductions) + 
-              parseFloat(fakeData.tax) + 
-              parseFloat(fakeData.otherDeductions)
-            } 
-            currency
-          />
-        </Col>
-
-        <Col span={24} style={{ fontWeight:"600", padding: "10px 0", borderTop: "2px solid black" }}>
-          <InputField 
-            label="Net Payable" 
-            value={
-              (
-                parseFloat(fakeData.basicSalary) + 
-                parseFloat(fakeData.transport) + 
-                parseFloat(fakeData.incentive) + 
-                parseFloat(fakeData.housing)
-              ) - (
-                parseFloat(fakeData.providentFund) + 
-                parseFloat(fakeData.lateDeductions) + 
-                parseFloat(fakeData.tax) + 
-                parseFloat(fakeData.otherDeductions)
-              )
-            } 
-            currency
-          />
-        </Col>
-
-        <Col span={24} style={{ textAlign: "center", paddingTop: "20px" }}>
-          <strong>Amount In Words:</strong> Thirty-two thousand five forty eighty Rupees Only
+      {/* Footer Row */}
+      <Row>
+        <Col span={24} style={footerStyle}>
+          <Row>
+            <Col span={12}>Total</Col>
+            <Col span={12} style={{ textAlign: "right" }}>000.00</Col>
+          </Row>
         </Col>
       </Row>
 
-      <Row style={{ textAlign: "center", paddingTop: "20px" }}>
+      {/* Deductions Section */}
+      <Row>
+        <Col span={24} style={{
+    padding: "10px 0",
+    textAlign: "center",
+    fontSize: "25px",
+    fontWeight: "bold",}}>
+         Deductions
+        </Col>
+      </Row>
+
+      <Row>
         <Col span={24}>
-          The figures herein are generated electronically. Hence, they do not require a signature except for alterations.
+          <table style={{ width: "100%",
+    borderCollapse: "collapse",
+    marginTop: "10px",}}>
+            <tbody>
+              <tr>
+                <td style={tdStyle}>Tax</td>
+                <td style={tdRightStyle}>0.00</td>
+              </tr>
+              <tr>
+                <td style={tdStyle}>Provident Fund</td>
+                <td style={tdRightStyle}>0.00</td>
+              </tr>
+              <tr>
+                <td style={tdStyle}>Advance/Loan</td>
+                <td style={tdRightStyle}>0.00</td>
+              </tr>
+              <tr>
+                <td style={tdStyle}>Advance Salaries</td>
+                <td style={tdRightStyle}>0.00</td>
+              </tr>
+              <tr>
+                <td style={tdStyle}>Absent</td>
+                <td style={tdRightStyle}>0.00</td>
+              </tr>
+              <tr>
+                <td style={tdStyle}>Late Deductions</td>
+                <td style={tdRightStyle}>0.00</td>
+              </tr>
+              <tr>
+                <td style={tdStyle}>Other Deductions</td>
+                <td style={tdRightStyle}>0.00</td>
+              </tr>
+              <tr>
+                <td style={tdStyle}>Total Deductions</td>
+                <td style={tdRightStyle}>0.00</td>
+              </tr>
+        
+            </tbody>
+          </table>
+        </Col>
+      </Row>
+
+      {/* Footer Row */}
+      <Row>
+        <Col span={24} style={footerStyle}>
+          <Row>
+            <Col span={12}>Net Payable</Col>
+            <Col span={12} style={{ textAlign: "right" }}>000.00</Col>
+          </Row>
+        </Col>
+      </Row>
+
+      <Row>
+        <Col span={24} style={{ padding: "20px 0",
+    textAlign: "center",
+    fontSize: "21px",
+    fontWeight:"900",
+ }}>
+          Amount in Words
+          <div style={{ fontWeight: "normal", marginTop: "10px" }}>
+            Thirty two thousand five forty eighty Rupees Only
+          </div>
+        </Col>
+      </Row>
+
+      <Row>
+        <Col span={24} style={{  padding: "10px 0",
+    textAlign: "center",
+    fontSize: "16px",
+    color: "#666",}}>
+          The figures herein are generated electronically. Hence, does not require signature except for alteration.
         </Col>
       </Row>
     </div>
   );
 };
 
-export default Payslip;
+export default PaySlip;
