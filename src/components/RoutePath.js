@@ -15,6 +15,8 @@ import Attendence from '../Pages/Attendence';
 import Payment from '../Pages/Payment';
 import Department from '../Pages/Department';
 import UserdetailPage from '../Pages/UserdetailPage';
+import PageNotFoundError from './PageNotFoundError';
+import UserTable from './UserTable';
 
 const RoutePath = () => {
     return (
@@ -25,8 +27,10 @@ const RoutePath = () => {
             <Route path="/footer" element={<Footer />} />
             <Route path="/error" element={<Error />} />
             <Route path="/error403" element={<ErrorForbidden />} />
+            <Route path="/error404" element={<PageNotFoundError/>} />
             <Route path="/sentOtp" element={<ForgotPasswordOtp />} />
             <Route path="/forgetPassword" element={<ForgotPasswordOtp />} />
+            <Route path="/userTable" element={<UserTable/>} />
             <Route path="/userDetails" element={<UserdetailPage />} />
             <Route path="/company" element={<CompanyDetail />} />
             <Route path="/employeeAttendenceRecord" element={<EmployeeAttendenceTracking />} />

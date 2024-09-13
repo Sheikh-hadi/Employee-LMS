@@ -97,7 +97,7 @@ const App = () => {
               {/* Submenu for "User" */}
               <SubMenu key="6" icon={<UserOutlined />} title="User" >
                 <Menu.Item key="6-1">
-                  <Link to="/user">User Table</Link>
+                  <Link to="/userTable">User Table</Link>
                 </Menu.Item>
                 <Menu.Item key="6-2">
                   <Link to="/userDetails">User Details</Link>

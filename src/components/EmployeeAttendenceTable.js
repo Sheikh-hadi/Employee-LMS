@@ -1,9 +1,12 @@
 import React, { useState } from "react";
 import { Table, Tooltip, Input, Button, Modal, Form, InputNumber, Col, Row } from "antd";
 import { CalendarOutlined, ClockCircleOutlined, CheckCircleOutlined, SearchOutlined, PrinterOutlined } from "@ant-design/icons";
-import { employeesColumn } from "../models/employeeColumnModel";
 import { toWords } from "number-to-words";
+import { employeesColumn } from "../models/employeeColumnModel";
 import "../App.css";
+
+
+
 
 const EmployeeAttendenceTable = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -13,7 +16,6 @@ const EmployeeAttendenceTable = () => {
   const [form] = Form.useForm();
   const [fineForm] = Form.useForm();
 
-  // Handle search input change
   const handleSearch = (e) => {
     const value = e.target.value.toLowerCase();
     setSearchTerm(value);
@@ -25,22 +27,18 @@ const EmployeeAttendenceTable = () => {
     setFilteredData(filtered);
   };
 
-  // Handle Add button click
   const handleAddClick = () => {
     setIsModalVisible(true);
   };
 
-  // Handle Fine button click
   const handleFineClick = () => {
     setIsFineModalVisible(true);
   };
 
-  // Handle Modal OK click for Fine
   const handleFineOk = () => {
     fineForm.validateFields()
       .then((values) => {
         console.log('Fine values:', values);
-        // Handle fine logic here
         setIsFineModalVisible(false);
         fineForm.resetFields();
       })
@@ -49,12 +47,10 @@ const EmployeeAttendenceTable = () => {
       });
   };
 
-  // Handle Modal OK click
   const handleOk = () => {
     form.validateFields()
       .then((values) => {
         console.log('Form values:', values);
-        // Handle form submission logic here
         setIsModalVisible(false);
         form.resetFields();
       })
@@ -63,7 +59,6 @@ const EmployeeAttendenceTable = () => {
       });
   };
 
-  // Handle Modal Cancel click
   const handleCancel = () => {
     setIsModalVisible(false);
     form.resetFields();
@@ -86,17 +81,11 @@ const EmployeeAttendenceTable = () => {
       title: "Name",
       dataIndex: "name",
       key: "name",
-      render: (text, record) => {
-        return (
-          <Tooltip
-            color="blue"
-            placement="right"
-            title={`${record.firstName} ${record.lastName}`}
-          >
-            <span>{text}</span>
-          </Tooltip>
-        );
-      },
+      render: (text, record) => (
+        <Tooltip color="blue" placement="right" title={`${record.firstName} ${record.lastName}`}>
+          <span>{text}</span>
+        </Tooltip>
+      ),
     },
     {
       title: "Days",
@@ -104,38 +93,66 @@ const EmployeeAttendenceTable = () => {
       key: "days",
     },
     {
+      title: "Absent",
+      dataIndex: ["attendance", "absent"],
+      key: "absent",
+      render: (absent) => (
+        <span style={{ color: absent > 0 ? 'red' : 'grey' }}>
+          {absent}
+        </span>
+      ),
+    },
+    {
+      title: "Late",
+      dataIndex: ["attendance", "late"],
+      key: "late",
+      render: (late) => (
+        <span style={{ color: late > 0 ? 'magenta' : 'grey' }}>
+          {late}
+        </span>
+      ),
+    },
+    {
+      title: "Leave",
+      dataIndex: ["attendance", "leave"],
+      key: "leave",
+      render: (leave) => (
+        <span style={{ color: leave > 0 ? 'green' : 'grey' }}>
+          {leave}
+        </span>
+      ),
+    },
+    {
       title: "Attendance",
       key: "lateComings",
-      render: (text, record) => {
-        return (
-          <Tooltip
-            color="blue"
-            placement="right"
-            title={
-              <>
-                <p style={{ margin: 0 }}>Absent: {record.attendance.absent}</p>
-                <p style={{ margin: 0 }}>Late: {record.attendance.late}</p>
-                <p style={{ margin: 0 }}>Leave: {record.attendance.leave}</p>
-              </>
-            }
-          >
-            <div style={{ display: 'flex', alignItems: 'center' }}>
-              <div style={{ marginRight: 10, display: 'flex', alignItems: 'center' }}>
-                <CalendarOutlined style={{ color: record.attendance.absent > 0 ? 'red' : 'grey' }} />
-                <span style={{ marginLeft: 5 }}>{record.attendance.absent}</span>
-              </div>
-              <div style={{ marginRight: 10, display: 'flex', alignItems: 'center' }}>
-                <ClockCircleOutlined style={{ color: record.attendance.late > 0 ? 'magenta' : 'grey' }} />
-                <span style={{ marginLeft: 5 }}>{record.attendance.late}</span>
-              </div>
-              <div style={{ display: 'flex', alignItems: 'center' }}>
-                <CheckCircleOutlined style={{ color: record.attendance.leave > 0 ? 'green' : 'grey' }} />
-                <span style={{ marginLeft: 5 }}>{record.attendance.leave}</span>
-              </div>
+      render: (text, record) => (
+        <Tooltip
+          color="blue"
+          placement="right"
+          title={
+            <>
+              <p style={{ margin: 0 }}>Absent: {record.attendance.absent}</p>
+              <p style={{ margin: 0 }}>Late: {record.attendance.late}</p>
+              <p style={{ margin: 0 }}>Leave: {record.attendance.leave}</p>
+            </>
+          }
+        >
+          <div style={{ display: 'flex', alignItems: 'center' }}>
+            <div style={{ marginRight: 10, display: 'flex', alignItems: 'center' }}>
+              <CalendarOutlined style={{ color: record.attendance.absent > 0 ? 'red' : 'grey' }} />
+              <span style={{ marginLeft: 5 }}>{record.attendance.absent}</span>
             </div>
-          </Tooltip>
-        );
-      }
+            <div style={{ marginRight: 10, display: 'flex', alignItems: 'center' }}>
+              <ClockCircleOutlined style={{ color: record.attendance.late > 0 ? 'magenta' : 'grey' }} />
+              <span style={{ marginLeft: 5 }}>{record.attendance.late}</span>
+            </div>
+            <div style={{ display: 'flex', alignItems: 'center' }}>
+              <CheckCircleOutlined style={{ color: record.attendance.leave > 0 ? 'green' : 'grey' }} />
+              <span style={{ marginLeft: 5 }}>{record.attendance.leave}</span>
+            </div>
+          </div>
+        </Tooltip>
+      ),
     },
     {
       title: "Advance",
@@ -183,15 +200,15 @@ const EmployeeAttendenceTable = () => {
         return <span>{totalSalary}</span>;
       },
     },
-    {
-      title: "Payment In Words",
-      dataIndex: "paymentInWords",
-      key: "paymentInWords",
-      render: (text, record) => {
-        let salaryInWord = toWords(record.salary);
-        return <span>{salaryInWord.toUpperCase()}</span>;
-      },
-    },
+    // {
+    //   title: "Payment In Words",
+    //   dataIndex: "paymentInWords",
+    //   key: "paymentInWords",
+    //   render: (text, record) => {
+    //     let salaryInWord = toWords(record.salary);
+    //     return <span>{salaryInWord.toUpperCase()}</span>;
+    //   },
+    // },
     {
       title: "Print",
       key: "print",
@@ -211,40 +228,25 @@ const EmployeeAttendenceTable = () => {
             onChange={handleSearch}
           />
         </Col>
-
-        <Col span={7} offset={11}  >
-
+        <Col span={7} offset={11}>
           <Row gutter={16}>
             <Col span={8}>
-              <Button
-                block
-                type="primary"
-                onClick={handleFineClick}
-              >
+              <Button block type="primary" onClick={handleFineClick}>
                 Set Fine
               </Button>
             </Col>
             <Col span={8}>
-              <Button
-                block
-                type="primary"
-              >
-                Send Email
-              </Button>
+              <Button block type="primary">Send Email</Button>
             </Col>
-            <Col span={8} >
-              <Button
-                block
-                type="primary"
-                onClick={handleAddClick}
-              >
+            <Col span={8}>
+              <Button block type="primary" onClick={handleAddClick}>
                 Add
               </Button>
             </Col>
-
           </Row>
         </Col>
       </Row>
+
       {/* Employee Table */}
       <Table columns={columns} dataSource={filteredData} />
 
@@ -282,25 +284,11 @@ const EmployeeAttendenceTable = () => {
       >
         <Form form={fineForm} layout="vertical">
           <Form.Item
-            name="lateFine"
-            label="Late Fine"
-            rules={[{ required: true, message: 'Please enter the late fine!' }]}
+            name="fineAmount"
+            label="Fine Amount"
+            rules={[{ required: true, message: 'Please enter the fine amount!' }]}
           >
-            <InputNumber min={0} style={{ width: '100%' }} placeholder="Enter late fine" />
-          </Form.Item>
-          <Form.Item
-            name="absentFine"
-            label="Absent Fine"
-            rules={[{ required: true, message: 'Please enter the absent fine!' }]}
-          >
-            <InputNumber min={0} style={{ width: '100%' }} placeholder="Enter absent fine" />
-          </Form.Item>
-          <Form.Item
-            name="halfDayFine"
-            label="Half Day Fine"
-            rules={[{ required: true, message: 'Please enter the half-day fine!' }]}
-          >
-            <InputNumber min={0} style={{ width: '100%' }} placeholder="Enter half-day fine" />
+            <InputNumber min={0} style={{ width: '100%' }} placeholder="Enter fine amount" />
           </Form.Item>
         </Form>
       </Modal>
