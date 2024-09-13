@@ -20,7 +20,8 @@ import UserTable from './UserTable';
 
 const RoutePath = () => {
     return (
-        <Routes> {/* Wrap all routes in Routes */}
+        <Routes>
+            <Route path="*" element={<ErrorForbidden />} />
             <Route path="/salary" element={<SalaryForm />} />
             <Route path="/editForm" element={<EditEmployeeForm />} />
             <Route path="/header" element={<Header />} />
