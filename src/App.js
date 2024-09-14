@@ -7,6 +7,7 @@ import {
   UserOutlined,
   BarChartOutlined,
   DashboardOutlined,
+  LogoutOutlined,
 } from "@ant-design/icons";
 import { Button, Layout, Menu, theme } from "antd";
 import LoginPage from "./components/LoginPage";
@@ -14,16 +15,21 @@ import SignUpForm from "./components/SignUpForm";
 import ForgotPasswordOtp from "./components/ForgotPasswordOtp";
 import RoutePath from "./components/RoutePath";
 
-
 const { Sider, Content } = Layout;
-const { SubMenu } = Menu; // Importing SubMenu from Ant Design's Menu
+const { SubMenu } = Menu;
 
 const App = () => {
   const [collapsed, setCollapsed] = useState(false);
+  const [isLoggedOut, setIsLoggedOut] = useState(false);
 
   const {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
+
+  const handleLogout = () => {
+    setIsLoggedOut(true);
+    console.log('Logging out...');
+  };
 
   return (
     <Router>
@@ -107,6 +113,26 @@ const App = () => {
 
             <Menu.Item key="7" icon={<CreditCardOutlined />}>
               <Link to="/company">Company Details</Link>
+            </Menu.Item>
+
+            {/* Logout button at the bottom */}
+            <Menu.Item
+              key="8"
+              style={{
+                position: "absolute",
+                bottom: 0,
+                width: "90%",
+                backgroundColor: isLoggedOut ? "white" : "#02183d",
+                color: isLoggedOut ? "#02183d" : "white",
+                border: `2px solid ${isLoggedOut ? "#02183d" : "transparent"}`,
+                textAlign: "center",
+                cursor: "pointer",
+                display: collapsed ? "none" : "block", // Show only when not collapsed
+              }}
+              onClick={handleLogout}
+            >
+              <LogoutOutlined style={{ color: isLoggedOut ? "#02183d" : "white", marginRight: 8 }} />
+              {!collapsed && "Logout"} {}
             </Menu.Item>
           </Menu>
         </Sider>
