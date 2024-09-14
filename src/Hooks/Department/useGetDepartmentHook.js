@@ -2,8 +2,9 @@ import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 
 const useGetDepartment = () => {
+    console.log('useGetDepartment hook called');
     const fetchDepartment = async () => {
-        const response = await axios.get('http://localhost:4000/api/v1/department');
+        const response = await axios.get('http://localhost:4000/api/v1/department', { withCredentials: true });
         return response.data;
     };
 
