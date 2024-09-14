@@ -6,34 +6,37 @@ import { useNavigate } from 'react-router-dom';
 const ProtectLayes = ({ children }) => {
     const navigate = useNavigate();
     const [isAuthenticated, setIsAuthenticated] = useState(false);
-    console.log("isAuthenticated: ", isAuthenticated)
     const [loading, setLoading] = useState(true);
-
 
     useEffect(() => {
         const checkAuth = async () => {
             try {
                 // Make a request to the backend to check if the user is authenticated
-                await axios.get('/api/auth/check-auth');
+                const res = await axios.get('http://localhost:4000/api/v1/check-auth', { withCredentials: true }); // Ensure credentials are passed
+                console.log("res: ", res);
                 setIsAuthenticated(true);
+                console.log("isAuthenticated: ", isAuthenticated);
             } catch (error) {
                 setIsAuthenticated(false);
             } finally {
                 setLoading(false);
             }
         };
+
         checkAuth();
-    }, []);
+    }, [navigate]);
+
+    useEffect(() => {
+        if (!loading && !isAuthenticated) {
+            navigate('/login'); // Redirect to the login page if not authenticated
+        }
+    }, [loading, isAuthenticated, navigate]);
 
     if (loading) {
-        return <Skeleton/>; // Show a loading indicator while checking auth status
+        return <Skeleton />; // Show a loading indicator while checking auth status
     }
 
-    if (!isAuthenticated) {
-        return navigate('/login'); // Redirect to the login page if not authenticated
-    }
-
-    return <>{children}</>; // Render protected content if authenticated
+    return <>{isAuthenticated && children}</>; // Render protected content if authenticated
 };
 
 export default ProtectLayes;

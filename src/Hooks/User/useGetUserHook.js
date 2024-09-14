@@ -4,7 +4,7 @@ import axios from "axios";
 
 const useGetUser = () => {
     const fetchUser = ()=>{
-        const response = axios.get("http://localhost:4000/api/v1/user");
+        const response = axios.get("http://localhost:4000/api/v1/user", { withCredentials: true });
         return response.data;
     }
 

@@ -17,10 +17,11 @@ import Department from '../Pages/Department';
 import UserdetailPage from '../Pages/UserdetailPage';
 import PageNotFoundError from './PageNotFoundError';
 import UserTable from './UserTable';
+import ProtectLayes from './ProtectLayes';
 
 const RoutePath = () => {
     return (
-       
+       <ProtectLayes>
         <Routes>
             <Route path="*" element={<ErrorForbidden />} />
             <Route path="/salary" element={<SalaryForm />} />
@@ -43,6 +44,7 @@ const RoutePath = () => {
             <Route path="/payment" element={<Payment />} />
             <Route path="/department" element={<Department />} />
         </Routes>
+        </ProtectLayes>
     );
 };
 

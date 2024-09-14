@@ -6,9 +6,9 @@ import { notification } from 'antd';
 
 const useDeleteEmployee = () => {
     const queryClient = useQueryClient();
-    const deleteEmployee =  async (employeeID) => {
+    const deleteEmployee = async (employeeID) => {
         // Ensure the URL and method are correct
-        const { data } = await axios.delete(`http://localhost:4000/api/v1/employee/${employeeID}`);
+        const { data } = await axios.delete(`http://localhost:4000/api/v1/employee/${employeeID}`, { withCredentials: true });
         return data;
     }
 

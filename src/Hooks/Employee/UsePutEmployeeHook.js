@@ -11,6 +11,7 @@ const queryClient = useQueryClient();
             headers: {
                 "Content-Type": "application/json",
             },
+            withCredentials: true,
         });
         console.log("response: ", response);
         return response.data;
