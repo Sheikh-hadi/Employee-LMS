@@ -26,7 +26,7 @@ const RegeneratePasswordField = () => {
         }
       })
       .catch(() => {
-        // Handle form validation errors
+        
       });
   };
 
