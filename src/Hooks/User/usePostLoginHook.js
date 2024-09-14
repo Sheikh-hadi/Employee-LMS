@@ -13,7 +13,6 @@ const usePostLoginHook = () => {
                 // Enable sending cookies with the request
                 withCredentials: true,
             });
-            localStorage.setItem('accessToken', response.data.token);
             return response.data;
         } catch (error) {
             console.log("Error in loginUser:", error);

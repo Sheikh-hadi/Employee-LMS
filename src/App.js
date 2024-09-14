@@ -14,22 +14,20 @@ import LoginPage from "./components/LoginPage";
 import SignUpForm from "./components/SignUpForm";
 import ForgotPasswordOtp from "./components/ForgotPasswordOtp";
 import RoutePath from "./components/RoutePath";
+import useUserLogout from "./Hooks/User/useLogoutUserHook";
 
 const { Sider, Content } = Layout;
 const { SubMenu } = Menu;
 
 
 const App = () => {
+
+  const {mutate: logout} = useUserLogout()
   const [collapsed, setCollapsed] = useState(false);
   const [isLoggedOut, setIsLoggedOut] = useState(false);
   const {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
-
-  const handleLogout = () => {
-    setIsLoggedOut(true);
-    console.log('Logging out...');
-  };
 
   return (
     <Router>
@@ -129,7 +127,7 @@ const App = () => {
                 cursor: "pointer",
                 display: collapsed ? "none" : "block", // Show only when not collapsed
               }}
-              onClick={handleLogout}
+              onClick={()=>{logout()}}
             >
               <LogoutOutlined style={{ color: isLoggedOut ? "#02183d" : "white", marginRight: 8 }} />
               {!collapsed && "Logout"} {}
