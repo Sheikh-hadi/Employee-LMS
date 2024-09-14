@@ -18,6 +18,7 @@ import UserdetailPage from '../Pages/UserdetailPage';
 import PageNotFoundError from './PageNotFoundError';
 import UserTable from './UserTable';
 import ProtectLayes from './ProtectLayes';
+import RegeneratePasswordField from './RegeneratePasswordField';
 
 const RoutePath = () => {
     return (
@@ -35,6 +36,7 @@ const RoutePath = () => {
             <Route path="/sentOtp" element={<ForgotPasswordOtp />} />
             <Route path="/forgetPassword" element={<ForgotPasswordOtp />} />
             <Route path="/userTable" element={<UserTable/>} />
+            <Route path="/newPassword" element={<RegeneratePasswordField/>} />
             <Route path="/userDetails" element={<UserdetailPage />} />
             <Route path="/company" element={<CompanyDetail />} />
             <Route path="/employeeAttendenceRecord" element={<EmployeeAttendenceTracking />} />

@@ -50,7 +50,7 @@ const ForgotPasswordOtp = () => {
     console.log('Entered OTP:', otp.join(''));
     console.log('Phone Number:', phone);
     setTimerActive(false); // Stop the timer
-    navigate("/login"); // Navigate to login page after verification
+    navigate("/newPassword"); // Navigate to login page after verification
   };
 
   const handleResendOtp = () => {
