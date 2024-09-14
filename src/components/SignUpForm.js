@@ -1,9 +1,11 @@
 import React from 'react';
 import { Form, Input, Button, Typography, Row, Col } from 'antd';
+// import { useNavigate } from 'react-router-dom';
 import { MailOutlined, LockOutlined, UserOutlined } from '@ant-design/icons';
 import usePostRegisterUser from './../Hooks/User/usePostRegisterUser';
 
 const SignUpForm = () => {
+  // const Navigate=useNavigate()
   const { mutate: mutateSignUp } = usePostRegisterUser();
   const [form] = Form.useForm();
 
@@ -157,6 +159,7 @@ const SignUpForm = () => {
                   type="primary"
                   htmlType="submit"
                   block
+                  // onClick={()=>{Navigate("/login")}} 
                   style={{ backgroundColor: "darkslateblue", borderColor: "darkslateblue" }}
                 >
                   Sign Up

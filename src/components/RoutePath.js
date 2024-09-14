@@ -17,6 +17,7 @@ import Department from '../Pages/Department';
 import UserdetailPage from '../Pages/UserdetailPage';
 import PageNotFoundError from './PageNotFoundError';
 import UserTable from './UserTable';
+import GamePixelBanner from './GamePixelBanner';
 
 const RoutePath = () => {
     return (
@@ -24,6 +25,7 @@ const RoutePath = () => {
             <Route path="*" element={<ErrorForbidden />} />
             <Route path="/salary" element={<SalaryForm />} />
             <Route path="/editForm" element={<EditEmployeeForm />} />
+            <Route path="/banner" element={<GamePixelBanner/>} />
             <Route path="/header" element={<Header />} />
             <Route path="/footer" element={<Footer />} />
             <Route path="/error" element={<Error />} />
