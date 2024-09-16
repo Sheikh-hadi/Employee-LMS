@@ -1,6 +1,6 @@
 import React from "react";
-import EmployeeTable from "../components/EmployeeTable";
-import AddNewEmployee from "../components/AddNewEmployee";
+import EmployeeTable from "../components/EmployeeComponent/EmployeeTable";
+import AddNewEmployee from "../components/EmployeeComponent/AddNewEmployee";
 import { Skeleton } from "antd";
 import UseFetchEmployee from "../Hooks/Employee/UseFetchEmployeeHook";
 

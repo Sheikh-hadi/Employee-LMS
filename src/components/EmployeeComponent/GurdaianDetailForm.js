@@ -1,6 +1,6 @@
 import React from "react";
 import { Form, Input, Select } from "antd";
-import guardianRelationDropdownOption from "../models/gardianRealationDropdownModel";
+import guardianRelationDropdownOption from "../../models/gardianRealationDropdownModel";
 import { UserOutlined, PhoneOutlined, } from "@ant-design/icons";
 
 const GurdaianDetailForm = () => {

@@ -8,12 +8,12 @@ import {
   DollarOutlined,
   BankOutlined
 } from "@ant-design/icons";
-import genderDropdownOptions from "../models/genderDropdownModel";
+import genderDropdownOptions from "../../models/genderDropdownModel";
 // import employeeDepartmentDropdownOptions from "../models/employeeDapartmentModel";
-import booleanDropdownOptions from "../models/booleanDropdownModel";
-import guardianRelationDropdownOption from "../models/gardianRealationDropdownModel";
-import usePutEmployee from './../Hooks/Employee/UsePutEmployeeHook';
-import useGetDepartment from "../Hooks/Department/useGetDepartmentHook";
+import booleanDropdownOptions from "../../models/booleanDropdownModel";
+import guardianRelationDropdownOption from "../../models/gardianRealationDropdownModel";
+import usePutEmployee from '../../Hooks/Employee/UsePutEmployeeHook';
+import useGetDepartment from "../../Hooks/Department/useGetDepartmentHook";
 
 const { TextArea } = Input;
 const { Option } = Select;

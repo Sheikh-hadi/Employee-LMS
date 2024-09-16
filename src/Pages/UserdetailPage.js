@@ -7,7 +7,7 @@ const UserdetailPage = () => {
   return (
     <div>
       <UserDetails />
-      <PermissionsPage />
+      {/* <PermissionsPage /> */}
 
     </div>
   )

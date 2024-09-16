@@ -1,186 +1,49 @@
-import React, { useState } from 'react';
-import { Row, Col, Button, Switch, Modal, Input, Form } from 'antd';
-import { UserOutlined, PhoneOutlined, MailOutlined, HomeOutlined } from '@ant-design/icons';
-
+import React from 'react'
+import { Row, Col, Button, Image, Switch } from 'antd';
 const UserDetails = () => {
-  const [isModalVisible, setIsModalVisible] = useState(false); // State to control modal visibility
-  const [currentStep, setCurrentStep] = useState(1); // Step for the modal form
-  const [passwords, setPasswords] = useState({
-    oldPassword: '',
-    newPassword: '',
-    confirmPassword: ''
-  }); // State to store passwords
-
-  // Show modal when "Change Password" is clicked
-  const showModal = () => {
-    setIsModalVisible(true);
-  };
-
-  // Handle modal submit
-  const handleOk = () => {
-    if (currentStep === 1) {
-      if (!passwords.oldPassword) {
-        Modal.error({
-          title: 'Error',
-          content: 'Please enter your old password!',
-        });
-      } else {
-        // Go to next step (entering new password)
-        setCurrentStep(2);
-      }
-    } else if (currentStep === 2) {
-      const { newPassword, confirmPassword } = passwords;
-      if (!newPassword || !confirmPassword) {
-        Modal.error({
-          title: 'Error',
-          content: 'Please fill out both new password fields!',
-        });
-      } else if (newPassword !== confirmPassword) {
-        Modal.error({
-          title: 'Error',
-          content: 'Passwords do not match!',
-        });
-      } else {
-        // Success message
-        Modal.success({
-          title: 'Success',
-          content: 'Password changed successfully!',
-        });
-        setIsModalVisible(false); // Close modal
-        setPasswords({ oldPassword: '', newPassword: '', confirmPassword: '' }); // Reset fields
-        setCurrentStep(1); // Reset modal to step 1
-      }
-    }
-  };
-
-  // Handle cancellation of modal
-  const handleCancel = () => {
-    setIsModalVisible(false);
-    setPasswords({ oldPassword: '', newPassword: '', confirmPassword: '' });
-    setCurrentStep(1);
-  };
-
   return (
-    <div style={{ margin: '20px', padding: '20px', backgroundColor: '#fff', minHeight: '50vh' }}>
-      <Row justify="space-between" align="middle" style={{ marginBottom: '20px' }}>
-        <Col>
-          <h2><UserOutlined /> User Details</h2>
-        </Col>
-        <Col>
-          {/* Align buttons to the right with spacing between them */}
-          <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '10px' }}>
-            <Button type="primary" onClick={showModal}>
-              Change Password
-            </Button>
-            <Button type="primary">
-              Edit User
-            </Button>
-          </div>
-        </Col>
-      </Row>
-
-      <div style={{ backgroundColor: '#fff', padding: '20px', borderRadius: '10px' }}>
-        <Row gutter={[16, 16]} align="middle">
-          <Col xs={24} sm={6} md={4}>
-            <div style={{ textAlign: 'center' }}>
-              <img
-                src="https://via.placeholder.com/150"
-                alt="User Avatar"
-                style={{ borderRadius: '10px', width: '100%', maxWidth: '150px' }}
-              />
-            </div>
+    <>
+      <div>UserDetails</div>
+      <Row>
+        <Row gutter={[16, 16]} align={"middle"}>
+          <Col lg={12} style={{ border: "2px solid black",textAlign: "center", padding: "10px" }}>
+            <Image
+              width={200}
+              height={200}
+              src="error"
+              fallback="data:image/png;base64,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"
+            />
           </Col>
+          <Col lg={12}>
+            <Row align={"middle"} justify={"space-between"}>
+              <Col lg={7} style={{ border: "2px solid black", width: "100%" }}>
+                <p><strong>First Name</strong></p>
+                <p></p>
+              </Col>
+              <Col lg={7}>
+              <p><strong>Contact Number</strong></p>
+              <p></p>
+              </Col>
+              <Col lg={7}>
+              <p><strong>Email Address</strong></p>
+              <p></p>
+              </Col>
+              <Col lg={3}>
+              <Switch defaultChecked />
+              </Col>
 
-          <Col xs={24} sm={18} md={20}>
-            <div style={{ padding: '20px' }}>
-              <Row gutter={[16, 16]}>
-                <Col xs={24} sm={12} md={6}>
-                  <div>
-                    <span style={{ fontWeight: 'bold' }}>
-                      <UserOutlined style={{ marginRight: '10px' }} />
-                      Full Name
-                    </span>
-                    <p style={{ fontSize: '17px', color: '#666', marginTop: '10px' }}>Ankit Gupta</p>
-                  </div>
-                  <div>
-                    <HomeOutlined style={{ marginRight: '10px' }} />
-                    <span style={{ fontWeight: 'bold' }}>Address</span>
-                    <p>A-123, 10B scheme, Triveni, Jaipur, Rajasthan, India 302020</p>
-                  </div>
-                </Col>
-
-                <Col xs={24} sm={12} md={6}>
-                  <div>
-                    <span style={{ fontWeight: 'bold' }}>
-                      <PhoneOutlined style={{ marginRight: '10px' }} />
-                      Contact Number
-                    </span>
-                    <p>9887296522</p>
-                  </div>
-                </Col>
-
-                <Col xs={24} sm={12} md={6}>
-                  <div>
-                    <span style={{ fontWeight: 'bold' }}>
-                      <MailOutlined style={{ marginRight: '10px' }} />
-                      Email Address
-                    </span>
-                    <p>ankit@craxinno.com</p>
-                  </div>
-                </Col>
-
-                <Col xs={24} sm={12} md={6}>
-                  <div style={{ textAlign: 'right' }}>
-                    <span style={{ fontWeight: 'bold' }}>Status</span>
-                    <Switch defaultChecked style={{ marginLeft: '10px' }} />
-                  </div>
-                </Col>
-              </Row>
-            </div>
+            </Row>
+            <Row align={"middle"}>
+              <Col lg={24}>
+              <p>Address</p>
+              <p></p>
+              </Col>
+            </Row>
           </Col>
         </Row>
-      </div>
+      </Row>
+    </>
+  )
+}
 
-      {/* Modal for Change Password */}
-      <Modal
-        title={currentStep === 1 ? "Enter Old Password" : "Enter New Password"}
-        visible={isModalVisible}
-        onOk={handleOk}
-        onCancel={handleCancel}
-        okText="Submit"
-        cancelText="Cancel"
-      >
-        {currentStep === 1 ? (
-          <Form layout="vertical">
-            <Form.Item label="Old Password">
-              <Input.Password
-                value={passwords.oldPassword}
-                onChange={e => setPasswords({ ...passwords, oldPassword: e.target.value })}
-                placeholder="Enter your old password"
-              />
-            </Form.Item>
-          </Form>
-        ) : (
-          <Form layout="vertical">
-            <Form.Item label="New Password">
-              <Input.Password
-                value={passwords.newPassword}
-                onChange={e => setPasswords({ ...passwords, newPassword: e.target.value })}
-                placeholder="Enter new password"
-              />
-            </Form.Item>
-            <Form.Item label="Confirm Password">
-              <Input.Password
-                value={passwords.confirmPassword}
-                onChange={e => setPasswords({ ...passwords, confirmPassword: e.target.value })}
-                placeholder="Confirm new password"
-              />
-            </Form.Item>
-          </Form>
-        )}
-      </Modal>
-    </div>
-  );
-};
-
-export default UserDetails;
+export default UserDetails

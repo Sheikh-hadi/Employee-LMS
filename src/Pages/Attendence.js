@@ -1,5 +1,5 @@
 import React from 'react'
-import EmployeeAttendenceTable from '../components/EmployeeAttendenceTable'
+import EmployeeAttendenceTable from '../components/AttendenceComponent/EmployeeAttendenceTable'
 
 const Attendence = () => {
   return (

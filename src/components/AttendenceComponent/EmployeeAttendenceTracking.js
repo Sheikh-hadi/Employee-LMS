@@ -1,7 +1,7 @@
 import React, { memo, useMemo } from 'react';
 import { Card, Row, Col, Button } from 'antd';
 import { StarFilled, CheckCircleFilled } from '@ant-design/icons';
-import { users } from '../models/userTrackingModel';
+import { users } from '../../models/userTrackingModel';
 
 // Memoized UserCard component
 const UserCard = memo(({ user: { name, role, time, status, imageUrl, date } }) => {

@@ -90,7 +90,7 @@ const App = () => {
                 <Link to="/attendence">Attendence Table</Link>
               </Menu.Item>
               <Menu.Item key="3-2">
-                <Link to="/attendenceTracking">Attendence Details</Link>
+                <Link to="/employee-attendence-record">Attendence Details</Link>
               </Menu.Item>
             </SubMenu>
             <Menu.Item key="4" icon={<CreditCardOutlined />}>
@@ -102,10 +102,10 @@ const App = () => {
 
             <SubMenu key="6" icon={<UserOutlined />} title="User">
               <Menu.Item key="6-1">
-                <Link to="/userTable">User Table</Link>
+                <Link to="/user-table">User Table</Link>
               </Menu.Item>
               <Menu.Item key="6-2">
-                <Link to="/userDetails">User Details</Link>
+                <Link to="/user-details">User Details</Link>
               </Menu.Item>
             </SubMenu>
 

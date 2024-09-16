@@ -3,13 +3,13 @@ import axios from "axios";
 
 
 const useGetUser = () => {
-    const fetchUser = ()=>{
-        const response = axios.get("http://localhost:4000/api/v1/user", { withCredentials: true });
+    const fetchUser = async()=>{
+        const response = await axios.get("http://localhost:4000/api/v1/users", { withCredentials: true });
         return response.data;
     }
 
     return useQuery({
-        queryKey: ["user"],
+        queryKey: ["users"],
         queryFn: fetchUser,
         onSuccess: (data) => {
             console.log("data in UseFetch hook: ", data);

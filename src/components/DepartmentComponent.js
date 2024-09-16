@@ -20,10 +20,13 @@ const DepartmentComponent = ({ data }) => {
   // console.log("hanndleValue: ", handleValue);
   const columns = [
     {
-      title: "Sr",
-      dataIndex: "id",
-      key: "id",
-      width: "6%",
+      title: 'Sr.',
+      dataIndex: 'id',
+      key: 'id',
+      width: '10%',
+      render: (text, record, index) => (
+        <span style={{ fontWeight: "bold" }}>{`${index + 1}_`}</span>
+      ),
     },
     {
       title: (
@@ -111,28 +114,28 @@ const DepartmentComponent = ({ data }) => {
       </Modal>
 
       <Row align={"middle"}>
-      <Col
-  xs={24} // Full width on extra small devices (mobile)
-  sm={12} // Half width on small devices (tablets)
-  md={8}  // 1/3rd width on medium devices (small laptops)
-  lg={6}  // 1/4th width on large devices (desktops)
->
-  <Search
-    placeholder="input search text"
-    enterButton="Search"
-    onSearch={handleSearch}
-    onChange={(e) => handleSearch(e.target.value)}
-    allowClear
-    style={{
-      height: "50px",
-      fontSize: "16px",
-      marginLeft: "auto",
-      marginRight: "auto",
-      marginTop: "10px",
-      width: "100%", 
-    }}
-  />
-</Col>
+        <Col
+          xs={24} // Full width on extra small devices (mobile)
+          sm={12} // Half width on small devices (tablets)
+          md={8}  // 1/3rd width on medium devices (small laptops)
+          lg={6}  // 1/4th width on large devices (desktops)
+        >
+          <Search
+            placeholder="input search text"
+            enterButton="Search"
+            onSearch={handleSearch}
+            onChange={(e) => handleSearch(e.target.value)}
+            allowClear
+            style={{
+              height: "50px",
+              fontSize: "16px",
+              marginLeft: "auto",
+              marginRight: "auto",
+              marginTop: "10px",
+              width: "100%",
+            }}
+          />
+        </Col>
 
         <Col span={6} offset={11}>
           <AddNewDepartment />

@@ -8,9 +8,9 @@ import {
   DollarOutlined,
 } from "@ant-design/icons";
 import moment from "moment";
-import genderDropdownOptions from "../models/genderDropdownModel";
-import booleanDropdownOptions from "../models/booleanDropdownModel";
-import useGetDepartment from "../Hooks/Department/useGetDepartmentHook";
+import genderDropdownOptions from "../../models/genderDropdownModel";
+import booleanDropdownOptions from "../../models/booleanDropdownModel";
+import useGetDepartment from "../../Hooks/Department/useGetDepartmentHook";
 
 const { TextArea } = Input;
 const { Option } = Select;

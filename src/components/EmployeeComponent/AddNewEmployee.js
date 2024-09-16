@@ -4,7 +4,7 @@ import { UserAddOutlined, UserOutlined } from "@ant-design/icons";
 import EmployeeDetailForm from "./EmployeeDetailForm";
 import BankDetailForm from "./BankDetailForm";
 import GurdaianDetailForm from "./GurdaianDetailForm";
-import usePostEmployee from "../Hooks/Employee/UsePostEmployeehook";
+import usePostEmployee from "../../Hooks/Employee/UsePostEmployeehook";
 
 
 

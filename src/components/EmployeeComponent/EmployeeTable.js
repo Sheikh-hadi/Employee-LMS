@@ -6,8 +6,8 @@ import {
 } from "@ant-design/icons";
 import { toWords } from "number-to-words";
 import moment from "moment";
-import "../App.css";
-import UseDeleteEmployee from "../Hooks/Employee/UseDeleteEmployeeHook";
+import "../../App.css";
+import UseDeleteEmployee from "../../Hooks/Employee/UseDeleteEmployeeHook";
 import EditEmployeeForm from "./EditEmployeeForm";
 
 const { Search } = Input;
@@ -56,12 +56,12 @@ const EmployeeTable = ({ employees }) => {
 
   const columns = [
     {
-      title: "Sr.",
-      dataIndex: "id",
-      key: "id",
-      width: "1%",
-      render: (text) => (
-        <span style={{ fontWeight: "bold" }}>{`${text}_`} </span>
+      title: 'Sr.',
+      dataIndex: 'id',
+      key: 'id',
+      width: '10%',
+      render: (text, record, index) => (
+        <span style={{ fontWeight: "bold" }}>{`${index + 1}_`}</span>
       ),
     },
     {

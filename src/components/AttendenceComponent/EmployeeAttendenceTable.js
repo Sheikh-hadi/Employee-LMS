@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import { Table, Tooltip, Input, Button, Modal, Form, InputNumber, Col, Row } from "antd";
 import { CalendarOutlined, ClockCircleOutlined, CheckCircleOutlined, SearchOutlined, PrinterOutlined } from "@ant-design/icons";
-import { toWords } from "number-to-words";
-import { employeesColumn } from "../models/employeeColumnModel";
-import "../App.css";
+import { employeesColumn } from "../../models/employeeColumnModel";
+import "../../App.css";
 
 
 
@@ -70,12 +69,14 @@ const EmployeeAttendenceTable = () => {
   };
 
   const columns = [
-    {
-      title: "Sr.",
-      dataIndex: "id",
-      key: "id",
-      width: "1%",
-      render: (text) => <span style={{ fontWeight: "bold", }}>{`${text}_`} </span>,
+   {
+      title: 'Sr.',
+      dataIndex: 'id',
+      key: 'id',
+      width: '10%',
+      render: (text, record, index) => (
+        <span style={{ fontWeight: "bold" }}>{`${index + 1}_`}</span>
+      ),
     },
     {
       title: "Name",
@@ -278,7 +279,7 @@ const EmployeeAttendenceTable = () => {
       {/* Modal for Setting Fines */}
       <Modal
         title="Set Fines"
-        visible={isFineModalVisible}
+        open={isFineModalVisible}
         onOk={handleFineOk}
         onCancel={handleFineCancel}
       >
