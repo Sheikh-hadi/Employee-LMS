@@ -3,6 +3,7 @@ import { Table } from 'antd';
 import 'antd/dist/reset.css';
 import moment from 'moment';
 
+// Function to get color based on status
 const getStatusColor = (status) => {
   switch (status) {
     case 'Present':
@@ -18,22 +19,32 @@ const getStatusColor = (status) => {
   }
 };
 
+// Sample data with status for each employee (array length should match the number of days in the month)
 const data = [
   { fullname: 'John Doe', status: Array(31).fill('Present') },
   { fullname: 'Jane Smith', status: Array(31).fill('Absent') },
   { fullname: 'John Doe', status: Array(31).fill('Leave') },
   { fullname: 'Jane Smith', status: Array(31).fill('Late') },
+  // Add more employee data as needed
 ];
 
+// Get the current year, month, and formatted date using moment
 const currentYear = moment().year();
-const currentMonth = moment().month(); 
+const currentMonth = moment().month(); // 0-indexed (e.g., 8 for September)
+const currentMonthShortName = moment().format('MMM'); // Short month name (e.g., Sep for September)
 
-const daysInMonth = moment(`${currentYear}-${currentMonth + 1}`, 'YYYY-MM').daysInMonth(); 
+// Calculate the number of days in the current month
+const daysInMonth = moment(`${currentYear}-${currentMonth + 1}`, 'YYYY-MM').daysInMonth(); // +1 because month is 0-indexed
 
+// Generate column titles with formatted date for each day
 const dayColumns = Array.from({ length: daysInMonth }, (_, i) => {
   return {
-    title: `day ${i + 1}`, 
-    dataIndex: ['status', i], 
+    title: (
+      <div style={{ transform: 'rotate(90deg)', whiteSpace: 'nowrap', display: 'flex', alignItems: 'center' }}>
+        {`day ${i + 1}`}
+      </div>
+    ),
+    dataIndex: ['status', i], // Access each status by index
     key: `day-${i + 1}`,
     width: '3%',
     render: (status) => (
@@ -57,10 +68,10 @@ const dayColumns = Array.from({ length: daysInMonth }, (_, i) => {
   };
 });
 
-
+// Column configuration with sub-child for "Name"
 const columns = [
   {
-    title: 'Name', 
+    title: 'Name',
     key: 'name',
     width: '10%',
     children: [
@@ -73,10 +84,10 @@ const columns = [
     ],
   },
   {
-    title: `Attendance (${moment().format('MMMM')}- ${currentYear})`, 
+    title: `Attendance (${currentMonthShortName}-${currentYear})`, // Main title with short month-year
     key: 'attendance',
     width: '90%',
-    children: dayColumns, 
+    children: dayColumns, // Subtitles with detailed day-MMM-year format
   },
 ];
 
@@ -87,7 +98,7 @@ const AttendanceTable = () => {
       dataSource={data}
       pagination={false}
       rowKey="fullname"
-      scroll={{ x: 1500 }}
+      scroll={{ x: 1500 }} // Adjust as needed
     />
   );
 };
