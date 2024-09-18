@@ -27,14 +27,12 @@ const data = [
 
 const currentYear = moment().year();
 const currentMonth = moment().month(); 
-const currentMonthShortName = moment().format('MMM'); 
 
 const daysInMonth = moment(`${currentYear}-${currentMonth + 1}`, 'YYYY-MM').daysInMonth(); 
 
 const dayColumns = Array.from({ length: daysInMonth }, (_, i) => {
-  const dayDate = moment().date(i + 1).format('D');
   return {
-    title: `${dayDate}-${currentMonthShortName}`, 
+    title: `day ${i + 1}`, 
     dataIndex: ['status', i], 
     key: `day-${i + 1}`,
     width: '3%',
@@ -89,7 +87,7 @@ const AttendanceTable = () => {
       dataSource={data}
       pagination={false}
       rowKey="fullname"
-      scroll={{ x: 1500 }} 
+      scroll={{ x: 1500 }}
     />
   );
 };
