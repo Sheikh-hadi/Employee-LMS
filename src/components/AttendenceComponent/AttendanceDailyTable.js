@@ -38,27 +38,99 @@ const daysInMonth = moment(`${currentYear}-${currentMonth + 1}`, 'YYYY-MM').days
 const dayColumns = Array.from({ length: daysInMonth }, (_, i) => {
   const date = moment(`${currentYear}-${currentMonth + 1}-${i + 1}`, 'YYYY-MM-DD');
   const isWeekend = date.day() === 6 || date.day() === 0;
+  const isSaturday = date.day() === 6;
+  const isSunday = date.day() === 0;
 
   // Determine the day abbreviation
-  const dayAbbreviation = date.day() === 0 ? 'Sun' : date.day() === 6 ? 'Sat' : `Day ${i + 1}`;
+  const dayAbbreviation = isSunday ? 'Sun' : isSaturday ? 'Sat' : `Day ${i + 1}`;
 
   return {
     title: (
       <div
         style={{
-
           whiteSpace: 'nowrap',
         }}
       >
         {dayAbbreviation}
       </div>
-       
     ),
     dataIndex: ['status', i],
     key: `day-${i + 1}`,
     width: '6%',
     render: (status) => {
-      return isWeekend ? '' : (
+      // Always show "OFF" on Sundays
+      if (isSunday) {
+        return (
+          <div
+            style={{
+              width: '20px',
+              height: '20px',
+              borderRadius: '50%',
+              backgroundColor: '#FAFAD2',  // Light Goldenrod Yellow
+              color: '#708090',            // Slate Grey
+              
+              display: 'inline-flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              fontSize: '12px',
+              fontWeight: 'bold',
+            }}
+          >
+            OFF
+          </div>
+        );
+      }
+
+      // Alternate "ON" and "OFF" for Saturdays
+      if (isSaturday) {
+        const isEvenSaturday = Math.floor(i / 7) % 2 === 0; // Alternating Saturdays
+
+        if (isEvenSaturday) {
+          // Show status on even Saturdays (like normal weekdays)
+          return (
+            <div
+              style={{
+                width: '20px',
+                height: '20px',
+                borderRadius: '50%',
+                backgroundColor: getStatusColor(status),
+                display: 'inline-flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                color: 'white',
+                fontSize: '12px',
+                fontWeight: 'bold',
+              }}
+            >
+              {status.charAt(0)}
+            </div>
+          );
+        } else {
+          // Show "OFF" on odd Saturdays 
+          return (
+            <div
+              style={{
+                width: '22px',
+                height: '20px',
+                borderRadius: '50%',
+                backgroundColor: '#D8BFD8',  // Thistle Purple
+                color: '#F8F8FF',            // Ghost White
+                display: 'inline-flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+              
+                fontSize: '10px',
+                fontWeight: 'bold',
+              }}
+            >
+              OFF
+            </div>
+          );
+        }
+      }
+
+      // Show normal status for weekdays
+      return (
         <div
           style={{
             width: '20px',
@@ -102,15 +174,16 @@ const columns = [
     children: dayColumns,
   },
   {
-    title: (<div
-      style={{
-
-        whiteSpace: 'nowrap',
-      }}
-    >
-      Percentage %
-    </div>),
-    key: 'perccentage',
+    title: (
+      <div
+        style={{
+          whiteSpace: 'nowrap',
+        }}
+      >
+        Percentage %
+      </div>
+    ),
+    key: 'percentage',
     width: '5%',
   },
 ];
