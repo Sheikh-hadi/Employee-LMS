@@ -1,53 +1,97 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import dayjs from 'dayjs';
+import React from 'react';
+import { Table } from 'antd';
+import 'antd/dist/reset.css';
+import moment from 'moment';
 
-const HolidayChecker = () => {
-  const [holidays, setHolidays] = useState([]);
-  const [currentDate, setCurrentDate] = useState(dayjs().format('YYYY-MM-DD'));
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+const getStatusColor = (status) => {
+  switch (status) {
+    case 'Present':
+      return 'green';
+    case 'Absent':
+      return 'red';
+    case 'Leave':
+      return 'blue';
+    case 'Late':
+      return 'orange';
+    default:
+      return 'grey';
+  }
+};
 
-  useEffect(() => {
-    const fetchHolidays = async () => {
-      try {
-        setLoading(true);
-        // Replace with your actual API endpoint
-        const response = await axios.get('https://example.com/api/holidays', {
-          params: { country: 'PK', year: dayjs().year() }
-        });
-        setHolidays(response.data.holidays);
-      } catch (err) {
-        setError(err.message);
-      } finally {
-        setLoading(false);
-      }
-    };
+const data = [
+  { fullname: 'John Doe', status: Array(31).fill('Present') },
+  { fullname: 'Jane Smith', status: Array(31).fill('Absent') },
+  { fullname: 'John Doe', status: Array(31).fill('Leave') },
+  { fullname: 'Jane Smith', status: Array(31).fill('Late') },
+];
 
-    fetchHolidays();
-  }, []);
+const currentYear = moment().year();
+const currentMonth = moment().month(); 
+const currentMonthShortName = moment().format('MMM'); 
 
-  const isHolidayToday = holidays.some(holiday => holiday.date === currentDate);
+const daysInMonth = moment(`${currentYear}-${currentMonth + 1}`, 'YYYY-MM').daysInMonth(); 
 
-  if (loading) return <p>Loading holidays...</p>;
-  if (error) return <p>Error fetching holidays: {error}</p>;
+const dayColumns = Array.from({ length: daysInMonth }, (_, i) => {
+  const dayDate = moment().date(i + 1).format('D');
+  return {
+    title: `${dayDate}-${currentMonthShortName}`, 
+    dataIndex: ['status', i], 
+    key: `day-${i + 1}`,
+    width: '3%',
+    render: (status) => (
+      <div
+        style={{
+          width: '20px',
+          height: '20px',
+          borderRadius: '50%',
+          backgroundColor: getStatusColor(status),
+          display: 'inline-flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          color: 'white',
+          fontSize: '12px',
+          fontWeight: 'bold',
+        }}
+      >
+        {status.charAt(0)}
+      </div>
+    ),
+  };
+});
 
+
+const columns = [
+  {
+    title: 'Name', 
+    key: 'name',
+    width: '10%',
+    children: [
+      {
+        title: 'Employee',
+        dataIndex: 'fullname',
+        key: 'fullname',
+        width: '100%',
+      },
+    ],
+  },
+  {
+    title: `Attendance (${moment().format('MMMM')}- ${currentYear})`, 
+    key: 'attendance',
+    width: '90%',
+    children: dayColumns, 
+  },
+];
+
+const AttendanceTable = () => {
   return (
-    <div>
-      <h1>Holiday Checker</h1>
-      <h2>Holidays in Pakistan for {dayjs().year()}</h2>
-      <ul>
-        {holidays.map((holiday, index) => (
-          <li key={index}>
-            {holiday.date} - {holiday.name}
-          </li>
-        ))}
-      </ul>
-      <p>
-        {isHolidayToday ? 'Today is a holiday!' : 'Today is not a holiday.'}
-      </p>
-    </div>
+    <Table
+      columns={columns}
+      dataSource={data}
+      pagination={false}
+      rowKey="fullname"
+      scroll={{ x: 1500 }} 
+    />
   );
 };
 
-export default HolidayChecker;
+export default AttendanceTable;
