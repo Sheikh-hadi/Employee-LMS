@@ -68,7 +68,6 @@ const dayColumns = Array.from({ length: daysInMonth }, (_, i) => {
               borderRadius: '50%',
               backgroundColor: '#FAFAD2',  // Light Goldenrod Yellow
               color: '#708090',            // Slate Grey
-              
               display: 'inline-flex',
               alignItems: 'center',
               justifyContent: 'center',
