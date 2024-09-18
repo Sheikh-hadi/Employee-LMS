@@ -3,7 +3,8 @@ import axios from "axios";
 import { message } from "antd";
 import { useNavigate } from "react-router-dom"; // Use useNavigate hook
 
-const usePostLoginHook = () => {
+const usePostLoginHook = (formData) => {
+    console.log("formData in usePostLoginHook:", formData);
     const queryClient = useQueryClient();
     const navigate = useNavigate(); // Get navigate function
 
@@ -24,11 +25,11 @@ const usePostLoginHook = () => {
         mutationFn: loginUser,
         onSuccess: (data) => {
             console.log("data in onSuccess: ", data);
+            navigate("/");
             message.success("User Login Successfully");
 
-            // Navigate to homepage after success
-            navigate("/");
         },
+
 
         onError: (error) => {
             console.log("Error in onError:", error);

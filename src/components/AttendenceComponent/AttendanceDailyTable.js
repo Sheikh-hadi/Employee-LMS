@@ -29,56 +29,60 @@ const data = [
 
 // Get the current year and month
 const currentYear = moment().year();
-const currentMonth = moment().month(); 
+const currentMonth = moment().month();
 
 // Calculate the number of days in the current month
-const daysInMonth = moment(`${currentYear}-${currentMonth + 1}`, 'YYYY-MM').daysInMonth(); 
+const daysInMonth = moment(`${currentYear}-${currentMonth + 1}`, 'YYYY-MM').daysInMonth();
 
 // Generate column titles for each day
 const dayColumns = Array.from({ length: daysInMonth }, (_, i) => {
+  const date = moment(`${currentYear}-${currentMonth + 1}-${i + 1}`, 'YYYY-MM-DD');
+  const isWeekend = date.day() === 6 || date.day() === 0;
+
+  // Determine the day abbreviation
+  const dayAbbreviation = date.day() === 0 ? 'Sun' : date.day() === 6 ? 'Sat' : `Day ${i + 1}`;
+
   return {
     title: (
       <div
         style={{
-         
-          transformOrigin: 'left bottom',
+
           whiteSpace: 'nowrap',
-          display: 'flex',
-          alignItems: 'center',
-          height: '100%',
         }}
       >
-        {`Day ${i + 1}`}
+        {dayAbbreviation}
       </div>
     ),
-    dataIndex: ['status', i], 
+    dataIndex: ['status', i],
     key: `day-${i + 1}`,
     width: '6%',
-    render: (status) => (
-      <div
-        style={{
-          width: '20px',
-          height: '20px',
-          borderRadius: '50%',
-          backgroundColor: getStatusColor(status),
-          display: 'inline-flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          color: 'white',
-          fontSize: '12px',
-          fontWeight: 'bold',
-        }}
-      >
-        {status.charAt(0)}
-      </div>
-    ),
+    render: (status) => {
+      return isWeekend ? '' : (
+        <div
+          style={{
+            width: '20px',
+            height: '20px',
+            borderRadius: '50%',
+            backgroundColor: getStatusColor(status),
+            display: 'inline-flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            color: 'white',
+            fontSize: '12px',
+            fontWeight: 'bold',
+          }}
+        >
+          {status.charAt(0)}
+        </div>
+      );
+    },
   };
 });
 
 // Column configuration
 const columns = [
   {
-    title: 'Name', 
+    title: 'Name',
     key: 'name',
     width: '10%',
     children: [
@@ -91,10 +95,22 @@ const columns = [
     ],
   },
   {
-    title: `Attendance (${moment().format('MMM')} ${currentYear})`, 
+    title: `Attendance (${moment().format('MMM')} ${currentYear})`,
     key: 'attendance',
-    width: '90%',
-    children: dayColumns, 
+    width: '50%',
+    children: dayColumns,
+  },
+  {
+    title: (<div
+      style={{
+
+        whiteSpace: 'nowrap',
+      }}
+    >
+      Percentage %
+    </div>),
+    key: 'perccentage',
+    width: '5%',
   },
 ];
 

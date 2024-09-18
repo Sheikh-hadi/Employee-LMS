@@ -5,8 +5,9 @@ import { MailOutlined, LockOutlined } from '@ant-design/icons';
 import usePostLoginHook from '../Hooks/UserHook/usePostLoginHook';
 
 const LoginPage = () => {
+  const [form] = Form.useForm();
   const Navigate=useNavigate()
-  const {mutate: mutateSCignIn} = usePostLoginHook();
+  const {mutate: mutateSCignIn} = usePostLoginHook(form);
   const onFinish = (values) => {
     console.log('Success:', values);
     mutateSCignIn(values);
@@ -115,6 +116,7 @@ const LoginPage = () => {
           </Typography.Title>
 
           <Form
+          form={form}
             name="basic"
             initialValues={{ remember: true }}
             onFinish={onFinish}

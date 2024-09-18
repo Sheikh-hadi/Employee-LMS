@@ -13,7 +13,7 @@ const ProtectLayes = ({ children }) => {
             try {
                 // Make a request to the backend to check if the user is authenticated
                 const res = await axios.get('http://localhost:4000/api/v1/check-auth', { withCredentials: true }); 
-                // console.log("res: ", res);
+                console.log("res: ", res);
                 setIsAuthenticated(true);
                 // console.log("isAuthenticated: ", isAuthenticated);
             } catch (error) {
