@@ -14,7 +14,7 @@ import LoginPage from "./components/LoginPage";
 import SignUpForm from "./components/SignUpForm";
 import ForgotPasswordOtp from "./components/ForgotPasswordOtp";
 import RoutePath from "./components/RoutePath";
-import useUserLogout from "./Hooks/User/useLogoutUserHook";
+import useUserLogout from "./Hooks/UserHook/useLogoutUserHook";
 
 const { Sider, Content } = Layout;
 const { SubMenu } = Menu;
@@ -91,6 +91,9 @@ const App = () => {
               </Menu.Item>
               <Menu.Item key="3-2">
                 <Link to="/employee-attendence-record">Attendence Details</Link>
+              </Menu.Item>
+              <Menu.Item key="3-4">
+                <Link to="/employee-attendence-monthly-record">Attendence Record</Link>
               </Menu.Item>
             </SubMenu>
             <Menu.Item key="4" icon={<CreditCardOutlined />}>

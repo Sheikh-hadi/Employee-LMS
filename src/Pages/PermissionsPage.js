@@ -1,82 +1,95 @@
-import React, { useState } from 'react';
-import { Row, Col, Checkbox, Button } from 'antd';
-
-import EmployeeAccess from '../components/Permissions/EmployeeAccess';
-import UserAccess from '../components/Permissions/UserAccess';
+import { Checkbox, Col, Row, Card, Form, Button } from 'antd';
+import React from 'react';
 
 const PermissionsPage = () => {
-  // State to track the "Full Permission" checkbox
-  const [fullPermission, setFullPermission] = useState(false);
+  const [form] = Form.useForm();
 
-  // State to track individual permissions for Employee and User access
-  const [employeePermissions, setEmployeePermissions] = useState({
-    editEmployee: false,
-    createEmployee: false,
-    deleteEmployee: false,
-    updateEmployee: false,
-  });
-
-  const [userPermissions, setUserPermissions] = useState({
-    editUser: false,
-    createUser: false,
-    deleteUser: false,
-    updateUser: false,
-  });
-
-  // Handle the Full Permission checkbox change
-  const handleFullPermissionChange = (e) => {
-    const { checked } = e.target;
-    setFullPermission(checked);
-
-    // Update all checkboxes in EmployeeAccess and UserAccess
-    setEmployeePermissions({
-      editEmployee: checked,
-      createEmployee: checked,
-      deleteEmployee: checked,
-      updateEmployee: checked,
-    });
-
-    setUserPermissions({
-      editUser: checked,
-      createUser: checked,
-      deleteUser: checked,
-      updateUser: checked,
+  // Handler for the Permissions checkbox
+  const onChangePermission = (e) => {
+    const checked = e.target.checked;
+    // Update the form with the checked status for all permissions
+    form.setFieldsValue({
+      employeeCreate: checked,
+      employeeEdit: checked,
+      employeeDelete: checked,
+      employeeView: checked,
+      employeePermissions: checked,
     });
   };
 
+  const onChangePermissionemployee = (e) => {
+    const checked = e.target.checked;
+    // Update the form with the checked status for all permissions
+    form.setFieldsValue({
+      employeeCreate: checked,
+      employeeEdit: checked,
+      employeeDelete: checked,
+      employeeView: checked,
+    });
+  };
+
+  // When the form is submitted
+  const onFinish = (values) => {
+    console.log('Success:', values);
+  };
+
+  // When the form submission fails
+  const onFinishFailed = (errorInfo) => {
+    console.log('Failed:', errorInfo);
+  };
+
   return (
-    <div style={{ padding: '250px', backgroundColor: '#fff', marginTop: '-350px' }}>  
-      <h2 style={{ fontSize: '24px', fontWeight: 'bold' }}>Permission</h2>
-
-      {/* Full Permission Checkbox */}
-      <Checkbox
-        style={{ marginBottom: '20px' }}
-        checked={fullPermission}
-        onChange={handleFullPermissionChange}
+    <>
+      {/* Checkbox to control all permissions */}
+      <Checkbox onChange={onChangePermission}>Permissions</Checkbox>
+      <Form
+        form={form}
+        name="permissionsForm"
+        layout="horizontal"
+        labelCol={{ span: 24 }}
+        wrapperCol={{ span: 24 }}
+        onFinish={onFinish}
+        onFinishFailed={onFinishFailed}
+        scrollToFirstError={true}
       >
-        Full Permission
-      </Checkbox>
+        <Row>
 
-      {/* Grid Layout for Access Permissions */}
-      <Row gutter={[24, 24]}>
-        <Col xs={24} sm={12} md={6}>
-          {/* EmployeeAccess Component */}
-          <EmployeeAccess
-            permissions={employeePermissions}
-            setPermissions={setEmployeePermissions}
-          />
-        </Col>
-        <Col xs={24} sm={12} md={6}>
-          {/* UserAccess Component */}
-          <UserAccess
-            permissions={userPermissions}
-            setPermissions={setUserPermissions}
-          />
-        </Col>
-      </Row>
+          <Col span={12}>
+            <Card
+              title={
+                <Form.Item name="employeePermissions" valuePropName='checked'>
+                  <Checkbox onChange={onChangePermissionemployee}>Employee Permissions</Checkbox>
+                </Form.Item>
+              }
+              style={{ width: 300 }}
+            >
+              <Form.Item name="employeeCreate" valuePropName="checked">
+                <Checkbox>Create Employee</Checkbox>
+              </Form.Item>
 
-  
-    </div>
+              <Form.Item name="employeeEdit" valuePropName="checked">
+                <Checkbox>Edit Employee</Checkbox>
+              </Form.Item>
+
+              <Form.Item name="employeeDelete" valuePropName="checked">
+                <Checkbox>Delete Employee</Checkbox>
+              </Form.Item>
+
+              <Form.Item name="employeeView" valuePropName="checked">
+                <Checkbox>View Employee</Checkbox>
+              </Form.Item>
+            </Card>
+          </Col>
+        </Row>
+        <Row justify={"end"}>
+          <Form.Item>
+            <Button type="primary" htmlType="submit">
+              Submit
+            </Button>
+          </Form.Item>
+        </Row>
+      </Form>
+    </>
   );
 };
 

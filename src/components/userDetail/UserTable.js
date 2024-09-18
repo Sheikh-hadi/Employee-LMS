@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { Table, Switch, Button, Row, Col, Modal, Form, Input } from 'antd';
 import moment from 'moment';
 import { useNavigate } from 'react-router-dom';
+
+const { TextArea } = Input;
 const UserTable = ({ user }) => {
   const navigate = useNavigate();
   const [userState, setUserState] = useState(
@@ -127,16 +129,19 @@ const UserTable = ({ user }) => {
       />
 
       <Modal
+        style={{ position: "absolute", top: 0, right: 0 }}
         title={"Add New User"}
         open={userState.model}
         onOk={() => setUserState({
           detail: null,
-          model: false
+          model: false,
         })}
         onCancel={() => setUserState({
           detail: null,
           model: false
         })}
+        width={"31%"}
+
         footer={null}
       >
         <Form
@@ -146,6 +151,11 @@ const UserTable = ({ user }) => {
           onFinishFailed={onFinishFailed}
           autoComplete="off"
         >
+           <Form.Item>
+            <Button type="primary" htmlType="submit">
+              Submit
+            </Button>
+          </Form.Item>
           <Form.Item
             label="Name"
             name="fullName"
@@ -164,7 +174,6 @@ const UserTable = ({ user }) => {
             rules={[
               { required: true, message: 'Please input the username!' },
               { min: 6, message: 'Username must be at least 6 characters long!' },
-              { pattern: /^[a-zA-Z0-9]+$/, message: 'Username can only contain letters and numbers!' },
             ]}
           >
             <Input placeholder="Enter username" allowClear />
@@ -199,10 +208,15 @@ const UserTable = ({ user }) => {
           >
             <Input placeholder="Enter contact number" allowClear maxLength={11} />
           </Form.Item>
-          <Form.Item>
-            <Button type="primary" htmlType="submit">
-              Submit
-            </Button>
+          <Form.Item
+            label="Address"
+            name="address"
+            hasFeedback
+            rules={[
+              { required: true, message: 'Please input the address!' },
+            ]}
+          >
+            <TextArea placeholder="Enter address" allowClear />
           </Form.Item>
         </Form>
       </Modal>

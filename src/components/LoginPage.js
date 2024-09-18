@@ -2,7 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Form, Input, Button, Checkbox, Typography, message, Row, Col } from 'antd';
 import { MailOutlined, LockOutlined } from '@ant-design/icons';
-import usePostLoginHook from '../Hooks/User/usePostLoginHook';
+import usePostLoginHook from '../Hooks/UserHook/usePostLoginHook';
 
 const LoginPage = () => {
   const Navigate=useNavigate()

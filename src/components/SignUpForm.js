@@ -2,7 +2,7 @@ import React from 'react';
 import { Form, Input, Button, Typography, Row, Col } from 'antd';
 // import { useNavigate } from 'react-router-dom';
 import { MailOutlined, LockOutlined, UserOutlined } from '@ant-design/icons';
-import usePostRegisterUser from './../Hooks/User/usePostRegisterUser';
+import usePostRegisterUser from '../Hooks/UserHook/usePostRegisterUser';
 
 const SignUpForm = () => {
   // const Navigate=useNavigate()
