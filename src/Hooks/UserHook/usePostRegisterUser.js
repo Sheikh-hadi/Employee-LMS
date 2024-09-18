@@ -9,7 +9,7 @@ const usePostLoginHook = () => {
 
     const loginUser = async (values) => {
         try {
-            const response = await axios.post("http://localhost:4000/api/v1/users/login", values,{ withCredentials: true });
+            const response = await axios.post("http://localhost:4000/api/v1/users/register", values,{ withCredentials: true });
             localStorage.setItem('accessToken', response.data.token);
             return response.data;
         } catch (error) {
@@ -22,7 +22,7 @@ const usePostLoginHook = () => {
         mutationFn: loginUser,
         onSuccess: (data) => {
             console.log("data in onSuccess: ", data);
-            message.success("User Login Successfully");
+            message.success("User register Successfully");
 
             // Navigate to homepage after success
             navigate("/");
@@ -30,7 +30,7 @@ const usePostLoginHook = () => {
 
         onError: (error) => {
             console.log("Error in onError:", error);
-            message.error(error?.response?.data?.message || "User Login Failed");
+            message.error(error?.response?.data?.message || "User register Failed");
         },
     });
 };
