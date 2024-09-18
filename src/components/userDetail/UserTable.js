@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Table, Switch, Button, Row, Col, Modal, Form, Input,  } from 'antd';
+import { Table, Switch, Button, Row, Col, Modal, Form, Input, Checkbox } from 'antd';
 import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
 import moment from 'moment';
 import { useNavigate } from 'react-router-dom';
@@ -239,6 +239,23 @@ const UserTable = ({ user }) => {
           >
             <TextArea placeholder="Enter address" allowClear />
           </Form.Item>
+          <Form.Item label="Roles">
+                        <Row>
+                            <Col span={6}>
+                                <Checkbox value="edit">Edit </Checkbox>
+                            </Col>
+                            <Col span={6}>
+                                <Checkbox value="delete">Delete </Checkbox>
+                            </Col>
+                            <Col span={6}>
+                                <Checkbox value="update">Update </Checkbox>
+                            </Col>
+                            <Col span={6}>
+                                <Checkbox value="createEmployee">Create </Checkbox>
+                            </Col>
+                        </Row>
+                    </Form.Item>
+
         </Form>
       </Modal>
     </div>

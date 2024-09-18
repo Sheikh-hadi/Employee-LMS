@@ -3,13 +3,12 @@ import { Row, Col } from "antd";
 
 const PaySlip = () => {
   const tdStyle = {
-    padding: "10px",
-    textAlign: "left",
+    // padding: "10px",
+    // textAlign: "left",
     borderBottom: "1px solid #ccc",
   };
 
   const tdCenterStyle = {
-    textAlign: "center",
     borderBottom: "1px solid #ccc",
   };
 
@@ -27,14 +26,7 @@ const PaySlip = () => {
 
   return (
     <>
-      <div style={{ border: "2px solid black" }}>
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="438"
-          height="388"
-          viewBox="0 0 438 388"
-        />
-      </div>
+     
       <div
         style={{
           padding: "20px",
@@ -89,7 +81,7 @@ const PaySlip = () => {
             <table
               style={{
                 width: "100%",
-                borderCollapse: "collapse",
+                // borderCollapse: "collapse",
                 marginTop: "10px",
               }}
             >
