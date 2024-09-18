@@ -52,6 +52,7 @@ const dayColumns = Array.from({ length: daysInMonth }, (_, i) => {
       >
         {dayAbbreviation}
       </div>
+       
     ),
     dataIndex: ['status', i],
     key: `day-${i + 1}`,

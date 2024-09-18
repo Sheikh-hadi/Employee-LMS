@@ -6,7 +6,7 @@ import { users } from '../../models/userTrackingModel';
 // Memoized UserCard component
 const UserCard = memo(({ user: { name, role, time, status, imageUrl, date } }) => {
 
-  // Memoized card styles
+  // Memoized card stylesojyy
   const cardStyle = useMemo(() => ({
     borderRadius: '10px',
     boxShadow: '0px 4px 12px rgba(0, 0, 0, 0.1)',
