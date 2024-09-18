@@ -13,6 +13,8 @@ const EmployeePayment = () => {
       sr: '1',
       employeeName: 'John Doe',
       transaction: '5000',
+      transactionId: '3000',
+      transactionHistory: '5000',
       salary: '20000',
     },
     {
@@ -20,6 +22,8 @@ const EmployeePayment = () => {
       sr: '2',
       employeeName: 'Jane Smith',
       transaction: '7000',
+      transactionId: '3000',
+      transactionHistory: '5000',
       salary: '25000',
     },
     {
@@ -27,6 +31,8 @@ const EmployeePayment = () => {
       sr: '3',
       employeeName: 'Mark Johnson',
       transaction: '9000',
+      transactionId:'8000',
+      transactionHistory: '2000',
       salary: '30000',
     },
   ];
@@ -47,6 +53,18 @@ const EmployeePayment = () => {
       title: 'Transaction',
       dataIndex: 'transaction',
       key: 'transaction',
+      render: (text) => `Rs ${text}`,
+    },
+    {
+      title: 'Transaction Id',
+      dataIndex: 'transactionId',
+      key: 'transactionId',
+      render: (text) => `Rs ${text}`,
+    },
+    {
+      title: 'Transaction History',
+      dataIndex: 'transactionHistory',
+      key: 'transactionHistory',
       render: (text) => `Rs ${text}`,
     },
     {

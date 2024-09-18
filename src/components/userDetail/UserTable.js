@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
-import { Table, Switch, Button, Row, Col, Modal, Form, Input } from 'antd';
+import { Table, Switch, Button, Row, Col, Modal, Form, Input,  } from 'antd';
+import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
+
 import moment from 'moment';
 import { useNavigate } from 'react-router-dom';
 
@@ -12,6 +14,8 @@ const UserTable = ({ user }) => {
       model: false
     }
   );
+  
+ 
 
   const onFinish = (values) => {
     console.log('Form values:', values);
@@ -21,6 +25,7 @@ const UserTable = ({ user }) => {
       model: false
     })
   }
+ 
 
   const onFinishFailed = (errorInfo) => {
     console.log('Failed:', errorInfo);
@@ -78,7 +83,8 @@ const UserTable = ({ user }) => {
               margin: "0",
             }}
           >
-            {record.endDate || "PRESENT"}
+              {moment(record.updateddAt).format('YYYY-MM-DD')}
+        
           </p>
           <p
             style={{
@@ -103,6 +109,21 @@ const UserTable = ({ user }) => {
             backgroundColor: text === 'Active' ? 'green' : 'red',
           }}
         />
+      ),
+    },
+    {
+      title: "Actions",
+      key: "actions",
+      width: "12%",
+      render: (text, record) => (
+        <span style={{ display: "flex", gap: "10px" }}>
+         
+          <EditOutlined className="icon-edit" />
+          <DeleteOutlined
+            className="icon-delete"
+          
+          />
+        </span>
       ),
     },
   ];
