@@ -11,9 +11,9 @@ const ProtectLayes = ({ children }) => {
     useEffect(() => {
         const checkAuth = async () => {
             try {
-                // Make a request to the backend to check if the user is authenticated
-                const res = await axios.get('http://localhost:4000/api/v1/check-auth', { withCredentials: true }); 
-                console.log("res: ", res);
+
+                const res = await axios.get('http://localhost:4000/api/v1/check-auth', { withCredentials: true });
+                // console.log("res: ", res);
                 setIsAuthenticated(true);
                 // console.log("isAuthenticated: ", isAuthenticated);
             } catch (error) {
@@ -28,15 +28,15 @@ const ProtectLayes = ({ children }) => {
 
     useEffect(() => {
         if (!loading && !isAuthenticated) {
-            navigate('/login'); // Redirect to the login page if not authenticated
+            navigate('/login');
         }
     }, [loading, isAuthenticated, navigate]);
 
     if (loading) {
-        return <Skeleton />; // Show a loading indicator while checking auth status
+        return <Skeleton />;
     }
 
-    return <>{isAuthenticated && children}</>; // Render protected content if authenticated
+    return <>{isAuthenticated && children}</>;
 };
 
 export default ProtectLayes;

@@ -3,7 +3,7 @@ import axios from "axios";
 import { notification } from "antd";
 
 const usePutEmployee = () => {
-const queryClient = useQueryClient();
+    const queryClient = useQueryClient();
     const putData = async (value) => {
         // console.log("values: ", value);
         // console.log("id", value.id);
@@ -17,7 +17,7 @@ const queryClient = useQueryClient();
         return response.data;
     }
     const mutation = useMutation({
-        mutationKey: ["employees"],
+        // mutationKey: ["employeesUpdate"],
         mutationFn: putData,
         onSuccess: async (data) => {
             notification.success({
@@ -35,7 +35,7 @@ const queryClient = useQueryClient();
             // console.log('data: ', data);
             // setIsModalOpen(false);
             // form.resetFields();
-            queryClient.invalidateQueries(['employees']);
+         queryClient.invalidateQueries(["employees"]);
         },
         onError: (error) => {
             console.log("error: ", error);

@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { Table, Switch, Button, Row, Col, Modal, Form, Input,  } from 'antd';
 import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
-
 import moment from 'moment';
 import { useNavigate } from 'react-router-dom';
-
+import usePostRegistUser from '../../Hooks/UserHook/usePostRegisterUser';
 const { TextArea } = Input;
 const UserTable = ({ user }) => {
+  const {mutate: users} = usePostRegistUser()
   const navigate = useNavigate();
   const [userState, setUserState] = useState(
     {
@@ -19,7 +19,7 @@ const UserTable = ({ user }) => {
 
   const onFinish = (values) => {
     console.log('Form values:', values);
-    // Handle form submission logic here
+    users(values)
     setUserState({
       detail: null,
       model: false
