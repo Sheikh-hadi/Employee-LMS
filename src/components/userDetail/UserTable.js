@@ -78,12 +78,12 @@ const UserTable = ({ user }) => {
         <span>
           <p
             style={{
-              color: record.endDate ? "red" : "green",
+              color: "",
               fontSize: "12px",
               margin: "0",
             }}
           >
-              {moment(record.updateddAt).format('YYYY-MM-DD')}
+              {moment(record.updatedAt).format('YYYY-MM-DD')}
         
           </p>
           <p
