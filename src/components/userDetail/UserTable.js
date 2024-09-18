@@ -251,7 +251,7 @@ const UserTable = ({ user }) => {
                                 <Checkbox value="update">Update </Checkbox>
                             </Col>
                             <Col span={6}>
-                                <Checkbox value="createEmployee">Create </Checkbox>
+                                <Checkbox value="create">Create </Checkbox>
                             </Col>
                         </Row>
                     </Form.Item>
