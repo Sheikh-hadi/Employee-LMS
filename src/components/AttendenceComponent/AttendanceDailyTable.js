@@ -19,34 +19,41 @@ const getStatusColor = (status) => {
   }
 };
 
-// Sample data with status for each employee (array length should match the number of days in the month)
+// Sample data with status for each employee
 const data = [
   { fullname: 'John Doe', status: Array(31).fill('Present') },
   { fullname: 'Jane Smith', status: Array(31).fill('Absent') },
   { fullname: 'John Doe', status: Array(31).fill('Leave') },
   { fullname: 'Jane Smith', status: Array(31).fill('Late') },
-  // Add more employee data as needed
 ];
 
-// Get the current year, month, and formatted date using moment
+// Get the current year and month
 const currentYear = moment().year();
-const currentMonth = moment().month(); // 0-indexed (e.g., 8 for September)
-const currentMonthShortName = moment().format('MMM'); // Short month name (e.g., Sep for September)
+const currentMonth = moment().month(); 
 
 // Calculate the number of days in the current month
-const daysInMonth = moment(`${currentYear}-${currentMonth + 1}`, 'YYYY-MM').daysInMonth(); // +1 because month is 0-indexed
+const daysInMonth = moment(`${currentYear}-${currentMonth + 1}`, 'YYYY-MM').daysInMonth(); 
 
-// Generate column titles with formatted date for each day
+// Generate column titles for each day
 const dayColumns = Array.from({ length: daysInMonth }, (_, i) => {
   return {
     title: (
-      <div style={{ transform: 'rotate(90deg)', whiteSpace: 'nowrap', display: 'flex', alignItems: 'center' }}>
-        {`day ${i + 1}`}
+      <div
+        style={{
+         
+          transformOrigin: 'left bottom',
+          whiteSpace: 'nowrap',
+          display: 'flex',
+          alignItems: 'center',
+          height: '100%',
+        }}
+      >
+        {`Day ${i + 1}`}
       </div>
     ),
-    dataIndex: ['status', i], // Access each status by index
+    dataIndex: ['status', i], 
     key: `day-${i + 1}`,
-    width: '3%',
+    width: '6%',
     render: (status) => (
       <div
         style={{
@@ -68,10 +75,10 @@ const dayColumns = Array.from({ length: daysInMonth }, (_, i) => {
   };
 });
 
-// Column configuration with sub-child for "Name"
+// Column configuration
 const columns = [
   {
-    title: 'Name',
+    title: 'Name', 
     key: 'name',
     width: '10%',
     children: [
@@ -84,10 +91,10 @@ const columns = [
     ],
   },
   {
-    title: `Attendance (${currentMonthShortName}-${currentYear})`, // Main title with short month-year
+    title: `Attendance (${moment().format('MMM')} ${currentYear})`, 
     key: 'attendance',
     width: '90%',
-    children: dayColumns, // Subtitles with detailed day-MMM-year format
+    children: dayColumns, 
   },
 ];
 
@@ -98,7 +105,7 @@ const AttendanceTable = () => {
       dataSource={data}
       pagination={false}
       rowKey="fullname"
-      scroll={{ x: 1500 }} // Adjust as needed
+      scroll={{ x: 'max-content' }} // Adjust scroll to fit the content width
     />
   );
 };
