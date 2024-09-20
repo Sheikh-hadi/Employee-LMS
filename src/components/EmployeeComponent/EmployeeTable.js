@@ -257,12 +257,12 @@ const EmployeeTable = ({ employees }) => {
 
       </Modal>
       <Modal
-        title="Confirm Deletion"
+        title="CONFIRMATION"
         open={handleValue.model}
         onOk={handleOk}
         onCancel={() => setHandleValue({ ...handleValue, model: false, id: null, record: null })}
       >
-        <h6>{`Are you sure you want to delete employee with ID: ${handleValue.id}?`}</h6>
+        <p>{`Are you sure you want to delete employee with ID: ${handleValue.id}?`}</p>
       </Modal>
     </div>
   )

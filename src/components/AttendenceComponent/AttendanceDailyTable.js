@@ -37,7 +37,6 @@ const daysInMonth = moment(`${currentYear}-${currentMonth + 1}`, 'YYYY-MM').days
 // Generate column titles for each day
 const dayColumns = Array.from({ length: daysInMonth }, (_, i) => {
   const date = moment(`${currentYear}-${currentMonth + 1}-${i + 1}`, 'YYYY-MM-DD');
-  const isWeekend = date.day() === 6 || date.day() === 0;
   const isSaturday = date.day() === 6;
   const isSunday = date.day() === 0;
 
@@ -105,15 +104,14 @@ const dayColumns = Array.from({ length: daysInMonth }, (_, i) => {
             </div>
           );
         } else {
-          // Show "OFF" on odd Saturdays 
           return (
             <div
               style={{
                 width: '22px',
                 height: '20px',
                 borderRadius: '50%',
-                backgroundColor: '#D8BFD8',  // Thistle Purple
-                color: '#F8F8FF',            // Ghost White
+                backgroundColor: '#D8BFD8',  
+                color: '#F8F8FF',          
                 display: 'inline-flex',
                 alignItems: 'center',
                 justifyContent: 'center',

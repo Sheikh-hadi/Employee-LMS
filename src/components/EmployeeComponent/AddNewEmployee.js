@@ -21,11 +21,23 @@ const AddNewEmployee = () => {
   };
 
   const onFinishFailed = (errorInfo) => {
-    // console.log("Failed:", errorInfo);
+    console.log("Failed:", errorInfo);
+    const firstErrorField = errorInfo.errorFields[0]?.name;
+    if (firstErrorField) {
+      form.scrollToField(firstErrorField);
+    }
     notification.error({
       key: 'form-submission-failed',
       message: 'Form Submission Failed',
-      description: 'Required fields are missing. Please check the form and try again.',
+      description: errorInfo.errorFields.map((error, index)=>{
+        return (
+      
+            <li style={{display:"inline"}} key={index}>
+              {`${index +1}) ${error?.name}  `}
+            </li>
+         
+        )
+      }),
       duration: 5,
       style: {
         borderLeft: `4px solid red`, // Red for error, green for success
@@ -35,12 +47,11 @@ const AddNewEmployee = () => {
       showProgress: true,
 
     });
-    setIsModalOpen(false);
   };
 
   const handleOk = () => {
     form.submit();
-    setIsModalOpen(false)
+    setIsModalOpen(true)
   };
 
   return (

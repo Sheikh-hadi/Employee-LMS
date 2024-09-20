@@ -1,27 +1,21 @@
 import React from "react";
-import { Card, Col, Row } from "antd";
-import { useDepartmentContext } from "../context/DepartmentContext";
-import "../App.css";
-// import { useEmployeeContext } from "../context/EmployeeContext";
+import { Card, Col, Row } from "antd";import "../App.css";
 import { UserOutlined, TeamOutlined, LogoutOutlined } from "@ant-design/icons";
-// import employeeDepartmentDropdownOptions from "../models/employeeDapartmentModel";
 import UseFetchEmployee from "../Hooks/Employee/UseFetchEmployeeHook";
+import useGetDepartment from "../Hooks/Department/useGetDepartmentHook";
 
 const EmployeeDashboard = () => {
+  const { data: dep } = useGetDepartment();
   const { data } = UseFetchEmployee()
-  const { departments } = useDepartmentContext()
-  console.log("department: ", departments)
+  console.log("department: ", dep)
   const employee = data?.length || 0;
-  const departmentLength = departments?.data?.length || 0;
-  // console.log("data: ", employee)
-  // console.log("department: ", department)
+ 
 
-  // Get today's month and day
   const today = new Date();
-  const todayMonth = today.getMonth() + 1; // Months are zero-based
+  const todayMonth = today.getMonth() + 1; 
   const todayDay = today.getDate();
 
-  // Function to check if today is the employee's birthday
+
   const isBirthdayToday = (dob) => {
     const date = new Date(dob);
     const month = date.getMonth() + 1;
@@ -32,7 +26,7 @@ const EmployeeDashboard = () => {
   // Inline styles
   const containerStyle = {
     padding: "20px",
-   
+
   };
 
   const titleStyle = {
@@ -53,7 +47,7 @@ const EmployeeDashboard = () => {
     textAlign: "center",
     padding: "30px",
     cursor: "pointer",
-    height:"25vh",
+    height: "25vh",
     position: "relative",
     transition: "transform 0.2s, box-shadow 0.2s",
   };
@@ -113,7 +107,7 @@ const EmployeeDashboard = () => {
               <div style={cardIconStyle}>
                 <UserOutlined />
               </div>
-              <div style={cardTitleStyle}>{departments?.data?.length || 0}</div>
+              <div style={cardTitleStyle}>{dep?.data?.length || 0}</div>
               <div style={cardDescriptionStyle}>Departments</div>
               <div style={cardMoreInfoStyle}>More Info ➔</div>
             </Card>

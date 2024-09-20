@@ -5,19 +5,15 @@ import { useDepartmentContext } from '../context/DepartmentContext';
 import { Skeleton } from 'antd';
 
 const Department = () => {
-  const { departments, setDepartments } = useDepartmentContext();
+
   const { data, isLoading, isError, error, isFetching } = useGetDepartment();
 
-  useEffect(() => {
-    // console.log("data: ", data);
-    setDepartments(data?.data);
-  }, [data, setDepartments]);
 
   // Logging isLoading, isFetching, isError, and error.message to the console
   console.log("isLoading: ", isLoading);
   console.log("isFetching: ", isFetching);
   console.log("isError: ", isError);
-  console.log("departments: ", departments);
+
  
 
 

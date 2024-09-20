@@ -10,7 +10,7 @@ const useFetchEmployee = () => {
         const response = await axios.get("http://localhost:4000/api/v1/employee", {
             withCredentials: true,
         });
-        console.log("Fetched employees data: ", response?.data?.data);
+        // console.log("Fetched employees data: ", response?.data?.data);
         return response?.data?.data;
     };
 
@@ -18,19 +18,19 @@ const useFetchEmployee = () => {
         queryKey: ["employees"],
         queryFn: fetchEmployees,
         onSuccess: (data) => {
-            console.log("Data in UseFetch hook: ", data);
+            // console.log("Data in UseFetch hook: ", data);
             setEmployees(data); // Update the employee context
         },
         onError: (error) => {
-            console.log("Fetch error: ", error);
+            // console.log("Fetch error: ", error);
         },
-        staleTime: 0,  // Data is considered stale immediately, so it refetches automatically
-        cacheTime: 600000, // Cache the data for 10 minutes
-        refetchOnWindowFocus: true,  // Auto-refetch when the window is focused
+        staleTime: 0,  
+        cacheTime: 600000,
+        refetchOnWindowFocus: true,  
         // refetchInterval: 10000, 
     });
 
-    console.log("Query result: ", result); // Debugging: see the result
+    // console.log("Query result: ", result); 
 
     return result;
 };

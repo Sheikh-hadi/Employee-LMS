@@ -1,11 +1,10 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
 import { message } from "antd";
 import { useNavigate } from "react-router-dom"; // Use useNavigate hook
 
-const usePostLoginHook = (formData) => {
-    console.log("formData in usePostLoginHook:", formData);
-    const queryClient = useQueryClient();
+const usePostLoginHook = (form) => {
+    console.log("formData in usePostLoginHook:", form.setFields);
     const navigate = useNavigate(); // Get navigate function
 
     const loginUser = async (values) => {
@@ -25,16 +24,25 @@ const usePostLoginHook = (formData) => {
         mutationFn: loginUser,
         onSuccess: (data) => {
             console.log("data in onSuccess: ", data);
-            navigate("/");
+            navigate("/"); // Navigate to home page after successful login
             message.success("User Login Successfully");
-
         },
-
-
         onError: (error) => {
-            console.log("Error in onError:", error);
-            message.error(error?.response?.data?.message || "User Login Failed");
-        },
+            if (error.response && error?.response?.data?.message === "User does not exist") {
+                console.log("Error in user onError:", error);
+                form.setFields([
+                    { name: "email", errors: ["User does not exist"] },
+                ]);
+            }
+            if (error.response && error?.response?.data?.message === "Invalid password") {
+                console.log("Error in password onError:", error);
+                form.setFields([
+                    { name: "password", errors: ["Password is incorrect"] },
+                ]);
+            } else {
+                message.error(error?.response?.data?.message || "User Login Failed");
+            }
+        }
     });
 };
 

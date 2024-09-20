@@ -29,7 +29,7 @@ const EditEmployeeForm = ({ setHandleValue, values }) => {
   const onFinish = (formValue) => {
     const updatedValues = { formValue, id: values.id };
     // console.log("Received values of form: ", updatedValues);
-    // console.log("values: ", values)
+    console.log("values: ", formValue)
     mutate(updatedValues);
     setHandleValue(
       {
@@ -66,7 +66,7 @@ const EditEmployeeForm = ({ setHandleValue, values }) => {
 
   React.useEffect(() => {
     if (values) {
-      form.setFieldsValue(values);  
+      form.setFieldsValue(values);
     }
   }, [values, form]);
 
@@ -226,7 +226,7 @@ const EditEmployeeForm = ({ setHandleValue, values }) => {
                     <Select placeholder="Select designation">
                       {Designation?.length && Designation.map((option) => (
                         <Option key={option.value} value={option.value}>
-                          {option.icon} {option.label}
+                         {option.label}
                         </Option>
                       ))}
                     </Select>
@@ -262,7 +262,6 @@ const EditEmployeeForm = ({ setHandleValue, values }) => {
                     <Select placeholder="Select contract status">
                       {booleanDropdownOptions.map(option => (
                         <Option key={option.value} value={option.value}>
-                          {option.icon}
                           {option.label}
                         </Option>
                       ))}
