@@ -124,7 +124,7 @@ const EmployeeTable = ({ employees }) => {
       dataIndex: "designation",
       key: "designation",
       width: "12%",
-     
+
     },
     {
       title: "Salary",
@@ -194,7 +194,7 @@ const EmployeeTable = ({ employees }) => {
       render: (text, record) => (
         <span style={{ display: "flex", gap: "10px" }}>
           <Tooltip title="Created Employee" color="blue" placement="right">
-            <span>Hadi</span>
+            <span>{record.author}</span>
           </Tooltip>
 
           <EditOutlined className="icon-edit" onClick={() => showModelEdit(record.id, record)} />
@@ -233,7 +233,7 @@ const EmployeeTable = ({ employees }) => {
         enterButton="Search"
         size="small"
         onSearch={handleSearch}
-        onChange={(e)=> handleSearch(e.target.value)}
+        onChange={(e) => handleSearch(e.target.value)}
         allowClear
       />
       <Table
