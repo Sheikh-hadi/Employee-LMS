@@ -10,7 +10,6 @@ const usePostLoginHook = () => {
     const loginUser = async (values) => {
         try {
             const response = await axios.post("http://localhost:4000/api/v1/users/register", values,{ withCredentials: true });
-            localStorage.setItem('accessToken', response.data.token);
             return response.data;
         } catch (error) {
             console.log("Error in loginUser:", error);

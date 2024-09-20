@@ -10,7 +10,6 @@ const usePostLoginHook = (form) => {
     const loginUser = async (values) => {
         try {
             const response = await axios.post("http://localhost:4000/api/v1/users/login", values, {
-                // Enable sending cookies with the request
                 withCredentials: true,
             });
             return response.data;
@@ -24,7 +23,7 @@ const usePostLoginHook = (form) => {
         mutationFn: loginUser,
         onSuccess: (data) => {
             console.log("data in onSuccess: ", data);
-            navigate("/"); // Navigate to home page after successful login
+            navigate("/"); 
             message.success("User Login Successfully");
         },
         onError: (error) => {

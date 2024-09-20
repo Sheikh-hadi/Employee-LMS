@@ -22,7 +22,7 @@ import AttendanceMonthyRecord from '../Pages/AttendanceMonthyRecord';
 
 const RoutePath = () => {
     return (
-        <ProtectLayes>
+        // <ProtectLayes>
             <Routes>
                 <Route path="*" element={<ErrorForbidden />} />
                 <Route path="/add-new-employee" element={<AddNewEmployee />} />
@@ -47,7 +47,7 @@ const RoutePath = () => {
                 <Route path="/department" element={<Department />} />
                 <Route path="/employee-attendence-monthly-record" element={<AttendanceMonthyRecord />} />
             </Routes>
-        </ProtectLayes>
+        // </ProtectLayes>
     );
 };
 
