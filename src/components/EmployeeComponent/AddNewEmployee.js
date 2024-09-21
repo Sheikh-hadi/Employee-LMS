@@ -15,9 +15,6 @@ const AddNewEmployee = () => {
 
   const onFinish = (values) => {
     mutate(values);
-    // console.log("Received values of form: ", values);
-    form.resetFields();
-    setIsModalOpen(false);
   };
 
   const onFinishFailed = (errorInfo) => {
@@ -28,14 +25,14 @@ const AddNewEmployee = () => {
     }
     notification.error({
       key: 'form-submission-failed',
-      message: 'Form Submission Failed',
-      description: errorInfo.errorFields.map((error, index)=>{
+      message: 'Missing required Fields',
+      description: errorInfo.errorFields.map((error, index) => {
         return (
-      
-            <li style={{display:"inline"}} key={index}>
-              {`${index +1}) ${error?.name}  `}
-            </li>
-         
+
+          <li style={{ display: "inline" }} key={index}>
+            {`${index + 1}) ${error?.name}  `}
+          </li>
+
         )
       }),
       duration: 5,
@@ -54,8 +51,13 @@ const AddNewEmployee = () => {
     setIsModalOpen(true)
   };
 
+  const handleCancel = () => {
+    setIsModalOpen(false);
+    form.resetFields();
+  };
+
   return (
-    
+
     <div style={{ display: "flex", justifyContent: "flex-end" }}>
       <Button
         type="primary"
@@ -69,7 +71,7 @@ const AddNewEmployee = () => {
         title="ADD NEW EMPLOYEE"
         open={isModalOpen}
         onOk={handleOk}
-        onCancel={() => setIsModalOpen(false)}
+        onCancel={handleCancel}
         width={"31%"}
       >
         <Form
