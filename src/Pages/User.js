@@ -4,7 +4,7 @@ import useGetUser from '../Hooks/UserHook/useGetUserHook'
 import { Skeleton } from 'antd'
 
 const UserPage = () => {
-  const { data: user = [], isLoading, isError, error, isFetching } = useGetUser()
+  const { data: user = [], isLoading, error, isFetching } = useGetUser()
   // console.log("data in User page: ", user);
   // console.log("error in User page: ", error);
   // console.log("isFetching in User page: ", isFetching);

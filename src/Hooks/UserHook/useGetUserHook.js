@@ -12,14 +12,14 @@ const useGetUser = () => {
         queryKey: ["users"],
         queryFn: fetchUser,
         onSuccess: (data) => {
-            console.log("data in UseFetch hook: ", data);
+            // console.log("data in UseFetch hook: ", data);
         },
         onError: (error) => {
             console.log(error);
         },
-        staleTime: 0, // Ensure that data is fresh
-        cacheTime: 600000, // Cache for 10 minutes
-        refetchOnWindowFocus: false, // Optionally refetch on window focus
+        staleTime: 0, 
+        cacheTime: 600000, 
+        refetchOnWindowFocus: false, 
     });
 }
 

@@ -6,7 +6,7 @@ import useGetByIdUser from '../../Hooks/UserHook/useGetByIdUserHook';
 const UserDetails = () => {
   const { id } = useParams();
   const { data: user, isLoading, isError, error, isFetching } = useGetByIdUser(id);
-// console.log("data in UserDetails: ", user);
+console.log("data in UserDetails: ", user);
 // console.log("error in UserDetails: ", error);
 // console.log("isFetching in UserDetails: ", isFetching);
 // console.log("loading in UserDetails: ", isLoading);
@@ -24,27 +24,32 @@ const UserDetails = () => {
         </Col>
         <Col span={20} style={{ padding: "10px" }}>
           <Row gutter={[16, 16]} align={"middle"} >
-            <Col span={7} style={{ width: "100%" }}>
+            <Col span={6} style={{ width: "100%" }}>
               <p><strong>First Name</strong></p>
-              <p>{user?.data?.fullName || ""}</p>
+              <p>{user?.data[0]?.fullName || ""}</p>
             </Col>
-            <Col span={7} style={{ width: "100%" }}>
+            <Col span={6} style={{ width: "100%" }}>
               <p><strong>Contact Number</strong></p>
-              <p>{user?.data?.contacNumber || ""}</p>
+              <p>{user?.data[0]?.contactNumber || ""}</p>
             </Col>
-            <Col span={7} style={{ width: "100%" }}>
+            <Col span={6} style={{ width: "100%" }}>
               <p><strong>Email Address</strong></p>
-              <p> {user?.data?.email || ""} </p>
+              <p> {user?.data[0]?.email || ""} </p>
             </Col>
-            <Col span={3} style={{ width: "100%" }}>
-              <Switch defaultChecked />
+            <Col span={6} style={{ width: "100%" }}>
+            <p><strong>UserName</strong></p>
+            <p> {user?.data[0]?.userName || ""} </p>
             </Col>
 
           </Row>
-          <Row align={"middle"} justify={"start"}>
-            <Col span={24}>
+          <br />
+          <Row  align={"middle"} justify={"start"}>
+            <Col span={12}>
               <p><strong>Address</strong></p>
-              <p> {user?.data?.address || ""} </p>
+              <p> {user?.data[0]?.address || ""} </p>
+            </Col>
+            <Col span={12}>
+              <Switch checked={user?.data[0]?.status} />
             </Col>
           </Row>
         </Col>

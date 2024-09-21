@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import usePostRegistUser from '../../Hooks/UserHook/usePostRegisterUser';
 const { TextArea } = Input;
 const UserTable = ({ user }) => {
-  const {mutate: users} = usePostRegistUser()
+  const { mutate: users } = usePostRegistUser()
   const navigate = useNavigate();
   const [userState, setUserState] = useState(
     {
@@ -14,22 +14,20 @@ const UserTable = ({ user }) => {
       model: false
     }
   );
-  
- 
+
+
 
   const onFinish = (values) => {
     console.log('Form values:', values);
     users(values)
     setUserState({
-      detail: null,
-      model: false
+      detail: null
     })
   }
- 
+
 
   const onFinishFailed = (errorInfo) => {
     console.log('Failed:', errorInfo);
-    // Handle form submission error here
     setUserState({
       detail: null,
       model: true
@@ -37,7 +35,6 @@ const UserTable = ({ user }) => {
   }
 
   const handleDoubleClick = (record) => {
-    // Construct the URL with query parameters
     navigate(`/user-details/${record.id}`);
   };
 
@@ -56,17 +53,17 @@ const UserTable = ({ user }) => {
     },
     {
       title: 'Contact Number',
-      dataIndex: 'contactNumber' || "",
+      dataIndex: 'contactNumber' || "N/A",
       key: 'contactNumber',
     },
     {
       title: 'Address',
-      dataIndex: 'address' || "",
+      dataIndex: 'address' || "N/A",
       key: 'address',
     },
     {
       title: 'Designation',
-      dataIndex: 'designation' || "",
+      dataIndex: 'designation' || "N/A",
       key: 'designation',
     },
     {
@@ -83,8 +80,8 @@ const UserTable = ({ user }) => {
               margin: "0",
             }}
           >
-              {moment(record.updatedAt).format('YYYY-MM-DD')}
-        
+            {moment(record.updatedAt).format('YYYY-MM-DD')}
+
           </p>
           <p
             style={{
@@ -117,11 +114,14 @@ const UserTable = ({ user }) => {
       width: "12%",
       render: (text, record) => (
         <span style={{ display: "flex", gap: "10px" }}>
-         
-          <EditOutlined className="icon-edit" />
+
+          <EditOutlined className="icon-edit"
+            onClick={() => {
+              navigate(`/user-details/${record.id}`);
+            }} />
           <DeleteOutlined
             className="icon-delete"
-          
+
           />
         </span>
       ),
@@ -169,10 +169,13 @@ const UserTable = ({ user }) => {
           layout="vertical"
           initialValues={userState.detail}
           onFinish={onFinish}
+          scrollToFirstError={true}
+          labelCol={{ span: 24 }}
+          wrapperCol={{ span: 24 }}
           onFinishFailed={onFinishFailed}
           autoComplete="off"
         >
-           <Form.Item>
+          <Form.Item>
             <Button type="primary" htmlType="submit">
               Submit
             </Button>
@@ -189,8 +192,8 @@ const UserTable = ({ user }) => {
             <Input placeholder="Enter name" allowClear />
           </Form.Item>
           <Form.Item
-            label="Username"
-            name="username"
+            label="UserName"
+            name="userName"
             hasFeedback
             rules={[
               { required: true, message: 'Please input the username!' },
@@ -240,21 +243,21 @@ const UserTable = ({ user }) => {
             <TextArea placeholder="Enter address" allowClear />
           </Form.Item>
           <Form.Item label="Roles">
-                        <Row>
-                            <Col span={6}>
-                                <Checkbox value="edit">Edit </Checkbox>
-                            </Col>
-                            <Col span={6}>
-                                <Checkbox value="delete">Delete </Checkbox>
-                            </Col>
-                            <Col span={6}>
-                                <Checkbox value="update">Update </Checkbox>
-                            </Col>
-                            <Col span={6}>
-                                <Checkbox value="create">Create </Checkbox>
-                            </Col>
-                        </Row>
-                    </Form.Item>
+            <Row>
+              <Col span={6}>
+                <Checkbox value="edit">Edit </Checkbox>
+              </Col>
+              <Col span={6}>
+                <Checkbox value="delete">Delete </Checkbox>
+              </Col>
+              <Col span={6}>
+                <Checkbox value="update">Update </Checkbox>
+              </Col>
+              <Col span={6}>
+                <Checkbox value="create">Create </Checkbox>
+              </Col>
+            </Row>
+          </Form.Item>
 
         </Form>
       </Modal>
