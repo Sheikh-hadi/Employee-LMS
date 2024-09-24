@@ -16,6 +16,7 @@ import ForgotPasswordOtp from "./components/ForgotPasswordOtp";
 import RoutePath from "./components/RoutePath";
 import useUserLogout from "./Hooks/UserHook/useLogoutUserHook";
 
+
 const { Sider, Content } = Layout;
 const { SubMenu } = Menu;
 
@@ -35,6 +36,7 @@ const App = () => {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignUpForm />} />
         <Route path="/forgetPassword" element={<ForgotPasswordOtp />} />
+   
       </Routes>
 
       <Layout style={{ minHeight: "100vh" }}>

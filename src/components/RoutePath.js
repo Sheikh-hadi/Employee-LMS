@@ -19,6 +19,7 @@ import RegeneratePasswordField from './RegeneratePasswordField';
 import UserPage from '../Pages/User';
 import AddNewEmployee from '../components/EmployeeComponent/AddNewEmployee';
 import AttendanceMonthyRecord from '../Pages/AttendanceMonthyRecord';
+import ExperienceLetter from './ExperienceLetter';
 
 const RoutePath = () => {
     return (
@@ -45,6 +46,7 @@ const RoutePath = () => {
                 <Route path="/attendence" element={<Attendence />} />
                 <Route path="/payment" element={<Payment />} />
                 <Route path="/department" element={<Department />} />
+                <Route path="/certificate" element={<ExperienceLetter/>} />
                 <Route path="/employee-attendence-monthly-record" element={<AttendanceMonthyRecord />} />
             </Routes>
         // </ProtectLayes>
