@@ -2,10 +2,10 @@ import React from "react";
 import EmployeeTable from "../components/EmployeeComponent/EmployeeTable";
 import AddNewEmployee from "../components/EmployeeComponent/AddNewEmployee";
 import { Skeleton } from "antd";
-import UseFetchEmployee from "../Hooks/Employee/UseFetchEmployeeHook";
+import useFetchEmployee from "../Hooks/Employee/UseFetchEmployeeHook";
 
 const Employee = () => {
-  const { data: employees = [], isLoading, isError, error } = UseFetchEmployee();
+  const { data: employees = [], isLoading, isError, error } = useFetchEmployee();
 
 
   if (isLoading) {

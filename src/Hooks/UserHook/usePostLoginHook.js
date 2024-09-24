@@ -14,7 +14,7 @@ const usePostLoginHook = (form) => {
             });
             return response.data;
         } catch (error) {
-            console.log("Error in loginUser:", error);
+            // console.log("Error in loginUser:", error);
             throw error;
         }
     };
@@ -22,19 +22,19 @@ const usePostLoginHook = (form) => {
     return useMutation({
         mutationFn: loginUser,
         onSuccess: (data) => {
-            console.log("data in onSuccess: ", data);
+            // console.log("data in onSuccess: ", data);
             navigate("/"); 
             message.success("User Login Successfully");
         },
         onError: (error) => {
             if (error.response && error?.response?.data?.message === "User does not exist") {
-                console.log("Error in user onError:", error);
+                // console.log("Error in user onError:", error);
                 form.setFields([
                     { name: "email", errors: ["User does not exist"] },
                 ]);
             }
             if (error.response && error?.response?.data?.message === "Invalid password") {
-                console.log("Error in password onError:", error);
+                // console.log("Error in password onError:", error);
                 form.setFields([
                     { name: "password", errors: ["Password is incorrect"] },
                 ]);

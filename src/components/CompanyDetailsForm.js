@@ -34,18 +34,15 @@ const CompanyDetailsForm = () => {
   // Handle cancellation of modal
   const handleCancel = () => {
     setIsModalVisible(false);
-    setPassword(''); // Reset password field if modal is closed without submission
   };
 
-  // Handle file upload
   const handleUpload = (file) => {
-    // Create a URL for the uploaded file and set it as the logo
     const reader = new FileReader();
     reader.onload = () => {
       setLogo(reader.result);
     };
     reader.readAsDataURL(file);
-    return false; // Prevent automatic upload
+    return false; 
   };
 
   const formItems = [
