@@ -3,14 +3,16 @@ import { Row, Col, Button, Image, Switch } from 'antd';
 import { useParams } from 'react-router-dom';
 
 import useGetByIdUser from '../../Hooks/UserHook/useGetByIdUserHook';
-const UserDetails = () => {
+const UserDetails = ({ handleInitiailValues }) => {
   const { id } = useParams();
   const { data: user, isLoading, isError, error, isFetching } = useGetByIdUser(id);
-console.log("data in UserDetails: ", user);
+  handleInitiailValues(user?.data)
+// console.log("data in UserDetails: ", user);
 // console.log("error in UserDetails: ", error);
 // console.log("isFetching in UserDetails: ", isFetching);
 // console.log("loading in UserDetails: ", isLoading);
 // console.log("isError in UserDetails: ", isError);
+
   return (
     <>
       <Row gutter={[16, 16]} style={{ padding: "10px" }}>
@@ -26,19 +28,19 @@ console.log("data in UserDetails: ", user);
           <Row gutter={[16, 16]} align={"middle"} >
             <Col span={6} style={{ width: "100%" }}>
               <p><strong>First Name</strong></p>
-              <p>{user?.data[0]?.fullName || ""}</p>
+              <p>{user?.data?.fullName || ""}</p>
             </Col>
             <Col span={6} style={{ width: "100%" }}>
               <p><strong>Contact Number</strong></p>
-              <p>{user?.data[0]?.contactNumber || ""}</p>
+              <p>{user?.data?.contactNumber || ""}</p>
             </Col>
             <Col span={6} style={{ width: "100%" }}>
               <p><strong>Email Address</strong></p>
-              <p> {user?.data[0]?.email || ""} </p>
+              <p> {user?.data?.email || ""} </p>
             </Col>
             <Col span={6} style={{ width: "100%" }}>
             <p><strong>UserName</strong></p>
-            <p> {user?.data[0]?.userName || ""} </p>
+            <p> {user?.data?.userName || ""} </p>
             </Col>
 
           </Row>
@@ -46,10 +48,10 @@ console.log("data in UserDetails: ", user);
           <Row  align={"middle"} justify={"start"}>
             <Col span={12}>
               <p><strong>Address</strong></p>
-              <p> {user?.data[0]?.address || ""} </p>
+              <p> {user?.data?.address || ""} </p>
             </Col>
             <Col span={12}>
-              <Switch checked={user?.data[0]?.status} />
+              <Switch checked={user?.data?.status} />
             </Col>
           </Row>
         </Col>

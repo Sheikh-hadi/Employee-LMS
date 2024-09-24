@@ -1,33 +1,62 @@
 import React, { useState } from 'react';
-import { Table, Switch, Button, Row, Col, Modal, Form, Input, Checkbox } from 'antd';
+import { Table, Switch, Button, Row, Col, Modal, Form, Input, Checkbox, notification } from 'antd';
 import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
 import moment from 'moment';
 import { useNavigate } from 'react-router-dom';
 import usePostRegistUser from '../../Hooks/UserHook/usePostRegisterUser';
+import useDeleteUser from '../../Hooks/UserHook/useDeleteUser';
 const { TextArea } = Input;
 const UserTable = ({ user }) => {
+  const [form] = Form.useForm();
   const { mutate: users } = usePostRegistUser()
+  const { mutate: userDelete } = useDeleteUser()
   const navigate = useNavigate();
   const [userState, setUserState] = useState(
     {
       detail: null,
-      model: false
+      model: false,
+      delete: false,
     }
   );
-
-
+  console.log("userState: ", userState);
 
   const onFinish = (values) => {
-    console.log('Form values:', values);
+    // console.log('Form values:', values);
     users(values)
     setUserState({
+      ...userState,
       detail: null
     })
   }
 
 
   const onFinishFailed = (errorInfo) => {
-    console.log('Failed:', errorInfo);
+    // console.log("Failed:", errorInfo);
+    const firstErrorField = errorInfo.errorFields[0]?.name;
+    if (firstErrorField) {
+      form.scrollToField(firstErrorField);
+    }
+    notification.error({
+      key: 'form-submission-failed',
+      message: 'Missing required Fields',
+      description: errorInfo.errorFields.map((error, index) => {
+        return (
+
+          <li style={{ display: "inline" }} key={index}>
+            {`${index + 1}) ${error?.name}  `}
+          </li>
+
+        )
+      }),
+      duration: 5,
+      style: {
+        borderLeft: `4px solid red`, // Red for error, green for success
+        position: 'relative',
+        color: 'red'
+      },
+      showProgress: true,
+
+    });
     setUserState({
       detail: null,
       model: true
@@ -38,6 +67,15 @@ const UserTable = ({ user }) => {
     navigate(`/user-details/${record.id}`);
   };
 
+  const handleDelete = () => {
+    console.log("record in handleDelete: ", userState.detail);
+    userDelete(userState.detail)
+    setUserState({
+      ...userState,
+      delete: true,
+      detail: null
+    })
+  }
   const columns = [
     {
       title: 'Sr.',
@@ -101,9 +139,9 @@ const UserTable = ({ user }) => {
       key: "status",
       render: (text) => (
         <Switch
-          checked={text === 'Active'}
+          checked={text === true}
           style={{
-            backgroundColor: text === 'Active' ? 'green' : 'red',
+            backgroundColor: text ? 'green' : 'red',
           }}
         />
       ),
@@ -121,7 +159,13 @@ const UserTable = ({ user }) => {
             }} />
           <DeleteOutlined
             className="icon-delete"
+            onClick={() => setUserState({
+              ...userState,
+              delete: true,
+              detail: record.id
+            })
 
+            }
           />
         </span>
       ),
@@ -154,10 +198,12 @@ const UserTable = ({ user }) => {
         title={"Add New User"}
         open={userState.model}
         onOk={() => setUserState({
+          ...userState,
           detail: null,
           model: false,
         })}
         onCancel={() => setUserState({
+          ...userState,
           detail: null,
           model: false
         })}
@@ -260,6 +306,18 @@ const UserTable = ({ user }) => {
           </Form.Item>
 
         </Form>
+      </Modal>
+      <Modal
+        title="Confirmation"
+        open={userState.delete}
+        onOk={handleDelete}
+        onCancel={() => setUserState({
+          ...userState,
+          delete: false
+        })}
+        width={"31%"}
+      >
+        <p>{`Are you sure you want to delete user with ID: ${userState?.detail}?`}</p>
       </Modal>
     </div>
   );

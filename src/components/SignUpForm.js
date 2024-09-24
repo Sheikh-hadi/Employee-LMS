@@ -18,7 +18,7 @@ const SignUpForm = () => {
   const onFinishFailed = (errorInfo) => {
     console.log('Failed:', errorInfo);
   };
-
+ 
   return (
     <Row style={{ height: '100vh', justifyContent: 'center', alignItems: 'center', backgroundColor: '#f0f2f5' }}>
       <Col xs={24} sm={18} md={16} lg={14} xl={12} style={{ backgroundColor: 'white', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)', borderRadius: '10px' }}>

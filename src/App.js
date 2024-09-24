@@ -105,14 +105,10 @@ const App = () => {
               <Link to="/payment">Payment</Link>
             </Menu.Item>
 
-            <SubMenu key="6" icon={<UserOutlined />} title="User">
-              <Menu.Item key="6-1">
+         
+              <Menu.Item key="6" icon={<CreditCardOutlined />}>
                 <Link to="/user-table">User Table</Link>
               </Menu.Item>
-              <Menu.Item key="6-2">
-                <Link to="/user-details">User Details</Link>
-              </Menu.Item>
-            </SubMenu>
 
             <Menu.Item key="7" icon={<CreditCardOutlined />}>
               <Link to="/company">Company Details</Link>

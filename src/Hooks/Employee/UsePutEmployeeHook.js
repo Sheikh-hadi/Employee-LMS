@@ -13,7 +13,7 @@ const usePutEmployee = () => {
             },
             withCredentials: true,
         });
-        console.log("response: ", response);
+        // console.log("response: ", response);
         return response.data;
     }
     const mutation = useMutation({
@@ -38,7 +38,7 @@ const usePutEmployee = () => {
          queryClient.invalidateQueries(["employees"]);
         },
         onError: (error) => {
-            console.log("error: ", error);
+            // console.log("error: ", error);
             notification.error({
                 key: 'error-Update-employee',
                 message: 'Update Employee Failed: ',
