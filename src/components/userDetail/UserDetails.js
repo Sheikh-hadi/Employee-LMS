@@ -1,17 +1,19 @@
 import React from 'react'
-import { Row, Col, Button, Image, Switch } from 'antd';
+import { Row, Col, Image, Switch } from 'antd';
 import { useParams } from 'react-router-dom';
 
 import useGetByIdUser from '../../Hooks/UserHook/useGetByIdUserHook';
 const UserDetails = ({ handleInitiailValues }) => {
   const { id } = useParams();
-  const { data: user, isLoading, isError, error, isFetching } = useGetByIdUser(id);
+  const { data: user,
+    //  isLoading, isError, error, isFetching
+  } = useGetByIdUser(id);
   handleInitiailValues(user?.data)
-// console.log("data in UserDetails: ", user);
-// console.log("error in UserDetails: ", error);
-// console.log("isFetching in UserDetails: ", isFetching);
-// console.log("loading in UserDetails: ", isLoading);
-// console.log("isError in UserDetails: ", isError);
+  // console.log("data in UserDetails: ", user);
+  // console.log("error in UserDetails: ", error);
+  // console.log("isFetching in UserDetails: ", isFetching);
+  // console.log("loading in UserDetails: ", isLoading);
+  // console.log("isError in UserDetails: ", isError);
 
   return (
     <>
@@ -39,13 +41,13 @@ const UserDetails = ({ handleInitiailValues }) => {
               <p> {user?.data?.email || ""} </p>
             </Col>
             <Col span={6} style={{ width: "100%" }}>
-            <p><strong>UserName</strong></p>
-            <p> {user?.data?.userName || ""} </p>
+              <p><strong>UserName</strong></p>
+              <p> {user?.data?.userName || ""} </p>
             </Col>
 
           </Row>
           <br />
-          <Row  align={"middle"} justify={"start"}>
+          <Row align={"middle"} justify={"start"}>
             <Col span={12}>
               <p><strong>Address</strong></p>
               <p> {user?.data?.address || ""} </p>

@@ -1,5 +1,5 @@
 import React, { useState } from 'react'; 
-import { Row, Col, Input, Button, Upload, Form, Modal, message } from 'antd';
+import { Row, Col, Input, Button, Upload, Form, Modal } from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
 
 const CompanyDetailsForm = () => {
