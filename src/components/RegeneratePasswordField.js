@@ -6,6 +6,7 @@ const RegeneratePasswordField = () => {
   const [isModalVisible, setIsModalVisible] = useState(false); // Success message modal state
   const [form] = Form.useForm(); // Form instance for validation
   const navigate = useNavigate(); 
+
   // Handle form submission
   const handleSubmit = () => {
     form
@@ -26,7 +27,7 @@ const RegeneratePasswordField = () => {
         }
       })
       .catch(() => {
-        
+        // Handle validation error
       });
   };
 
@@ -40,6 +41,7 @@ const RegeneratePasswordField = () => {
     <div
       style={{
         height: '100vh',
+        width: '100%',
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
@@ -50,11 +52,11 @@ const RegeneratePasswordField = () => {
         form={form}
         layout="vertical"
         style={{
-          padding: '30px',
+          padding: '60px', // Increased padding
           backgroundColor: '#fff',
           borderRadius: '10px',
           boxShadow: '0px 4px 16px rgba(0, 0, 0, 0.2)',
-          width: '300px',
+          width: '500px', // Increased width
         }}
       >
         <h2 style={{ textAlign: 'center' }}>Change Password</h2>
