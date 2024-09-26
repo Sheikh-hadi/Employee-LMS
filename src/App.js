@@ -22,7 +22,6 @@ const { SubMenu } = Menu;
 
 
 const App = () => {
-
   const {mutate: logout} = useUserLogout()
   const [collapsed, setCollapsed] = useState(false);
   const [isLoggedOut, setIsLoggedOut] = useState(false);
@@ -79,7 +78,7 @@ const App = () => {
               }}
             />
           </div>
-          <Menu theme="dark" mode="inline" defaultSelectedKeys={["1"]}>
+          <Menu theme="dark" mode="inline" defaultSelectedKeys={["1"]} >
             <Menu.Item key="1" icon={<DashboardOutlined />}>
               <Link to="/">Dashboard</Link>
             </Menu.Item>

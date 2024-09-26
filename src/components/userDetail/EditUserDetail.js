@@ -2,6 +2,7 @@ import React from 'react';
 import { Button, Col, Modal, Row, Typography, Form, Input, notification, Switch } from 'antd';
 import { EditOutlined, UserOutlined } from '@ant-design/icons';
 import useUpdateUser from '../../Hooks/UserHook/usePutUpdateUser';
+import useChangePassword from '../../Hooks/UserHook/usePostChangePassword';
 
 const { Title } = Typography;
 const { TextArea } = Input;
@@ -13,12 +14,8 @@ const EditUserDetail = ({ initialValues }) => {
     });
     const [form] = Form.useForm();
     const { mutate: user } = useUpdateUser(setIsModalVisible, form);
-    const [showNewPasswordFields, setShowNewPasswordFields] = React.useState(false);
+    const {mutate: changePassword} = useChangePassword(setIsModalVisible, form)
 
-    const onChangeOldPassword = (e) => {
-        const password = e.target.value;
-        setShowNewPasswordFields(password ? true : false);
-    };
 
     const handleOk = () => {
         form.submit();
@@ -27,7 +24,6 @@ const EditUserDetail = ({ initialValues }) => {
     const handleCancel = () => {
         setIsModalVisible({ changePassword: false, edit: false });
         form.resetFields();
-        setShowNewPasswordFields(false); // Reset new password fields
     };
 
     const onFinishUserDetails = (values) => {
@@ -56,11 +52,34 @@ const EditUserDetail = ({ initialValues }) => {
     };
 
     const onFinishChangePassword = (values) => {
+        changePassword({values});
         console.log('Change Password Success:', values);
         // Handle password change logic (e.g., API call)
         setIsModalVisible({ ...isModalVisible, changePassword: false });
         form.resetFields(); // Reset form fields
     };
+
+
+    const onFinishFailedChangePassword = (errorInfo) => {
+        console.log("Failed:", errorInfo);
+        const firstErrorField = errorInfo.errorFields[0]?.name;
+        if (firstErrorField) {
+            form.scrollToField(firstErrorField);
+        }
+        notification.error({
+            key: 'form-submission-failed',
+            message: 'Missing required Fields',
+            description: errorInfo.errorFields.map((error, index) => (
+                <li key={index}>{`${index + 1}) ${error?.name}`}</li>
+            )),
+            duration: 5,
+            style: { borderLeft: `4px solid red`, position: 'relative', color: 'red' },
+            showProgress: true,
+        });
+        setIsModalVisible({ ...isModalVisible, edit: true });
+    };
+
+   
 
     return (
         <>
@@ -103,20 +122,23 @@ const EditUserDetail = ({ initialValues }) => {
                 onOk={handleOk}
                 onCancel={handleCancel}
                 footer={null}
+                initialValues={initialValues}
             >
-                <Form form={form} layout="vertical" onFinish={onFinishChangePassword}>
+                <Form form={form} layout="vertical"
+                    onFinish={onFinishChangePassword}
+                    onFinishFailed={onFinishFailedChangePassword}
+                >
                     <Form.Item
-                        label="Old Password"
-                        name="oldPassword"
-                        rules={[{ required: true, message: 'Please input your old password!' }]}
+                        label="Email"
+                        name="email"
+                        rules={[{ required: true, message: 'Please input your email!' }]}
                     >
-                        <Input.Password
-                            placeholder='Old Password'
+                        <Input
+                            placeholder="Email"
                             allowClear
-                            onChange={onChangeOldPassword}
                         />
                     </Form.Item>
-                    {showNewPasswordFields && (
+           
                         <>
                             <Form.Item
                                 label="New Password"
@@ -143,7 +165,7 @@ const EditUserDetail = ({ initialValues }) => {
                                 <Input.Password placeholder='Confirm New Password' allowClear />
                             </Form.Item>
                         </>
-                    )}
+                   
                     <Form.Item>
                         <Button type="primary" htmlType="submit"> Submit </Button>
                     </Form.Item>

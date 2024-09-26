@@ -102,6 +102,7 @@ const LoginPage = () => {
                 placeholder="Enter your password"
                 prefix={<LockOutlined style={{ color: 'darkslateblue', margin: '5px' }} />}
               />
+              
             </Form.Item>
 
             <Form.Item>

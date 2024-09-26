@@ -6,7 +6,7 @@ import { notification } from 'antd';
 const useDeleteDepartment = () => {
     const queryClient = useQueryClient();
     const deleteDepartment = async (departmentId) => {
-        const { data } = await axios.delete(`http://localhost:4000/api/v1/department/${departmentId}`, { withCredentials: true });
+        const { data } = await axios.delete(`${process.env.REACT_APP_API_URL}/department/${departmentId}`, { withCredentials: true });
         return data;
     };
 

@@ -1,26 +1,23 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import {  useMutation, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import { message } from "antd";
 
-const useDeleteUser = () => {
+const UseDeleteUser = () => {
     const queryClient = useQueryClient();
     const deleteUser = async (id) => {
-        const { data } = await axios.delete(`http://localhost:4000/api/v1/users/${id}`, {
-            withCredentials: true,
-        });
-        return data;
+        const response = await axios.delete(`http://localhost:8080/api/v1/employees/${id}`);
+        return response.data;
     };
-    return useMutation({
-        mutationKey: ["deleteUser"],
-        mutationFn: deleteUser,
-        onSuccess: (data) => {
-            message.success(data?.message || "User deleted successfully");
-            queryClient.invalidateQueries(["users"]);
-        },
-        onError: (error) => {
-            message.error(error?.response?.data?.message || "Unknown error");
-        },
-    });
-};
-
-export default useDeleteUser;
+return useMutation({
+    mutationFn: deleteUser,
+    onSuccess: () => {
+        queryClient.invalidateQueries({ queryKey: ["users"] });
+        message.success("User Deleted Successfully");
+    },
+    onError: (error) => {
+        message.error(error?.response?.data?.message || "User Deletion Failed");
+    },
+});
+        
+}
+export default UseDeleteUser;

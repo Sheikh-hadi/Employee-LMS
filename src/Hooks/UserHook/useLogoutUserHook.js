@@ -1,14 +1,13 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
 import { message } from "antd";
 
 const useUserLogout = () => {
-    const queryClient = useQueryClient();
 
     const logout = async () => {
 
         try {
-            return await axios.post("http://localhost:4000/api/v1/users/logout", {}, { withCredentials: true })
+            return await axios.post(`${process.env.REACT_APP_API_URL}/users/logout`, {}, { withCredentials: true })
         } catch (error) {
             // console.log("Error in logoutUser:", error);
             throw error;

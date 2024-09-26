@@ -9,7 +9,7 @@ const useUpdateUser = ( setIsModalVisible, form ) => {
 
     const queryClient = useQueryClient();
     const updateUser = async (values) => {
-        const { data } = await axios.put(`http://localhost:4000/api/v1/users/update/${id}`, values, {
+        const { data } = await axios.put(`${process.env.REACT_APP_API_URL}/users/update/${id}`, values, {
             withCredentials: true,
         });
         return data;

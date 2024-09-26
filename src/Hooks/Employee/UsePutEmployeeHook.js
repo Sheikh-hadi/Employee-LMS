@@ -7,7 +7,7 @@ const usePutEmployee = () => {
     const putData = async (value) => {
         // console.log("values: ", value);
         // console.log("id", value.id);
-        const response = await axios.put(`http://localhost:4000/api/v1/employee/${value.id}`, value, {
+        const response = await axios.put(`${process.env.REACT_APP_API_URL}/employee/${value.id}`, value, {
             headers: {
                 "Content-Type": "application/json",
             },

@@ -1,16 +1,21 @@
-import React, { useState, useEffect, useRef } from 'react'; 
+import React, { useState, useEffect } from 'react';
 import { Row, Col, Button, Input, Modal } from 'antd';
 import { useNavigate } from 'react-router-dom';
+import { OtpForgetPassword } from './OtpForgetPassword';
+import usePostCheckMail from '../Hooks/UserHook/usePostCheckMail';
+import usePostotp from '../Hooks/otp/usePostOtpHook';
 
 const ForgotPasswordOtp = () => {
   const navigate = useNavigate();
-  const [otp, setOtp] = useState(['', '', '', '', '', '']);
   const [email, setEmail] = useState('');
-  const [timeLeft, setTimeLeft] = useState(300); // 5 minutes in seconds
+  const [timeLeft, setTimeLeft] = useState(300);
   const [modalVisible, setModalVisible] = useState(false);
   const [timerActive, setTimerActive] = useState(false);
   const [showOtpSection, setShowOtpSection] = useState(false);
-  const otpInputs = useRef([]);
+  const { mutate: checkMail, data } = usePostCheckMail()
+  const {mutate: otp} =  usePostotp({ setShowOtpSection, setTimerActive })
+  // console.log("data", data)
+
 
   useEffect(() => {
     if (timeLeft === 0) {
@@ -24,39 +29,35 @@ const ForgotPasswordOtp = () => {
       }, 1000);
       return () => clearInterval(timer);
     }
+
   }, [timeLeft, timerActive]);
 
-  const handleInputChange = (value, index) => {
-    const newOtp = [...otp];
-    newOtp[index] = value;
-    setOtp(newOtp);
-
-    if (value !== '' && index < otp.length - 1) {
-      otpInputs.current[index + 1].focus();
-    }
-  };
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
   };
 
   const handleEmailSubmit = () => {
-    console.log('Email:', email);
-    setShowOtpSection(true); // Show OTP section and button
-    setTimerActive(true); // Start the timer
+    checkMail({ email })
+    if (data) {
+      otp({ email })
+      setShowOtpSection(true);
+      console.log("data", data)
+      setTimerActive(true);
+    }
+
   };
 
-  const handleSubmit = () => {
-    console.log('Entered OTP:', otp.join(''));
+  const handleSubmit = (data) => {
     console.log('Email:', email);
-    setTimerActive(false); // Stop the timer
-    navigate("/new-password"); // Navigate to new password page after verification
+    setTimerActive(data);
+    navigate("/new-password");
   };
 
   const handleResendOtp = () => {
-    setTimeLeft(300); // Reset timer to 5 minutes
+    setTimeLeft(300);
     setModalVisible(false);
-    setTimerActive(true); // Restart the timer
+    setTimerActive(true);
   };
 
   return (
@@ -75,21 +76,21 @@ const ForgotPasswordOtp = () => {
         {/* Email Input and Submit Button */}
         {!showOtpSection && (
           <>
-            <Input 
-              value={email} 
-              onChange={handleEmailChange} 
-              style={{ marginBottom: '20px' }} 
-              placeholder="Enter your email" 
+            <Input
+              value={email}
+              onChange={handleEmailChange}
+              style={{ marginBottom: '20px' }}
+              placeholder="Enter your email"
             />
-            <Button 
-              type="primary" 
-              style={{ 
-                width: '100%', 
-                height: '45px', 
-                borderRadius: '8px', 
+            <Button
+              type="primary"
+              style={{
+                width: '100%',
+                height: '45px',
+                borderRadius: '8px',
                 backgroundColor: 'darkslateblue',
                 color: '#fff' // White text
-              }} 
+              }}
               onClick={handleEmailSubmit}
             >
               Submit
@@ -97,48 +98,13 @@ const ForgotPasswordOtp = () => {
           </>
         )}
 
-        {/* OTP Input Fields and Timer */}
         {showOtpSection && (
           <>
             <p style={{ fontWeight: 'bold', marginBottom: '20px' }}>{email}</p>
             <p style={{ color: 'green', fontWeight: 'bold' }}>{`00:${String(Math.floor(timeLeft / 60)).padStart(2, '0')}:${String(timeLeft % 60).padStart(2, '0')}`}</p>
 
-            {/* OTP Input Fields */}
-            <Row gutter={10} justify="center" style={{ marginBottom: '20px' }}>
-              {otp.map((digit, index) => (
-                <Col key={index}>
-                  <Input
-                    ref={el => otpInputs.current[index] = el}
-                    maxLength={1}
-                    value={digit}
-                    onChange={(e) => handleInputChange(e.target.value, index)}
-                    style={{ 
-                      width: '40px', 
-                      height: '50px', 
-                      textAlign: 'center', 
-                      fontSize: '18px', 
-                      borderRadius: '8px', 
-                      border: '1px solid pink' // Pink border
-                    }}
-                  />
-                </Col>
-              ))}
-            </Row>
+            <OtpForgetPassword handleSubmit={handleSubmit} />
 
-            {/* Submit Button */}
-            <Button 
-              type="primary" 
-              style={{ 
-                width: '100%', 
-                height: '45px', 
-                borderRadius: '8px', 
-                backgroundColor: 'darkslateblue',
-                color: '#fff' // White text
-              }} 
-              onClick={handleSubmit} // Single onClick handler for form submission and navigation
-            >
-              Verify and Proceed
-            </Button>
 
             {/* Resend OTP */}
             <p style={{ marginTop: '10px', color: 'darkslateblue', cursor: 'pointer' }} onClick={() => handleResendOtp()}>
@@ -151,7 +117,7 @@ const ForgotPasswordOtp = () => {
       {/* Modal for Timeout */}
       <Modal
         title="Error"
-        visible={modalVisible}
+        open={modalVisible}
         onOk={handleResendOtp}
         onCancel={() => setModalVisible(false)}
       >

@@ -9,7 +9,7 @@ const useUpdateDepartment = () => {
         // console.log("values.id: ", values.id)
         // console.log("values.values: ", values.values)
         // console.log("values.values.name: ", values.values.name)
-        const { data } = await axios.put(`http://localhost:4000/api/v1/department/${values.id}`, values.values, 
+        const { data } = await axios.put(`${process.env.REACT_APP_API_URL}/department/${values.id}`, values.values, 
         {
             withCredentials: true,
         }

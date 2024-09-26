@@ -4,7 +4,7 @@ import { message } from "antd";
 
 const useGetByIdUser = (id) => {
     const fetchUser = async () => {
-        const response = await axios.get(`http://localhost:4000/api/v1/users/${id}`, { withCredentials: true });
+        const response = await axios.get(`${process.env.REACT_APP_API_URL}/users/${id}`, { withCredentials: true });
         // console.log("response: ", response);
         return response.data;
     }

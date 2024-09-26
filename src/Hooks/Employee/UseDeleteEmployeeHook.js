@@ -1,33 +1,23 @@
-
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import axios from 'axios';
-import { notification } from 'antd';
-
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import axios from "axios";
+import { message } from "antd";
 
 const useDeleteEmployee = () => {
     const queryClient = useQueryClient();
-    const deleteEmployee = async (employeeID) => {
-        const { data } = await axios.delete(`http://localhost:4000/api/v1/employee/${employeeID}`, { withCredentials: true });
-        return data;
+    const deleteEmployee = async (id) => {
+        const response = await axios.delete(`http://localhost:8080/api/v1/employees/${id}`);
+        return response.data;
     };
 
     return useMutation({
-        mutationKey: ["employees"],
         mutationFn: deleteEmployee,
-        onSuccess: (data) => {
-            notification.success({
-                message: "Success",
-                description: data?.message || "Employee deleted successfully",
-            });
-            queryClient.invalidateQueries(["employees"]);
+        onSuccess: () => {
+            queryClient.invalidateQueries({ queryKey: ["employees"] });
+            message.success("Employee Deleted Successfully");
         },
         onError: (error) => {
-            notification.error({
-                message: "Department deletion failed:",
-                description: error?.response?.data?.message || "Unknown error"
-            });
+            message.error(error?.response?.data?.message || "Employee Deletion Failed");
         },
     });
 }
-
 export default useDeleteEmployee;

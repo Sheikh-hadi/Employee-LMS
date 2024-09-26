@@ -4,7 +4,7 @@ import axios from "axios";
 
 const useGetUser = () => {
     const fetchUser = async()=>{
-        const response = await axios.get("http://localhost:4000/api/v1/users", { withCredentials: true });
+        const response = await axios.get(`${process.env.REACT_APP_API_URL}/users`, { withCredentials: true });
         return response.data;
     }
 

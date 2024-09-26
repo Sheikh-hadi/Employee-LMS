@@ -3,7 +3,7 @@ import axios from 'axios';
 
 const useGetDepartment = () => {
     const fetchDepartment = async () => {
-        const response = await axios.get('http://localhost:4000/api/v1/department', { withCredentials: true });
+        const response = await axios.get(`${process.env.REACT_APP_API_URL}/department`, { withCredentials: true });
         return response.data;
     };
 
